@@ -98,6 +98,94 @@ npm start
 - [ ] 도메인 설정
 - [ ] OG 이미지 생성 (`public/og/` 폴더)
 - [ ] Favicon 설정 (`public/icons/` 폴더)
+
+---
+
+## 게임화 시스템 (회원/포인트/계급/출석체크)
+
+### ⚠️ 보안 안내: Mock 인증 (localStorage 기반)
+
+현재 인증 시스템은 **실제 서비스용이 아닙니다**.
+
+- 모든 사용자 데이터는 **브라우저 localStorage**에만 저장됩니다
+- 비밀번호는 간단한 해시 함수를 사용 (암호학적으로 안전하지 않음)
+- 다른 기기/브라우저에서 로그인 불가
+- 목적: Supabase Auth로 교체하기 전 UX 프로토타이핑
+
+### 주요 localStorage 키
+
+| 키 | 내용 |
+|---|---|
+| `sslab_current_user` | 현재 로그인 사용자 정보 |
+| `sslab_users_db` | 전체 가입 사용자 DB |
+| `sslab_point_logs` | 포인트 적립/사용 로그 |
+| `sslab_earned:{userId}:{reason}:{contentId}:{date}` | 중복 적립 방지 키 |
+
+### 포인트 적립 이유 및 금액
+
+| 이유 | 금액 |
+|---|---|
+| 회원가입 축하 | 500P |
+| 일일 출석 | 100P |
+| 3일 연속 출석 보너스 | 300P |
+| 7일 연속 출석 보너스 | 1,000P |
+| 14일 연속 출석 보너스 | 2,000P |
+| 30일 연속 출석 보너스 | 5,000P |
+| 심리테스트 완료 | 30P |
+| 월드컵 완료 | 50P |
+| 밸런스 게임 완료 | 30P |
+| 초성퀴즈 완료 | 40P |
+| 넌센스 퀴즈 완료 | 30P |
+| 기억력 게임 완료 | 40P |
+| 반응속도 게임 완료 | 40P |
+| 관찰력 게임 완료 | 40P |
+| 투표 참여 | 10P |
+| 생성기 사용 | 10P |
+| 같이놀기 참가 완료 | 80P |
+| 같이놀기 방장 완료 | 120P |
+| 친구 초대 | 150P |
+
+### 계급 시스템 (15단계)
+
+훈련병(게스트) → 이등병(★, 500P) → ... → 장군(👑★★★, 300,000P)
+
+### 같이놀기 회원 제한
+
+`/together/create` 및 `/together/room/*` 페이지는 회원 전용입니다.  
+게스트 접근 시 AuthModal이 표시되어 가입/로그인을 유도합니다.
+
+### Supabase 마이그레이션 계획
+
+추후 Supabase로 마이그레이션 시 아래 테이블 구조를 사용할 예정입니다:
+
+```sql
+-- 사용자
+users (id, nickname, password_hash, points, rank_id, created_at, last_login_at)
+
+-- 포인트 로그
+point_logs (id, user_id, reason, amount, label, created_at)
+
+-- 출석 체크
+check_ins (id, user_id, check_in_date, streak, bonus_reason)
+
+-- 콘텐츠 완료 (중복 적립 방지)
+content_completions (id, user_id, reason, content_id, completed_at)
+
+-- 랭킹 (캐싱용)
+leaderboards (user_id, points, rank_position, updated_at)
+
+-- 같이놀기 방
+rooms (id, room_code, host_id, game_type, status, created_at)
+
+-- 같이놀기 참가자
+room_participants (id, room_id, user_id, nickname, is_host, joined_at)
+
+-- 게임 라운드/답변
+game_rounds (id, room_id, round_number, question, started_at)
+game_answers (id, round_id, participant_id, answer, submitted_at)
+```
+
+`src/lib/user/authService.ts`의 함수들은 Supabase Auth API와 동일한 인터페이스를 유지하도록 설계되었습니다.
 - [ ] 카카오 JavaScript Key 발급
 
 ## 향후 Supabase 연결 계획
