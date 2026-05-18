@@ -2,6 +2,41 @@
 // 심리테스트 연구소 타입 정의
 // ============================
 
+export type TestFormat =
+  | "short-choice"
+  | "long-choice"
+  | "image-choice"
+  | "color-choice"
+  | "illusion"
+  | "first-impression"
+  | "balance"
+  | "card-pick"
+  | "situation"
+  | "ranking"
+  | "iq-puzzle"
+  | "eq-scenario"
+  | "mbti-axis"
+  | "blood-type"
+  | "enneagram"
+  | "big5-lite"
+  | "memory"
+  | "observation"
+  | "reaction"
+  | "logic"
+  | "compatibility"
+  | "worldcup"
+  | "checklist"
+  | "generator";
+
+export type VisualStyle =
+  | "gradient"
+  | "abstract"
+  | "card"
+  | "color"
+  | "shape"
+  | "illusion"
+  | "emoji";
+
 export type TestCategory = {
   id: string;
   slug: string;
@@ -30,6 +65,10 @@ export type TestMeta = {
   isFeatured: boolean;
   isNew: boolean;
   status: "curated" | "generated" | "needsReview";
+  testFormat?: TestFormat;
+  visualStyle?: VisualStyle;
+  minQuestionCount?: number;
+  maxQuestionCount?: number;
 };
 
 export type TestQuestion = {
