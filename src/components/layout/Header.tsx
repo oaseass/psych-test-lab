@@ -37,6 +37,9 @@ export default function Header() {
           <Link href="/games/initial-quiz" className="text-gray-600 hover:text-brand-purple transition-colors">
             초성퀴즈
           </Link>
+          <Link href="/together" className="text-gray-600 hover:text-brand-purple transition-colors font-semibold text-violet-600">
+            같이놀기
+          </Link>
           <Link href="/polls" className="text-gray-600 hover:text-brand-purple transition-colors">
             투표
           </Link>
@@ -83,6 +86,7 @@ export default function Header() {
             { href: "/games/observation", label: "👁️ 관찰력 테스트" },
             { href: "/games/memory", label: "🧠 기억력 테스트" },
             { href: "/games/reaction", label: "⚡ 반응속도" },
+            { href: "/together", label: "👥 같이놀기" },
             { href: "/polls", label: "🗳️ 투표" },
             { href: "/generator", label: "✨ 생성기" },
           ].map((item) => (

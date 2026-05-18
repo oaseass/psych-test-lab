@@ -91,7 +91,56 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════
-          3. 지금 인기
+          3. 같이놀기
+      ════════════════════════════ */}
+      <section className="mb-8">
+        <div className="bg-gradient-to-br from-violet-50 to-pink-50 rounded-3xl p-5 border border-violet-100">
+          <div className="flex items-start justify-between mb-3">
+            <div>
+              <h2 className="text-base font-extrabold text-gray-900">👥 같이놀기 <span className="text-xs font-bold bg-violet-600 text-white px-2 py-0.5 rounded-full ml-1">NEW</span></h2>
+              <p className="text-xs text-gray-500 mt-0.5">혼자 와도 AI 친구가 같이 놀아줘요</p>
+            </div>
+            <Link href="/together" className="text-xs text-violet-600 font-semibold hover:underline flex-shrink-0">
+              전체 보기 →
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-2 mb-4">
+            {[
+              { href: "/together/games/image-vote", emoji: "🗳️", label: "친구 이미지 투표", bg: "#FDF2F8" },
+              { href: "/together/games/balance-room", emoji: "⚖️", label: "같이 밸런스게임", bg: "#EFF6FF" },
+              { href: "/together/games/initial-quiz-room", emoji: "🔤", label: "초성퀴즈 대결방", bg: "#FFF7ED" },
+              { href: "/together/games/compatibility-room", emoji: "💫", label: "친구 궁합방", bg: "#EDE9FE" },
+            ].map((g) => (
+              <Link key={g.href} href={g.href}>
+                <div
+                  className="flex items-center gap-2 p-3 rounded-2xl border border-white/80 hover:shadow-md transition-all active:scale-[0.97]"
+                  style={{ background: g.bg }}
+                >
+                  <span className="text-xl">{g.emoji}</span>
+                  <span className="text-xs font-bold text-gray-800">{g.label}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <Link
+              href="/together/create"
+              className="flex-1 py-3 rounded-2xl bg-gradient-to-r from-violet-600 to-pink-500 text-white font-bold text-sm text-center hover:opacity-90 transition-all"
+            >
+              🎮 방 만들기
+            </Link>
+            <Link
+              href="/together/create"
+              className="flex-1 py-3 rounded-2xl bg-white border-2 border-violet-200 text-violet-700 font-bold text-sm text-center hover:border-violet-400 transition-all"
+            >
+              🤖 AI랑 바로 시작
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════
+          4. 지금 인기
       ════════════════════════════ */}
       <section className="mb-8">
         <SectionTitle title="🔥 지금 인기" subtitle="지금 가장 많이 하는 콘텐츠" />

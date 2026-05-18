@@ -28,6 +28,10 @@ const ALL_CONTENT: RecommendItem[] = [
   { href: "/generator/past-life", emoji: "⏳", label: "전생 직업 생성기", sub: "전생에는 뭐였을까", tag: "생성기", bgColor: "#F5F3FF" },
   { href: "/test/yeonae-gojang-paeteon/play", emoji: "💔", label: "연애 고장 패턴", sub: "심리테스트", tag: "심리", bgColor: "#FFF1F2" },
   { href: "/test/kkeullim-yuhyeong/play", emoji: "🌟", label: "끌림 유형", sub: "심리테스트", tag: "심리", bgColor: "#FFFBEB" },
+  { href: "/together/games/balance-room", emoji: "⚖️", label: "같이 밸런스게임", sub: "파티게임", tag: "같이놀기", bgColor: "#EFF6FF" },
+  { href: "/together/games/image-vote", emoji: "🗳️", label: "친구 이미지 투표", sub: "파티게임", tag: "같이놀기", bgColor: "#FDF2F8" },
+  { href: "/together/games/initial-quiz-room", emoji: "🔤", label: "초성퀴즈 대결방", sub: "파티게임", tag: "같이놀기", bgColor: "#FFF7ED" },
+  { href: "/together/games/compatibility-room", emoji: "💫", label: "친구 궁합방", sub: "파티게임", tag: "같이놀기", bgColor: "#EDE9FE" },
 ];
 
 function pickRecommends(exclude: string, count = 6): RecommendItem[] {
