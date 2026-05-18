@@ -4,11 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getCurrentUser, logout } from "@/lib/user/authService";
 import { getPointLogs } from "@/lib/user/pointService";
-import { getRankProgress } from "@/lib/user/rankService";
+import { getRankProgress, getRankById } from "@/lib/user/rankService";
 import { canCheckInToday, getNextStreakReward } from "@/lib/user/checkInService";
 import type { UserProfile, PointLog } from "@/lib/user/types";
 import RankProgress from "@/components/user/RankProgress";
 import SignupPrompt from "@/components/user/SignupPrompt";
+import AnimatedRankIcon from "@/components/user/AnimatedRankIcon";
 
 export default function MyPage() {
   const router = useRouter();
@@ -60,8 +61,8 @@ export default function MyPage() {
       {/* 프로필 카드 */}
       <div className="bg-gradient-to-br from-violet-600 to-pink-500 rounded-3xl p-6 text-white">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-3xl">
-            {user.rankIcon}
+          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+            <AnimatedRankIcon rank={getRankById(user.rankId)} sizeClass="text-4xl" animated />
           </div>
           <div>
             <h1 className="text-xl font-extrabold">{user.nickname}</h1>

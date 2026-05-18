@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import RankUpToast from "@/components/user/RankUpToast";
 import { buildSiteMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildSiteMetadata();
@@ -41,6 +42,7 @@ export default function RootLayout({
         )}
       </head>
       <body className="min-h-screen flex flex-col">
+        <RankUpToast />
         <Header />
         <div className="flex-1">{children}</div>
         <Footer />

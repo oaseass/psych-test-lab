@@ -50,10 +50,34 @@ export type PointLog = {
   createdAt: string;
 };
 
+export type RankTier =
+  | "guest"
+  | "soldier"
+  | "nonCommissionedOfficer"
+  | "officer"
+  | "fieldOfficer"
+  | "general"
+  | "legend";
+
+export type RankAnimationType =
+  | "none"
+  | "soft-pulse"
+  | "shine"
+  | "float"
+  | "aura"
+  | "legend-flame";
+
 export type Rank = {
   id: string;
   name: string;
+  shortName: string;
   icon: string;
   minPoints: number;
+  tier: RankTier;
+  color: string;
+  gradient: string;
+  glowColor: string;
   description: string;
+  rewardText: string;
+  animationType: RankAnimationType;
 };

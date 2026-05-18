@@ -1,5 +1,13 @@
-import { GUEST_RANK, MEMBER_RANKS } from "@/data/ranks";
+import { GUEST_RANK, MEMBER_RANKS, ALL_RANKS } from "@/data/ranks";
 import type { Rank, UserProfile, UserRole } from "@/lib/user/types";
+
+export function getRankById(rankId: string): Rank {
+  return ALL_RANKS.find((r) => r.id === rankId) ?? GUEST_RANK;
+}
+
+export function getRankByName(rankName: string): Rank | undefined {
+  return ALL_RANKS.find((r) => r.name === rankName);
+}
 
 export function getRankByPoints(points: number, role: UserRole): Rank {
   if (role === "guest") return GUEST_RANK;

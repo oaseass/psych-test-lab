@@ -4,7 +4,9 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getCurrentUser, logout, getOrCreateGuest } from "@/lib/user/authService";
 import { canCheckInToday } from "@/lib/user/checkInService";
+import { getRankById } from "@/lib/user/rankService";
 import type { UserProfile } from "@/lib/user/types";
+import RankBadge from "@/components/user/RankBadge";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -70,9 +72,30 @@ export default function Header() {
         {/* 계정 영역 (데스크탑) */}
         <div className="hidden md:flex items-center gap-2 ml-2">
           {user && (
-            <Link href="/my" className="text-xs font-semibold text-gray-700 hover:text-brand-purple transition-colors whitespace-nowrap">
-              ({user.rankIcon} {user.nickname})
-            </Link>
+            <div className="relative group">
+              <Link href="/my" className="text-xs font-semibold text-gray-700 hover:text-brand-purple transition-colors whitespace-nowrap">
+                <RankBadge rank={getRankById(user.rankId)} nickname={user.nickname} size="sm" compact animated />
+              </Link>
+              {/* Hover tooltip */}
+              <div className="absolute right-0 top-full mt-1 w-52 bg-white border border-gray-100 rounded-xl shadow-lg p-3 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all z-50 pointer-events-none">
+                <div className="flex items-center gap-2 mb-2">
+                  <RankBadge rank={getRankById(user.rankId)} size="md" showName animated />
+                </div>
+                <div className="text-xs text-gray-500 space-y-1">
+                  <div className="flex justify-between">
+                    <span>보유 포인트</span>
+                    <span className="font-bold text-violet-600">{user.points.toLocaleString()}P</span>
+                  </div>
+                  {isMember && (() => {
+                    const next = getRankById(user.rankId);
+                    return null;
+                  })()}
+                </div>
+                <div className="mt-1.5 pt-1.5 border-t border-gray-50 text-center">
+                  <span className="text-[10px] text-gray-400">내 정보 보기</span>
+                </div>
+              </div>
+            </div>
           )}
           {isMember ? (
             <>
@@ -107,7 +130,8 @@ export default function Header() {
         <div className="md:hidden flex items-center gap-2">
           {user && (
             <Link href="/my" className="text-xs font-semibold text-gray-600 hover:text-brand-purple">
-              {user.rankIcon} {isMember ? `${user.points.toLocaleString()}P` : "게스트"}
+              <RankBadge rank={getRankById(user.rankId)} size="sm" compact animated />
+              {isMember && <span className="ml-1">{user.points.toLocaleString()}P</span>}
             </Link>
           )}
           <Link href="/search" aria-label="검색" className="p-2 text-gray-600 hover:text-brand-purple">
