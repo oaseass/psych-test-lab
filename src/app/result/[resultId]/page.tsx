@@ -14,6 +14,7 @@ import { getPlayResult } from "@/lib/test-engine/storage";
 import { restoreFromResultId } from "@/lib/test-engine/resultResolver";
 import { decodeResultId } from "@/lib/utils/slug";
 import NextContentRecommend from "@/components/common/NextContentRecommend";
+import PointRewardBanner from "@/components/user/PointRewardBanner";
 import type { TestResult, TestMeta } from "@/types";
 
 interface PageProps {
@@ -132,6 +133,9 @@ export default function ResultPage({ params }: PageProps) {
           </Link>
         </div>
       </div>
+
+      {/* 포인트 보상 */}
+      <PointRewardBanner contentId={meta.slug} reason="test_complete" className="mb-6" />
 
       {/* 추천 테스트 */}
       <RecommendedTests currentSlug={meta.slug} categorySlug={meta.categorySlug} />

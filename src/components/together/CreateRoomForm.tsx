@@ -1,9 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { TogetherGameType } from "@/lib/together/types";
 import { TOGETHER_GAMES } from "@/data/together/togetherGames";
 import { createRoom } from "@/lib/together/roomService";
+import { getCurrentUser } from "@/lib/user/authService";
+import AuthModal from "@/components/user/AuthModal";
 
 const EMOJIS = ["😊", "😎", "🤩", "🥳", "🌟", "🎯", "🔥", "🦄", "👾", "🐼"];
 
@@ -17,6 +19,15 @@ export default function CreateRoomForm() {
   const [allowBots, setAllowBots] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [isMember, setIsMember] = useState(false);
+
+  useEffect(() => {
+    const user = getCurrentUser();
+    const member = user?.role === "member";
+    setIsMember(member);
+    if (!member) setShowAuthModal(true);
+  }, []);
 
   const selectedConfig = TOGETHER_GAMES.find((g) => g.gameType === selectedGame);
 
@@ -53,7 +64,21 @@ export default function CreateRoomForm() {
 
   return (
     <div className="max-w-lg mx-auto space-y-6">
-      {step === 1 && (
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        redirectPath="/together/create"
+        reason="together"
+      />
+      {!isMember && !showAuthModal && (
+        <div className="bg-violet-50 border border-violet-200 rounded-2xl p-5 text-center">
+          <p className="text-sm text-violet-700 font-semibold mb-3">같이놀기는 회원 전용입니다.</p>
+          <button onClick={() => setShowAuthModal(true)} className="px-4 py-2 bg-violet-600 text-white rounded-xl text-sm font-bold hover:bg-violet-700 transition-colors">
+            가입/로그인하기
+          </button>
+        </div>
+      )}
+      {isMember && step === 1 && (
         <div>
           <h2 className="text-lg font-bold text-gray-900 mb-4">어떤 게임을 할까요?</h2>
           <div className="space-y-3">
@@ -86,7 +111,7 @@ export default function CreateRoomForm() {
         </div>
       )}
 
-      {step === 2 && selectedConfig && (
+      {isMember && step === 2 && selectedConfig && (
         <div>
           <button
             onClick={() => setStep(1)}

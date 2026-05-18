@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from "react";
 import NextContentRecommend from "@/components/common/NextContentRecommend";
+import PointRewardBanner from "@/components/user/PointRewardBanner";
 
 // 관찰력 테스트: 격자에서 다른 것 찾기
 type Level = {
@@ -91,6 +92,7 @@ export default function ObservationGame() {
         <button onClick={handleRetry} className="px-6 py-3 rounded-full bg-purple-600 text-white font-bold">
           다시 도전
         </button>
+        <PointRewardBanner contentId="observation" reason="observation_complete" className="w-full max-w-sm" />
         <NextContentRecommend currentSlug="observation" title="다음에 이거 해보요 👇" />
       </div>
     );

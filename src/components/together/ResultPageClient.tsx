@@ -5,6 +5,8 @@ import Link from "next/link";
 import type { TogetherRoom } from "@/lib/together/types";
 import { getRoom, getMyParticipantId } from "@/lib/together/roomService";
 import TogetherResultCard from "./TogetherResultCard";
+import PointRewardBanner from "@/components/user/PointRewardBanner";
+import { getCurrentUser } from "@/lib/user/authService";
 
 interface Props {
   roomCode: string;
@@ -15,12 +17,19 @@ export default function ResultPageClient({ roomCode }: Props) {
   const [room, setRoom] = useState<TogetherRoom | null>(null);
   const [myId, setMyId] = useState<string>("");
   const [loading, setLoading] = useState(true);
+  const [isHost, setIsHost] = useState(false);
 
   useEffect(() => {
     const r = getRoom(roomCode);
     const id = getMyParticipantId(roomCode);
     setRoom(r);
     setMyId(id ?? "");
+    // 호스트 여부 확인
+    const user = getCurrentUser();
+    if (user && r) {
+      const me = r.participants.find((p) => p.id === id);
+      setIsHost(me?.isHost ?? false);
+    }
     setLoading(false);
   }, [roomCode]);
 
@@ -51,7 +60,14 @@ export default function ResultPageClient({ roomCode }: Props) {
       <div className="max-w-md mx-auto">
         <TogetherResultCard room={room} myParticipantId={myId} />
 
-        <div className="mt-8 space-y-3">
+        {/* 포인트 보상 */}
+        <PointRewardBanner
+          contentId={roomCode}
+          reason={isHost ? "together_host_complete" : "together_join_complete"}
+          className="mt-6"
+        />
+
+        <div className="mt-4 space-y-3">
           <button
             onClick={() => router.push("/together/create")}
             className="w-full py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-pink-500 text-white font-bold text-lg hover:opacity-90 transition-all"

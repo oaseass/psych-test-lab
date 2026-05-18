@@ -3,6 +3,7 @@ import { useState } from "react";
 import type { BalanceGameData, BalancePair } from "@/data/games/balanceData";
 import { computeBalanceResult } from "@/data/games/balanceData";
 import NextContentRecommend from "@/components/common/NextContentRecommend";
+import PointRewardBanner from "@/components/user/PointRewardBanner";
 
 type Props = {
   data: BalanceGameData;
@@ -72,6 +73,7 @@ export default function BalanceGame({ data }: Props) {
         >
           다시 하기
         </button>
+        <PointRewardBanner contentId={data.slug} reason="balance_complete" className="w-full max-w-sm" />
         <NextContentRecommend currentSlug={data.slug} title="다음에 이거 해보요 👇" />
       </div>
     );

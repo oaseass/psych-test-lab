@@ -11,6 +11,8 @@ import {
   nextRound,
   finishRoom,
 } from "@/lib/together/roomService";
+import { getCurrentUser } from "@/lib/user/authService";
+import AuthModal from "@/components/user/AuthModal";
 import RoomLobby from "./RoomLobby";
 import ImageVoteRound from "./ImageVoteRound";
 import BalanceRoomRound from "./BalanceRoomRound";
@@ -46,6 +48,15 @@ export default function RoomPageClient({ roomCode }: Props) {
   const [joinNickname, setJoinNickname] = useState("");
   const [joining, setJoining] = useState(false);
   const [joinError, setJoinError] = useState("");
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [isMember, setIsMember] = useState(false);
+
+  useEffect(() => {
+    const user = getCurrentUser();
+    const member = user?.role === "member";
+    setIsMember(member);
+    if (!member) setShowAuthModal(true);
+  }, []);
 
   const loadRoom = useCallback(() => {
     const r = getRoom(roomCode);
@@ -135,6 +146,12 @@ export default function RoomPageClient({ roomCode }: Props) {
           <div className="text-4xl mb-3 animate-bounce">🎮</div>
           <p className="text-gray-600">방 불러오는 중...</p>
         </div>
+        <AuthModal
+          isOpen={showAuthModal && !isMember}
+          onClose={() => setShowAuthModal(false)}
+          redirectPath={`/together/room/${roomCode}`}
+          reason="together"
+        />
       </div>
     );
   }

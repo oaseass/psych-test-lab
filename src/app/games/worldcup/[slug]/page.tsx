@@ -5,6 +5,7 @@ import { getWorldcupBySlug } from "@/data/games/worldcupData";
 import WorldcupGame from "@/components/games/WorldcupGame";
 import Link from "next/link";
 import { use } from "react";
+import PointRewardBanner from "@/components/user/PointRewardBanner";
 
 export default function WorldcupPlayPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -50,6 +51,7 @@ function WorldcupPlayClient({ data }: { data: NonNullable<ReturnType<typeof getW
               >
                 다시 하기
               </button>
+              <PointRewardBanner contentId={data.slug} reason="worldcup_complete" className="w-full" />
               <Link href="/games/worldcup" className="text-sm text-gray-400 underline">
                 다른 월드컵 보기
               </Link>
