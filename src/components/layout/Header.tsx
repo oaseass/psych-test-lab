@@ -13,7 +13,7 @@ export default function Header() {
         {/* 로고 */}
         <Link href="/" className="flex items-center gap-2 font-bold text-lg text-brand-purple">
           <span className="text-2xl">🎮</span>
-          <span className="hidden sm:block">심심풀이 포털</span>
+          <span className="hidden sm:block">심심풀이 연구소</span>
           <span className="sm:hidden">심심풀이</span>
         </Link>
 
@@ -21,6 +21,9 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-4 text-sm font-medium">
           <Link href="/tests" className="text-gray-600 hover:text-brand-purple transition-colors">
             심리테스트
+          </Link>
+          <Link href="/daily" className="text-gray-600 hover:text-brand-purple transition-colors font-semibold">
+            오늘의 놀이
           </Link>
           <Link href="/games" className="text-gray-600 hover:text-brand-purple transition-colors">
             두뇌게임
@@ -71,6 +74,7 @@ export default function Header() {
         <div className="md:hidden bg-white border-t border-gray-100 px-4 py-3 space-y-1">
           {[
             { href: "/tests", label: "🧠 심리테스트" },
+            { href: "/daily", label: "🎯 오늘의 놀이" },
             { href: "/games", label: "🎮 두뇌게임" },
             { href: "/games/worldcup", label: "🏆 이상형 월드컵" },
             { href: "/games/balance", label: "⚖️ 밸런스 게임" },

@@ -13,6 +13,7 @@ import { getPlayableTest, getRecommendations, getAllTestMeta } from "@/lib/data/
 import { getPlayResult } from "@/lib/test-engine/storage";
 import { restoreFromResultId } from "@/lib/test-engine/resultResolver";
 import { decodeResultId } from "@/lib/utils/slug";
+import NextContentRecommend from "@/components/common/NextContentRecommend";
 import type { TestResult, TestMeta } from "@/types";
 
 interface PageProps {
@@ -134,6 +135,11 @@ export default function ResultPage({ params }: PageProps) {
 
       {/* 추천 테스트 */}
       <RecommendedTests currentSlug={meta.slug} categorySlug={meta.categorySlug} />
+
+      {/* 다음 콘텐츠 (게임/퀴즈/투표) */}
+      <div className="mt-2 mb-10">
+        <NextContentRecommend currentSlug={meta.slug} title="다른 것도 해봐요 🎮" />
+      </div>
     </div>
   );
 }

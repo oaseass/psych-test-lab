@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
+import NextContentRecommend from "@/components/common/NextContentRecommend";
 
 // 기억력 테스트: 시퀀스 기억하기
 const EMOJIS = ["🔴", "🟡", "🟢", "🔵", "🟣", "🟠"];
@@ -158,6 +159,7 @@ export default function MemoryGame() {
           <button onClick={handleRetry} className="px-6 py-3 rounded-full bg-purple-600 text-white font-bold">
             다시 도전
           </button>
+          <NextContentRecommend currentSlug="memory" title="다음에 이거 해봐요 👇" />
         </div>
       )}
     </div>

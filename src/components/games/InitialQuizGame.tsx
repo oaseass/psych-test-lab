@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import type { InitialQuizData, InitialQuizQuestion } from "@/data/games/initialQuizData";
+import NextContentRecommend from "@/components/common/NextContentRecommend";
 
 type Props = {
   data: InitialQuizData;
@@ -69,6 +70,7 @@ export default function InitialQuizGame({ data }: Props) {
         >
           다시 도전하기
         </button>
+        <NextContentRecommend currentSlug={data.slug} title="다음에 이거 해보요 👇" />
       </div>
     );
   }

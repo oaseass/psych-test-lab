@@ -2,6 +2,7 @@
 import { useState } from "react";
 import type { BalanceGameData, BalancePair } from "@/data/games/balanceData";
 import { computeBalanceResult } from "@/data/games/balanceData";
+import NextContentRecommend from "@/components/common/NextContentRecommend";
 
 type Props = {
   data: BalanceGameData;
@@ -71,6 +72,7 @@ export default function BalanceGame({ data }: Props) {
         >
           다시 하기
         </button>
+        <NextContentRecommend currentSlug={data.slug} title="다음에 이거 해보요 👇" />
       </div>
     );
   }

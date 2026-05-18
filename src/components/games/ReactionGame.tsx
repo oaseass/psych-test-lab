@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useCallback } from "react";
+import NextContentRecommend from "@/components/common/NextContentRecommend";
 
 type Phase = "idle" | "waiting" | "ready" | "done";
 
@@ -89,6 +90,7 @@ export default function ReactionGame() {
         <button onClick={handleRetry} className="px-6 py-3 rounded-full bg-purple-600 text-white font-bold">
           다시 측정
         </button>
+        <NextContentRecommend currentSlug="reaction" title="다음에 이거 해보요 👇" />
       </div>
     );
   }

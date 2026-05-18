@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import type { NonsenseSet, NonsenseQuestion } from "@/data/games/nonsenseData";
+import NextContentRecommend from "@/components/common/NextContentRecommend";
 
 type Props = {
   data: NonsenseSet;
@@ -46,6 +47,7 @@ export default function NonsenseGame({ data }: Props) {
         >
           다시 풀기
         </button>
+        <NextContentRecommend currentSlug={data.slug} title="다음에 이거 해보요 👇" />
       </div>
     );
   }

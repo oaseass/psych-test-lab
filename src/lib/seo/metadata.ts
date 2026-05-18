@@ -2,16 +2,17 @@ import type { Metadata } from "next";
 import type { TestMeta, TestResult, TestCategory } from "@/types";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://psychlab.kr";
-const SITE_NAME = "심리테스트 연구소";
-const DEFAULT_DESCRIPTION = "1000가지 무료 심리테스트! 연애, 성격, 직장, 인간관계 등 다양한 심리테스트를 무료로 즐겨보세요. 결과를 공유하고 나를 더 잘 알아가세요.";
+const SITE_NAME = "심심풀이 연구소";
+const DEFAULT_DESCRIPTION = "무료 심리테스트 · 이상형 월드컵 · 밸런스게임 · 초성퀴즈 · 투표 · 생성기! 심심할 때 3분씩 즐기는 퀴즈/게임/테스트 포털. 지금 바로 시작해보세요.";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 export function buildSiteMetadata(): Metadata {
   return {
     title: {
-      default: `${SITE_NAME} | 무료 심리테스트 1000가지`,
+      default: `${SITE_NAME} | 심리테스트·월드컵·퀴즈·밸런스게임 무료`,
       template: `%s | ${SITE_NAME}`,
     },
+    keywords: ["심리테스트", "이상형 월드컵", "밸런스게임", "초성퀴즈", "넌센스퀴즈", "무료테스트", "심심풀이", "성격테스트", "MBTI", "연애테스트"],
     description: DEFAULT_DESCRIPTION,
     metadataBase: new URL(SITE_URL),
     openGraph: {

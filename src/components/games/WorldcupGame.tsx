@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import type { WorldcupData, WorldcupItem } from "@/data/games/worldcupData";
+import NextContentRecommend from "@/components/common/NextContentRecommend";
 
 type Props = {
   data: WorldcupData;
@@ -62,7 +63,7 @@ export default function WorldcupGame({ data, onComplete }: Props) {
 
   if (finalWinner) {
     return (
-      <div className="flex flex-col items-center gap-6 py-12">
+      <div className="flex flex-col items-center gap-6 py-8">
         <div className="text-5xl">{finalWinner.emoji}</div>
         <div
           className="text-2xl font-bold text-white px-6 py-3 rounded-2xl"
@@ -72,6 +73,14 @@ export default function WorldcupGame({ data, onComplete }: Props) {
         </div>
         <div className="text-xl font-semibold text-gray-800">{finalWinner.label}</div>
         <p className="text-gray-500 text-sm">{finalWinner.description}</p>
+        <button
+          onClick={() => { setFinalWinner(null); setBracket((() => { const items = [...data.items]; const pairs: WorldcupItem[][] = []; for (let i = 0; i < items.length; i += 2) { pairs.push([items[i], items[i + 1]]); } return pairs; })()); setCurrentPairIdx(0); setWinners([]); setRound(data.items.length); setSelected(null); }}
+          className="px-6 py-2 rounded-full text-sm font-semibold text-white"
+          style={{ background: data.color }}
+        >
+          다시 하기
+        </button>
+        <NextContentRecommend currentSlug={data.slug} title="다음에 이거 해보요 👇" />
       </div>
     );
   }
