@@ -13,102 +13,163 @@ import { initialQuizList } from "@/data/games/initialQuizData";
 import { pollList } from "@/data/pollsData";
 import { generatorList } from "@/data/generatorData";
 
-// 날짜 기반 seed → 오늘의 추천 아이템 선택
-function todaySeed(): number {
-  const d = new Date();
-  return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+// playCount → 배지 텍스트 (숫자 직노출 대신)
+function playBadge(count?: number): string | null {
+  if (!count) return null;
+  if (count >= 40000) return "인기";
+  if (count >= 25000) return "많이 하는 중";
+  if (count >= 10000) return "HOT";
+  return null;
 }
 
-const DAILY_PICKS = [
-  { href: "/games/worldcup/isanghyeong", emoji: "🏆", label: "이상형 월드컵", tag: "월드컵" },
-  { href: "/games/balance/realistic-choice", emoji: "⚖️", label: "현실 밸런스", tag: "밸런스" },
-  { href: "/games/initial-quiz/korean-food", emoji: "🍜", label: "한식 초성퀴즈", tag: "퀴즈" },
-  { href: "/games/nonsense", emoji: "🤣", label: "넌센스 퀴즈", tag: "퀴즈" },
-  { href: "/games/observation", emoji: "👁️", label: "관찰력 테스트", tag: "두뇌" },
-  { href: "/games/memory", emoji: "🧠", label: "기억력 테스트", tag: "두뇌" },
-  { href: "/games/reaction", emoji: "⚡", label: "반응속도 테스트", tag: "두뇌" },
-  { href: "/polls/convenience-store-meal", emoji: "🗳️", label: "편의점 음식 투표", tag: "투표" },
-  { href: "/generator/nickname", emoji: "✨", label: "랜덤 닉네임 생성", tag: "생성기" },
-  { href: "/test/yeonae-gojang-paeteon/play", emoji: "💌", label: "연애 고장 패턴", tag: "심리" },
-  { href: "/test/kkeullim-yuhyeong/play", emoji: "🔥", label: "끌림 유형 테스트", tag: "심리" },
-  { href: "/games/initial-quiz/kpop-song", emoji: "🎵", label: "K-POP 초성퀴즈", tag: "퀴즈" },
-  { href: "/games/worldcup/food-worldcup", emoji: "🍔", label: "음식 월드컵", tag: "월드컵" },
-  { href: "/generator/daily-fortune", emoji: "🔮", label: "오늘의 운세", tag: "생성기" },
+// 오늘의 놀이 — 카테고리별 고정 진입 카드
+const TODAY_CATEGORIES = [
+  { href: "/tests", emoji: "🧠", label: "오늘의 심리테스트", tag: "심리", bgFrom: "#EDE9FE", bgTo: "#E0E7FF" },
+  { href: "/games/worldcup", emoji: "🏆", label: "오늘의 월드컵", tag: "월드컵", bgFrom: "#FDF2F8", bgTo: "#FCE7F3" },
+  { href: "/games/balance", emoji: "⚖️", label: "오늘의 밸런스게임", tag: "밸런스", bgFrom: "#FFF0F6", bgTo: "#FFE4E6" },
+  { href: "/games/initial-quiz", emoji: "🔤", label: "오늘의 초성퀴즈", tag: "퀴즈", bgFrom: "#FFF7ED", bgTo: "#FFEDD5" },
+  { href: "/polls", emoji: "🗳️", label: "오늘의 투표", tag: "투표", bgFrom: "#ECFDF5", bgTo: "#D1FAE5" },
+  { href: "/generator", emoji: "✨", label: "오늘의 생성기", tag: "생성기", bgFrom: "#FEFCE8", bgTo: "#FEF9C3" },
 ];
-
-function seededShuffle<T>(arr: T[], seed: number): T[] {
-  const shuffled = [...arr];
-  let s = seed;
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    s = (s * 1664525 + 1013904223) & 0xffffffff;
-    const j = Math.abs(s) % (i + 1);
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
 
 export default function HomePage() {
   const featured = getFeaturedTests();
   const newTests = getNewTests();
-  const seed = todaySeed();
-  const todayPicks = seededShuffle(DAILY_PICKS, seed).slice(0, 6);
 
   return (
     <LayoutContainer>
-      {/* ── 오늘의 놀이 (최상단) ── */}
-      <section className="-mx-4 px-5 pt-6 pb-5 mb-6 bg-gradient-to-br from-indigo-600 via-purple-600 to-violet-600 rounded-b-3xl sm:rounded-3xl sm:mx-0 text-white">
+
+      {/* ════════════════════════════
+          1. 히어로
+      ════════════════════════════ */}
+      <section className="text-center pt-8 pb-6 mb-2">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-text leading-tight">
+          할 거 없을 때<br />
+          <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">3분만 눌러봐 👇</span>
+        </h1>
+        <p className="mt-3 text-gray-500 text-sm sm:text-base leading-relaxed max-w-xs mx-auto">
+          심리테스트, 월드컵, 밸런스게임, 초성퀴즈, 투표, 생성기까지.<br />
+          심심할 때 바로 하는 무료 놀이 모음.
+        </p>
+        <div className="mt-5 flex gap-3 justify-center">
+          <Link href="/daily" className="px-5 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-2xl font-bold text-sm shadow-md hover:shadow-lg hover:opacity-95 transition-all active:scale-95">
+            🎯 오늘의 놀이 시작
+          </Link>
+          <Link href="/tests" className="px-5 py-3 bg-white text-purple-700 border-2 border-purple-200 rounded-2xl font-bold text-sm hover:border-purple-400 transition-colors active:scale-95">
+            🔥 인기 콘텐츠 보기
+          </Link>
+        </div>
+      </section>
+
+      {/* ════════════════════════════
+          2. 오늘의 놀이
+      ════════════════════════════ */}
+      <section className="mb-8">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <div className="text-white/70 text-[10px] font-bold tracking-widest uppercase">TODAY&apos;S PICK</div>
-            <h2 className="text-lg font-extrabold leading-tight mt-0.5">🎯 오늘의 놀이</h2>
+            <h2 className="text-base font-extrabold text-gray-900">🎯 오늘의 놀이</h2>
+            <p className="text-xs text-gray-400 mt-0.5">카테고리별 지금 바로 시작</p>
           </div>
-          <Link href="/daily" className="px-3 py-1.5 bg-white/20 border border-white/30 rounded-xl text-xs font-bold hover:bg-white/30 transition-colors flex-shrink-0">
+          <Link href="/daily" className="text-xs text-brand-purple font-semibold hover:underline">
             전체 보기 →
           </Link>
         </div>
         <div className="grid grid-cols-3 gap-2">
-          {todayPicks.map((item) => (
-            <Link key={item.href} href={item.href}>
-              <div className="flex flex-col items-center gap-1.5 p-2.5 bg-white/15 border border-white/20 rounded-2xl hover:bg-white/25 transition-colors text-center active:scale-[0.97]">
-                <span className="text-2xl">{item.emoji}</span>
-                <span className="text-[11px] font-semibold leading-tight">{item.label}</span>
-                <span className="text-[9px] bg-white/20 px-1.5 py-0.5 rounded-full">{item.tag}</span>
+          {TODAY_CATEGORIES.map((cat) => (
+            <Link key={cat.href} href={cat.href}>
+              <div
+                className="flex flex-col items-center gap-1.5 p-3 rounded-2xl border border-gray-100 hover:shadow-md transition-all text-center active:scale-[0.97]"
+                style={{ background: `linear-gradient(135deg, ${cat.bgFrom}, ${cat.bgTo})` }}
+              >
+                <span className="text-2xl">{cat.emoji}</span>
+                <span className="text-[11px] font-bold text-gray-800 leading-tight">{cat.label}</span>
+                <span className="text-[9px] bg-white/70 text-gray-500 px-1.5 py-0.5 rounded-full font-medium">{cat.tag}</span>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* ── 히어로 ── */}
-      <section className="text-center py-6 mb-4">
-        <div className="inline-block bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-full mb-3">
-          🔥 지금 3,200명 동시 접속 중
+      {/* ════════════════════════════
+          3. 지금 인기
+      ════════════════════════════ */}
+      <section className="mb-8">
+        <SectionTitle title="🔥 지금 인기" subtitle="지금 가장 많이 하는 콘텐츠" />
+        <div className="flex flex-col gap-2">
+          {worldcupList.filter((w) => w.isFeatured).slice(0, 2).map((w) => (
+            <Link key={w.id} href={`/games/worldcup/${w.slug}`}>
+              <div className="flex items-center gap-3 p-3 bg-white rounded-2xl border border-gray-100 hover:border-purple-200 hover:shadow-md transition-all active:scale-[0.99]">
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{ background: w.bgColor }}>
+                  {w.emoji}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-gray-900 text-sm truncate">{w.title}</div>
+                  <div className="text-xs text-gray-400">월드컵</div>
+                </div>
+                {playBadge(w.playCount) && (
+                  <span className="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full font-bold flex-shrink-0">{playBadge(w.playCount)}</span>
+                )}
+              </div>
+            </Link>
+          ))}
+          {balanceGameList.filter((b) => b.isFeatured).slice(0, 1).map((b) => (
+            <Link key={b.id} href={`/games/balance/${b.slug}`}>
+              <div className="flex items-center gap-3 p-3 bg-white rounded-2xl border border-gray-100 hover:border-pink-200 hover:shadow-md transition-all active:scale-[0.99]">
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{ background: b.bgColor }}>
+                  {b.emoji}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-gray-900 text-sm truncate">{b.title}</div>
+                  <div className="text-xs text-gray-400">밸런스게임</div>
+                </div>
+                <span className="text-[10px] bg-pink-100 text-pink-600 px-2 py-0.5 rounded-full font-bold flex-shrink-0">인기</span>
+              </div>
+            </Link>
+          ))}
+          {pollList.filter((p) => p.isHot).slice(0, 1).map((p) => (
+            <Link key={p.id} href={`/polls/${p.slug}`}>
+              <div className="flex items-center gap-3 p-3 bg-white rounded-2xl border border-gray-100 hover:border-emerald-200 hover:shadow-md transition-all active:scale-[0.99]">
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{ background: p.bgColor }}>
+                  {p.emoji}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-gray-900 text-sm leading-tight">{p.question}</div>
+                  <div className="text-xs text-gray-400">투표</div>
+                </div>
+                <span className="text-[10px] bg-red-100 text-red-500 px-2 py-0.5 rounded-full font-bold flex-shrink-0">HOT</span>
+              </div>
+            </Link>
+          ))}
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-text leading-tight">
-          지금 당장 3분,<br />
-          <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">뭐 할까? 👇</span>
-        </h1>
-        <p className="mt-2 text-gray-500 text-sm">심리테스트 · 월드컵 · 밸런스 · 퀴즈 · 투표 · 생성기</p>
-        <div className="mt-4 grid grid-cols-3 gap-2 max-w-xs mx-auto">
+      </section>
+
+      {/* ════════════════════════════
+          4. 10초 테스트 (두뇌게임 퀵런치)
+      ════════════════════════════ */}
+      <section className="mb-8">
+        <SectionTitle title="⚡ 10초 테스트" subtitle="클릭 한 번, 바로 시작" />
+        <div className="grid grid-cols-4 gap-2">
           {[
-            { href: "/games/worldcup", emoji: "🏆", label: "월드컵", bg: "bg-purple-600" },
-            { href: "/games/balance", emoji: "⚖️", label: "밸런스", bg: "bg-pink-500" },
-            { href: "/games/initial-quiz", emoji: "🔤", label: "초성퀴즈", bg: "bg-orange-500" },
-            { href: "/polls", emoji: "🗳️", label: "투표", bg: "bg-emerald-600" },
-            { href: "/generator", emoji: "✨", label: "생성기", bg: "bg-yellow-500" },
-            { href: "/tests", emoji: "🧠", label: "심리테스트", bg: "bg-indigo-600" },
-          ].map((btn) => (
-            <Link key={btn.href} href={btn.href}>
-              <div className={`${btn.bg} text-white rounded-2xl py-2.5 text-center hover:opacity-90 transition-opacity active:scale-95`}>
-                <div className="text-lg">{btn.emoji}</div>
-                <div className="text-[11px] font-bold mt-0.5">{btn.label}</div>
+            { href: "/games/reaction", emoji: "⚡", label: "반응속도", bg: "#FEF2F2", color: "#DC2626" },
+            { href: "/games/observation", emoji: "👁️", label: "관찰력", bg: "#ECFEFF", color: "#0891B2" },
+            { href: "/games/memory", emoji: "🧠", label: "기억력", bg: "#ECFDF5", color: "#059669" },
+            { href: "/games/nonsense", emoji: "🤣", label: "넌센스", bg: "#FFFBEB", color: "#D97706" },
+          ].map((g) => (
+            <Link key={g.href} href={g.href}>
+              <div className="flex flex-col items-center gap-1.5 py-3 px-1 bg-white rounded-2xl border border-gray-100 hover:shadow-md transition-all text-center active:scale-95">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ background: g.bg }}>
+                  {g.emoji}
+                </div>
+                <span className="text-[11px] font-bold" style={{ color: g.color }}>{g.label}</span>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* ── 이상형 월드컵 ── */}
+      {/* ════════════════════════════
+          5. 이상형 월드컵
+      ════════════════════════════ */}
       <section className="mb-8">
         <SectionTitle
           title="🏆 이상형 월드컵"
@@ -124,10 +185,12 @@ export default function HomePage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="font-semibold text-gray-900 text-sm truncate">{w.title}</div>
-                  <div className="text-xs text-gray-400">{w.playCount?.toLocaleString()}명 참여</div>
+                  <div className="text-xs text-gray-400">{w.tags.slice(0, 2).join(" · ")}</div>
                 </div>
-                <div className="flex gap-1">
-                  {w.isFeatured && <span className="text-[10px] bg-purple-100 text-purple-600 px-2 py-0.5 rounded-full font-bold">인기</span>}
+                <div className="flex gap-1 items-center">
+                  {playBadge(w.playCount) && (
+                    <span className="text-[10px] bg-purple-100 text-purple-600 px-2 py-0.5 rounded-full font-bold">{playBadge(w.playCount)}</span>
+                  )}
                   {w.isNew && <span className="text-[10px] bg-pink-100 text-pink-500 px-2 py-0.5 rounded-full font-bold">NEW</span>}
                 </div>
                 <span className="text-gray-300 ml-1">›</span>
@@ -137,7 +200,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 밸런스 게임 ── */}
+      {/* ════════════════════════════
+          6. 밸런스 게임
+      ════════════════════════════ */}
       <section className="mb-8">
         <SectionTitle
           title="⚖️ 밸런스 게임"
@@ -151,7 +216,9 @@ export default function HomePage() {
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ background: b.bgColor }}>
                   {b.emoji}
                 </div>
-                <div className="font-semibold text-gray-900 text-xs leading-snug">{b.title}</div>
+                <div className="flex-1">
+                  <div className="font-semibold text-gray-900 text-xs leading-snug">{b.title}</div>
+                </div>
                 <div className="text-[11px] text-gray-400">{b.pairs.length}쌍</div>
               </div>
             </Link>
@@ -159,7 +226,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 초성 퀴즈 ── */}
+      {/* ════════════════════════════
+          7. 초성 퀴즈
+      ════════════════════════════ */}
       <section className="mb-8">
         <SectionTitle
           title="🔤 초성 퀴즈"
@@ -173,7 +242,9 @@ export default function HomePage() {
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ background: q.bgColor }}>
                   {q.emoji}
                 </div>
-                <div className="font-semibold text-gray-900 text-xs leading-snug">{q.title}</div>
+                <div className="flex-1">
+                  <div className="font-semibold text-gray-900 text-xs leading-snug">{q.title}</div>
+                </div>
                 <div className="text-[11px] text-gray-400">{q.questions.length}문제</div>
               </div>
             </Link>
@@ -181,7 +252,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 두뇌 미니게임 ── */}
+      {/* ════════════════════════════
+          8. 두뇌 미니게임
+      ════════════════════════════ */}
       <section className="mb-8">
         <SectionTitle title="🎮 두뇌 미니게임" subtitle="관찰력 · 기억력 · 반응속도 · 넌센스" />
         <div className="grid grid-cols-2 gap-2">
@@ -209,7 +282,9 @@ export default function HomePage() {
       {/* 광고 */}
       <AdSlot slotKey="header_banner" className="mb-8" />
 
-      {/* ── HOT 투표 ── */}
+      {/* ════════════════════════════
+          9. 투표
+      ════════════════════════════ */}
       <section className="mb-8">
         <SectionTitle
           title="🗳️ 지금 HOT 투표"
@@ -226,19 +301,23 @@ export default function HomePage() {
                   <div className="font-semibold text-gray-900 text-sm leading-tight">{p.question}</div>
                   <div className="text-xs text-gray-400 mt-0.5">{p.options.length}개 선택지</div>
                 </div>
-                {p.isHot && <span className="text-[10px] bg-red-100 text-red-500 px-2 py-0.5 rounded-full font-bold flex-shrink-0">HOT</span>}
-                {p.isNew && <span className="text-[10px] bg-pink-100 text-pink-500 px-2 py-0.5 rounded-full font-bold flex-shrink-0">NEW</span>}
+                <div className="flex gap-1 flex-shrink-0">
+                  {p.isHot && <span className="text-[10px] bg-red-100 text-red-500 px-2 py-0.5 rounded-full font-bold">HOT</span>}
+                  {p.isNew && <span className="text-[10px] bg-pink-100 text-pink-500 px-2 py-0.5 rounded-full font-bold">NEW</span>}
+                </div>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* ── 생성기 ── */}
+      {/* ════════════════════════════
+          10. 생성기
+      ════════════════════════════ */}
       <section className="mb-8">
         <SectionTitle
           title="✨ 생성기"
-          subtitle="이름/생일로 나만의 결과 만들기"
+          subtitle="이름 · 생일로 나만의 결과 만들기"
           action={<Link href="/generator" className="text-sm text-brand-purple font-medium hover:underline">전체 보기 →</Link>}
         />
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -255,10 +334,29 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ════════════════════════════
+          11. 넌센스 퀴즈
+      ════════════════════════════ */}
+      <section className="mb-8">
+        <SectionTitle
+          title="🤣 넌센스 퀴즈"
+          action={<Link href="/games/nonsense" className="text-sm text-brand-purple font-medium hover:underline">풀어보기 →</Link>}
+        />
+        <Link href="/games/nonsense">
+          <div className="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-2xl p-5 text-white hover:shadow-md transition-shadow active:scale-[0.99]">
+            <div className="text-3xl mb-2">🤣</div>
+            <div className="font-bold text-lg">맞히면 웃고, 틀려도 웃는 퀴즈</div>
+            <div className="text-sm text-white/80 mt-1">아재개그 · 반전 · 5초 퀴즈 · 연애 넌센스</div>
+          </div>
+        </Link>
+      </section>
+
       {/* 인피드 광고 */}
       <AdSlot slotKey="in_feed_1" className="mb-8" />
 
-      {/* ── 인기 심리테스트 ── */}
+      {/* ════════════════════════════
+          12. 인기 심리테스트
+      ════════════════════════════ */}
       {featured.length > 0 && (
         <section className="mb-10">
           <SectionTitle
@@ -270,16 +368,19 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* ── 신규 테스트 ── */}
+      {/* ════════════════════════════
+          13. 새로 추가된 콘텐츠
+      ════════════════════════════ */}
       {newTests.length > 0 && (
         <section className="mb-10">
           <SectionTitle
-            title="✨ 새로 추가된 테스트"
+            title="✨ 새로 추가된 콘텐츠"
             action={<Link href="/new" className="text-sm text-brand-purple font-medium hover:underline">더 보기 →</Link>}
           />
           <TestGrid tests={newTests.slice(0, 6)} columns={2} />
         </section>
       )}
+
     </LayoutContainer>
   );
 }

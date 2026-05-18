@@ -9,7 +9,7 @@ const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 export function buildSiteMetadata(): Metadata {
   return {
     title: {
-      default: `${SITE_NAME} | 심리테스트·월드컵·퀴즈·밸런스게임 무료`,
+      default: `${SITE_NAME} | 무료 테스트·퀴즈·월드컵 모음`,
       template: `%s | ${SITE_NAME}`,
     },
     keywords: ["심리테스트", "이상형 월드컵", "밸런스게임", "초성퀴즈", "넌센스퀴즈", "무료테스트", "심심풀이", "성격테스트", "MBTI", "연애테스트"],

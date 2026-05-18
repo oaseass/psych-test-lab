@@ -10,8 +10,8 @@ export default function Footer() {
           <div>
             <div className="font-bold text-brand-purple mb-3">🎮 심심풀이 연구소</div>
             <p className="text-gray-500 text-xs leading-relaxed">
-              심리테스트·월드컵·퀴즈·투표·생성기<br />
-              심심할 때 3분씩 즐기는 무료 포털
+              심리테스트, 월드컵, 밸런스게임, 초성퀴즈, 두뇌게임을<br />
+              무료로 즐기는 심심풀이 포털입니다.
             </p>
           </div>
 
