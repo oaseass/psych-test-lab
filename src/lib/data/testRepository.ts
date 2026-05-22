@@ -16,8 +16,13 @@ const _allMeta: TestMeta[] = [
   ...generatedTestMeta.filter((g) => !curatedTestSlugs.includes(g.slug)),
 ];
 
-// 우선순위 정렬
-const allTestMeta: TestMeta[] = _allMeta.sort((a, b) => a.priority - b.priority);
+// 우선순위 정렬 + isPlayable 주입
+const allTestMeta: TestMeta[] = _allMeta
+  .sort((a, b) => a.priority - b.priority)
+  .map((m) => {
+    const isPlayable = POLISHED_SLUGS.has(m.slug);
+    return { ...m, isPlayable };
+  });
 
 // slug → meta 맵
 const metaBySlug = new Map<string, TestMeta>(allTestMeta.map((m) => [m.slug, m]));
