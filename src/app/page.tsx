@@ -135,7 +135,7 @@ export default function HomePage() {
             <div className="text-3xl">⚗️</div>
             <div>
               <div className="font-bold text-brand-text text-sm">심심할 때 해보는 인터랙티브 실험들</div>
-              <div className="text-xs text-brand-muted mt-0.5">돈쓰기, 비밀번호지옥, 무한조합</div>
+              <div className="text-xs text-brand-muted mt-0.5">돈쓰기, 비밀번호지옥, 랜덤여행</div>
             </div>
             <span className="ml-auto text-brand-muted text-sm">→</span>
           </div>
