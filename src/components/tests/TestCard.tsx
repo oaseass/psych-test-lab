@@ -23,10 +23,10 @@ export default function TestCard({ test, className, compact }: TestCardProps) {
     >
       {/* 썸네일 영역 */}
       {!compact && (
-        <div className={cn(
-          "relative h-24 bg-gradient-to-br overflow-hidden flex items-center justify-center",
-          visual.gradient
-        )}>
+        <div
+          className="relative h-24 overflow-hidden flex items-center justify-center"
+          style={{ background: visual.gradient }}
+        >
           {/* 배경 장식 */}
           <div className="absolute -top-4 -right-4 w-16 h-16 bg-white/10 rounded-full" />
           <div className="absolute -bottom-3 -left-3 w-12 h-12 bg-white/10 rounded-full" />

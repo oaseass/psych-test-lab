@@ -118,8 +118,8 @@ function GeneratorClient({ data }: { data: GeneratorData }) {
                 <div className="w-full">
                   {/* 일러스트 헤더 */}
                   <div
-                    className={`relative w-full rounded-2xl overflow-hidden mb-4 bg-gradient-to-br ${jobVisual.gradient}`}
-                    style={{ minHeight: 160 }}
+                    className="relative w-full rounded-2xl overflow-hidden mb-4"
+                    style={{ background: jobVisual.gradient, minHeight: 160 }}
                   >
                     {/* 배경 장식 */}
                     <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full" />

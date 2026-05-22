@@ -27,10 +27,10 @@ export default function ResultCard({ result, meta, className }: ResultCardProps)
   return (
     <div className={cn("bg-white rounded-3xl border border-gray-100 shadow-lg overflow-hidden", className)}>
       {/* Header */}
-      <div className={cn(
-        "relative bg-gradient-to-br px-6 pt-8 pb-12 text-white text-center overflow-hidden",
-        visual.gradient
-      )}>
+      <div
+        className="relative px-6 pt-8 pb-12 text-white text-center overflow-hidden"
+        style={{ background: visual.gradient }}
+      >
         {/* 배경 장식 원 */}
         <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full" />
         <div className="absolute -bottom-4 -left-6 w-24 h-24 bg-white/10 rounded-full" />
