@@ -14,7 +14,7 @@ export default function TestGrid({ tests, className, compact, columns = 2 }: Tes
     return (
       <div className="text-center py-16 text-gray-400">
         <div className="text-4xl mb-3">🔍</div>
-        <p>테스트가 없습니다</p>
+        <p>조건에 맞는 테스트를 찾지 못했어요.</p>
       </div>
     );
   }

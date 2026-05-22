@@ -10,6 +10,7 @@ import type { UserProfile, Rank, RankTier } from "@/lib/user/types";
 const TIER_ORDER: RankTier[] = [
   "soldier",
   "nonCommissionedOfficer",
+  "warrantOfficer",
   "officer",
   "fieldOfficer",
   "general",
@@ -167,7 +168,7 @@ export default function RankPage() {
       {/* ── 가입 유도 (게스트) ── */}
       {loaded && !isMember && (
         <div className="bg-gradient-to-br from-violet-50 to-pink-50 border border-violet-100 rounded-3xl p-5 mb-8 text-center">
-          <div className="text-3xl mb-2">ㅡ</div>
+          <div className="text-3xl mb-2">🪖</div>
           <p className="font-bold text-gray-800">훈련병 · 미가입</p>
           <p className="text-xs text-gray-500 mt-1 mb-4">회원가입하면 500P와 함께 이등병으로 즉시 임관!</p>
           <Link
@@ -184,7 +185,7 @@ export default function RankPage() {
         <h3 className="font-extrabold text-sm mb-3 text-yellow-300">계급별 특수 효과</h3>
         <div className="space-y-2 text-xs">
           <div className="flex items-center gap-2">
-            <span className="text-cyan-400 font-bold w-16 flex-shrink-0">하사~상사</span>
+            <span className="text-cyan-400 font-bold w-16 flex-shrink-0">하사~준위</span>
             <span className="opacity-80">부사관 전용 소프트 펄스 뱃지</span>
           </div>
           <div className="flex items-center gap-2">

@@ -1,6 +1,7 @@
 import type { PointLog, PointReason } from "@/lib/user/types";
 import { getCurrentUser, saveCurrentUser } from "@/lib/user/authService";
 import { syncUserRank } from "@/lib/user/rankService";
+import { syncPointLog } from "@/lib/supabase/dbService";
 
 const KEY_POINT_LOGS = "sslab_point_logs";
 
@@ -71,6 +72,8 @@ export function addPointLog(userId: string, reason: PointReason, amount: number)
     logs.push(log);
     localStorage.setItem(KEY_POINT_LOGS, JSON.stringify(logs));
   }
+  // Supabase 비동기 동기화 (실패해도 무시)
+  syncPointLog(userId, log).catch(() => {});
   return log;
 }
 

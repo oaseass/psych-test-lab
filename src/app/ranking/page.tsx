@@ -33,7 +33,7 @@ export default function RankingPage() {
               <p className="font-bold text-brand-text text-sm truncate">{test.title}</p>
               <p className="text-xs text-gray-400 truncate">{test.hook}</p>
             </div>
-            <span className="text-xs text-gray-400">🔥 {test.viralScore * 100}+</span>
+
           </a>
         ))}
       </div>

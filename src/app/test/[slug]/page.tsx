@@ -5,16 +5,22 @@ import LayoutContainer from "@/components/layout/LayoutContainer";
 import AdSlot from "@/components/common/AdSlot";
 import TestGrid from "@/components/tests/TestGrid";
 import SectionTitle from "@/components/common/SectionTitle";
-import { getTestMeta, getPlayableTest, getAllTestSlugs, getRecommendations, getAllTestMeta } from "@/lib/data/testRepository";
+import LiveCounter from "@/components/common/LiveCounter";
+import { getTestMeta, getPlayableTest, getPlayableTests, getRecommendations, getAllTestMeta } from "@/lib/data/testRepository";
 import { buildTestMetadata } from "@/lib/seo/metadata";
 import { formatMinutes } from "@/lib/utils/format";
+import { categories } from "@/data/categories";
+
+function getCategoryName(slug: string): string {
+  return categories.find((c) => c.slug === slug)?.name ?? slug;
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return getAllTestSlugs().map((slug) => ({ slug }));
+  return getPlayableTests().map((t) => ({ slug: t.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -27,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function TestDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const meta = getTestMeta(slug);
-  if (!meta) notFound();
+  if (!meta || !meta.isPlayable) notFound();
 
   const playable = getPlayableTest(slug);
   if (!playable) notFound();
@@ -45,7 +51,7 @@ export default async function TestDetailPage({ params }: PageProps) {
       <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 mb-6">
         <div className="flex flex-wrap gap-2 mb-4">
           <span className="text-xs px-2.5 py-1 bg-purple-50 text-brand-purple rounded-full font-medium">
-            {meta.categorySlug}
+            {getCategoryName(meta.categorySlug)}
           </span>
           <span className="text-xs px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full">
             {meta.questionCount}문항
@@ -60,7 +66,8 @@ export default async function TestDetailPage({ params }: PageProps) {
         </h1>
 
         <p className="text-brand-purple font-medium text-base mb-2">{meta.hook}</p>
-        <p className="text-sm text-gray-500 leading-relaxed">{meta.description}</p>
+        <p className="text-sm text-gray-500 leading-relaxed mb-3">{meta.description}</p>
+        <LiveCounter testSlug={slug} />
 
         {meta.tags && meta.tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mt-4">

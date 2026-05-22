@@ -31,9 +31,6 @@ export default function InitialQuizListPage() {
                     )}
                   </div>
                   <p className="text-xs text-gray-500 mt-0.5">{q.description}</p>
-                  {q.playCount && (
-                    <p className="text-xs text-gray-400 mt-1">👥 {q.playCount.toLocaleString()}명 참여</p>
-                  )}
                 </div>
                 <span className="text-gray-300">›</span>
               </div>

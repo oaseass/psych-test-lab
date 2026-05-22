@@ -1,5 +1,6 @@
 import type { UserProfile } from "@/lib/user/types";
 import { getCurrentUser } from "@/lib/user/authService";
+import { fetchLeaderboard } from "@/lib/supabase/dbService";
 
 const KEY_USERS_DB = "sslab_users_db";
 
@@ -48,4 +49,22 @@ export function getMyRank(userId: string): number {
     .sort((a, b) => b.points - a.points);
   const idx = users.findIndex((u) => u.id === userId);
   return idx === -1 ? -1 : idx + 1;
+}
+
+/** Supabase 우선, 실패 시 localStorage fallback */
+export async function getLeaderboardAsync(limit = 50): Promise<LeaderboardEntry[]> {
+  const supabaseData = await fetchLeaderboard(limit);
+  if (supabaseData && supabaseData.length > 0) {
+    return supabaseData.map((u, i) => ({
+      rank: i + 1,
+      userId: u.id,
+      nickname: u.nickname,
+      rankName: u.rank_name,
+      rankIcon: u.rank_icon,
+      points: u.points,
+      playedCount: u.played_count,
+      togetherPlayedCount: u.together_played_count,
+    }));
+  }
+  return getLeaderboard(limit);
 }

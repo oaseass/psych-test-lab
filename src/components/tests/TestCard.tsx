@@ -41,7 +41,7 @@ export default function TestCard({ test, className, compact }: TestCardProps) {
             compact ? "text-sm" : "text-base"
           )}
         >
-          {test.title}
+          {test.title.replace(/ 테스트$/, "")}
         </h3>
 
         {/* 훅 문구 */}
@@ -50,11 +50,10 @@ export default function TestCard({ test, className, compact }: TestCardProps) {
         )}
 
         {/* 하단 메타 */}
-        <div className="mt-3 flex items-center justify-between text-xs text-gray-400">
+        <div className="mt-3 flex items-center text-xs text-gray-400 gap-1.5">
           <span>{test.questionCount}문항</span>
-          <span className="flex items-center gap-0.5">
-            🔥 {test.viralScore * 100}+
-          </span>
+          <span className="text-gray-300">·</span>
+          <span>1분컷</span>
         </div>
       </div>
     </Link>

@@ -1,35 +1,73 @@
 "use client";
 
+import { useState } from "react";
 import { trackShare } from "@/lib/tracking/tracking";
 
 interface ShareButtonsProps {
   shareText: string;
   testSlug: string;
   resultId?: string;
+  resultTitle?: string;
+  resultSubtitle?: string;
+  testTitle?: string;
+  categorySlug?: string;
 }
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://psychlab.kr";
 
-export default function ShareButtons({ shareText, testSlug, resultId }: ShareButtonsProps) {
+export default function ShareButtons({
+  shareText,
+  testSlug,
+  resultId,
+  resultTitle,
+  resultSubtitle,
+  testTitle,
+  categorySlug,
+}: ShareButtonsProps) {
+  const [copied, setCopied] = useState(false);
+  const [compareCopied, setCompareCopied] = useState(false);
+
   const url = resultId
     ? `${SITE_URL}/result/${encodeURIComponent(resultId)}`
     : `${SITE_URL}/test/${testSlug}`;
-  
-  const fullText = `${shareText}${url}`;
+
+  const fullText = `${shareText}\n${url}`;
+
+  // OG 이미지 URL 생성
+  const ogImageUrl = resultTitle
+    ? `${SITE_URL}/api/og?${new URLSearchParams({
+        title: testTitle ?? testSlug,
+        result: resultTitle,
+        subtitle: resultSubtitle ?? "",
+        category: categorySlug ?? "심리테스트",
+      }).toString()}`
+    : null;
+
+  // 결과 타입 추출 (resultId: {testSlug}__{resultTypeId}__{timestamp})
+  const resultTypeId = resultId ? resultId.split("__")[1] : null;
 
   function copyLink() {
-    navigator.clipboard.writeText(url).then(() => {
-      alert("링크가 복사됐어요! 친구에게 공유해보세요 🙌");
-    }).catch(() => {
-      alert("링크: " + url);
-    });
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => alert("링크: " + url));
     trackShare(testSlug, "copy_link");
   }
 
-  function shareKakao() {
-    // 카카오 SDK가 없으면 링크 복사로 fallback
-    copyLink();
-    trackShare(testSlug, "kakao");
+  function copyCompareLink() {
+    if (!resultTypeId) return;
+    const compareUrl = `${SITE_URL}/compare/${testSlug}?a=${encodeURIComponent(resultTypeId)}`;
+    navigator.clipboard
+      .writeText(compareUrl)
+      .then(() => {
+        setCompareCopied(true);
+        setTimeout(() => setCompareCopied(false), 2000);
+      })
+      .catch(() => alert("비교 링크: " + compareUrl));
+    trackShare(testSlug, "compare_link");
   }
 
   function shareTwitter() {
@@ -69,9 +107,19 @@ export default function ShareButtons({ shareText, testSlug, resultId }: ShareBut
           onClick={copyLink}
           className="flex-1 flex items-center justify-center gap-2 py-3 bg-gray-100 text-gray-700 rounded-2xl text-sm font-medium hover:bg-gray-200 transition-colors"
         >
-          🔗 링크 복사
+          {copied ? "✅ 복사됨" : "🔗 링크 복사"}
         </button>
       </div>
+
+      {/* 친구와 결과 비교하기 */}
+      {resultTypeId && (
+        <button
+          onClick={copyCompareLink}
+          className="w-full flex items-center justify-center gap-2 py-2.5 bg-pink-50 text-pink-600 rounded-2xl text-sm font-bold hover:bg-pink-100 transition-colors border border-pink-100"
+        >
+          {compareCopied ? "✅ 비교 링크 복사됨!" : "🆚 친구와 결과 비교하기"}
+        </button>
+      )}
 
       {/* 트위터 공유 */}
       <button
@@ -80,6 +128,8 @@ export default function ShareButtons({ shareText, testSlug, resultId }: ShareBut
       >
         🐦 X(트위터)에 공유
       </button>
+
+
     </div>
   );
 }

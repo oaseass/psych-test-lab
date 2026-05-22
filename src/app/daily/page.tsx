@@ -113,7 +113,6 @@ export default function DailyPage() {
                   {w.emoji}
                 </div>
                 <div className="font-semibold text-gray-900 text-xs leading-snug">{w.title}</div>
-                <div className="text-[11px] text-gray-400">{w.playCount?.toLocaleString()}명 참여</div>
               </div>
             </Link>
           ))}

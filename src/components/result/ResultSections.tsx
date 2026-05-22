@@ -61,31 +61,7 @@ export default function ResultSections({ result, className }: ResultSectionsProp
         </div>
       )}
 
-      {/* 궁합 */}
-      {(result.matchingTypes?.length || result.oppositeTypes?.length) && (
-        <div className="grid grid-cols-2 gap-3">
-          {result.matchingTypes && result.matchingTypes.length > 0 && (
-            <div className="bg-blue-50 rounded-2xl p-4">
-              <h3 className="text-sm font-bold text-blue-700 mb-1.5">💙 잘 맞는 유형</h3>
-              <ul className="space-y-0.5">
-                {result.matchingTypes.map((t, i) => (
-                  <li key={i} className="text-xs text-blue-800">{t}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {result.oppositeTypes && result.oppositeTypes.length > 0 && (
-            <div className="bg-red-50 rounded-2xl p-4">
-              <h3 className="text-sm font-bold text-red-700 mb-1.5">💔 충돌하는 유형</h3>
-              <ul className="space-y-0.5">
-                {result.oppositeTypes.map((t, i) => (
-                  <li key={i} className="text-xs text-red-800">{t}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      )}
+
     </div>
   );
 }

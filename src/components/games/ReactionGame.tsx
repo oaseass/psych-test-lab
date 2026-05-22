@@ -1,7 +1,9 @@
 "use client";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import NextContentRecommend from "@/components/common/NextContentRecommend";
 import PointRewardBanner from "@/components/user/PointRewardBanner";
+import { getCurrentUser } from "@/lib/user/authService";
+import { submitRankingScore } from "@/lib/ranking/rankingService";
 
 type Phase = "idle" | "waiting" | "ready" | "done";
 
@@ -63,6 +65,18 @@ export default function ReactionGame() {
     times.length > 0 ? Math.round(times.reduce((a, b) => a + b, 0) / times.length) : null;
 
   const isDone = times.length >= maxRounds && phase === "idle";
+
+  // 랭킹 등록 (회원만)
+  const hasSubmittedRef = useRef(false);
+  useEffect(() => {
+    if (isDone && avgTime !== null && !hasSubmittedRef.current) {
+      hasSubmittedRef.current = true;
+      const user = getCurrentUser();
+      if (user?.role === "member") {
+        submitRankingScore({ userId: user.id, contentId: "reaction", rankingType: "time", clearTimeMs: avgTime });
+      }
+    }
+  }, [isDone, avgTime]);
 
   function getGrade(ms: number) {
     if (ms < 200) return "🚀 초인적 반응속도!";

@@ -28,8 +28,8 @@ export default function BalanceListPage() {
                     )}
                   </div>
                   <p className="text-xs text-gray-500 mt-0.5">{g.description}</p>
-                  {g.playCount && (
-                    <p className="text-xs text-gray-400 mt-1">👥 {g.playCount.toLocaleString()}명 참여</p>
+                  {g.isFeatured && (
+                    <span className="inline-block mt-1 text-[10px] bg-pink-100 text-pink-600 px-2 py-0.5 rounded-full font-bold">친구랑 하기 좋음</span>
                   )}
                 </div>
                 <span className="text-gray-300">›</span>

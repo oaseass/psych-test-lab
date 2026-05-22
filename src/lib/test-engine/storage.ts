@@ -33,6 +33,17 @@ export function savePlayResult(result: TestPlayResult): void {
   filtered.unshift(result);
   // 최대 50개 유지
   safeSetItem(STORAGE_KEY_HISTORY, JSON.stringify(filtered.slice(0, 50)));
+  // 오늘의 챌린지 자동 체크
+  try {
+    const key = "sslab_challenge";
+    const today = new Date().toISOString().slice(0, 10);
+    const raw = localStorage.getItem(key);
+    const progress = raw ? JSON.parse(raw) : { date: today, completedSlugs: [], bonusClaimed: false };
+    if (progress.date === today && !progress.completedSlugs.includes(result.testSlug)) {
+      progress.completedSlugs.push(result.testSlug);
+      localStorage.setItem(key, JSON.stringify(progress));
+    }
+  } catch { /* 무시 */ }
 }
 
 export function getPlayHistory(): TestPlayResult[] {

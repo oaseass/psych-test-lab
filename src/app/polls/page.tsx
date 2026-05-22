@@ -35,7 +35,6 @@ export default function PollsPage() {
 }
 
 function PollCard({ data }: { data: (typeof pollList)[0] }) {
-  const totalVotes = data.options.reduce((s, o) => s + o.seedVotes, 0);
   return (
     <Link href={`/polls/${data.slug}`}>
       <div
@@ -60,10 +59,6 @@ function PollCard({ data }: { data: (typeof pollList)[0] }) {
           </div>
           <div className="flex items-center gap-2 mt-1">
             <span className="text-xs text-gray-400">{data.options.length}개 선택지</span>
-            <span className="text-xs text-gray-300">•</span>
-            <span className="text-xs text-gray-400">
-              {totalVotes.toLocaleString()}명 참여
-            </span>
           </div>
         </div>
         <span className="text-gray-300">›</span>

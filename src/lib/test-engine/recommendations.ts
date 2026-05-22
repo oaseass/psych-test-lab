@@ -13,33 +13,49 @@ interface RecommendationOptions {
 export function getRecommendations(options: RecommendationOptions): TestMeta[] {
   const { currentSlug, categorySlug, playedSlugs = [], allTests } = options;
 
-  const notCurrent = allTests.filter((t) => t.slug !== currentSlug && t.status !== "needsReview");
+  // 플레이 가능한 테스트만 대상
+  const candidates = allTests.filter(
+    (t) => t.slug !== currentSlug && t.isPlayable && t.status !== "needsReview"
+  );
 
-  // 같은 카테고리 우선 (안 해본 것)
-  const sameCat = notCurrent
+  // 현재 카테고리에서 플레이한 횟수 계산 (카테고리 선호도 판단)
+  const sameCatPlayedCount = playedSlugs.filter((s) => {
+    const t = allTests.find((m) => m.slug === s);
+    return t?.categorySlug === categorySlug;
+  }).length;
+  const preferSameCategory = sameCatPlayedCount >= 2;
+
+  // 같은 카테고리 (안 해본 것, 우선순위 기준)
+  const sameCat = candidates
     .filter((t) => t.categorySlug === categorySlug && !playedSlugs.includes(t.slug))
     .sort((a, b) => a.priority - b.priority);
 
-  // 다른 카테고리 (안 해본 것, 높은 바이럴 스코어 우선)
-  const otherCat = notCurrent
+  // 다른 카테고리 (안 해본 것, 바이럴 스코어 우선)
+  const otherCat = candidates
     .filter((t) => t.categorySlug !== categorySlug && !playedSlugs.includes(t.slug))
     .sort((a, b) => b.viralScore - a.viralScore);
 
   // 이미 한 것들 (바이럴 스코어 순)
-  const alreadyPlayed = notCurrent
+  const alreadyPlayed = candidates
     .filter((t) => playedSlugs.includes(t.slug))
     .sort((a, b) => b.viralScore - a.viralScore);
 
-  // 3개 추천: 같은 카테고리 1개 + 다른 카테고리 2개 (없으면 이미 한 것으로 채움)
   const result: TestMeta[] = [];
 
-  if (sameCat.length > 0) result.push(sameCat[0]);
-  const remaining = [...otherCat, ...alreadyPlayed].filter(
+  if (preferSameCategory) {
+    // 같은 카테고리 2개 + 다른 카테고리 4개
+    result.push(...sameCat.slice(0, 2));
+  } else {
+    // 같은 카테고리 1개 + 다른 카테고리 5개
+    if (sameCat.length > 0) result.push(sameCat[0]);
+  }
+
+  const pool = [...otherCat, ...alreadyPlayed].filter(
     (t) => !result.find((r) => r.slug === t.slug)
   );
-  result.push(...remaining.slice(0, 3 - result.length));
+  result.push(...pool.slice(0, 6 - result.length));
 
-  return result.slice(0, 3);
+  return result.slice(0, 6);
 }
 
 export function getPopularTests(allTests: TestMeta[], limit = 10): TestMeta[] {

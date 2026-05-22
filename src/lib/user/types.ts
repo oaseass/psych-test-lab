@@ -54,6 +54,7 @@ export type RankTier =
   | "guest"
   | "soldier"
   | "nonCommissionedOfficer"
+  | "warrantOfficer"
   | "officer"
   | "fieldOfficer"
   | "general"
@@ -72,6 +73,7 @@ export type Rank = {
   name: string;
   shortName: string;
   icon: string;
+  iconCount: number;
   minPoints: number;
   tier: RankTier;
   color: string;

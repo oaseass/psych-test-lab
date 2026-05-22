@@ -143,8 +143,8 @@ export function generatePlayableTest(meta: TestMeta): PlayableTest {
   const resultTitles = RESULT_TEMPLATES_BY_CATEGORY[meta.categorySlug] ||
     RESULT_TEMPLATES_BY_CATEGORY.default;
 
-  // 질문 생성 (12개)
-  const questionTexts = seededPickN(categoryTemplates, 12, rng);
+  // 질문 생성 (6개)
+  const questionTexts = seededPickN(categoryTemplates, 6, rng);
   const questions: TestQuestion[] = questionTexts.map((text, qi) => {
     const optionTemplate = OPTION_TEXTS[qi % OPTION_TEXTS.length];
     return {

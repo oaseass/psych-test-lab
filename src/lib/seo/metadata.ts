@@ -3,16 +3,16 @@ import type { TestMeta, TestResult, TestCategory } from "@/types";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://psychlab.kr";
 const SITE_NAME = "심심풀이 연구소";
-const DEFAULT_DESCRIPTION = "무료 심리테스트 · 이상형 월드컵 · 밸런스게임 · 초성퀴즈 · 투표 · 생성기! 심심할 때 3분씩 즐기는 퀴즈/게임/테스트 포털. 지금 바로 시작해보세요.";
+const DEFAULT_DESCRIPTION = "무료 심리테스트 · 이상형 월드컵 · 밸런스게임 · 웹실험 · 선택형 스토리 · 빙고 · 초성퀴즈 · 투표 · 생성기! 심심할 때 즐기는 퀴즈/게임/테스트 포털.";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 export function buildSiteMetadata(): Metadata {
   return {
     title: {
-      default: `${SITE_NAME} | 무료 테스트·퀴즈·월드컵 모음`,
+      default: `${SITE_NAME} | 무료 테스트·퀴즈·월드컵·랜덤놀이 모음`,
       template: `%s | ${SITE_NAME}`,
     },
-    keywords: ["심리테스트", "이상형 월드컵", "밸런스게임", "초성퀴즈", "넌센스퀴즈", "무료테스트", "심심풀이", "성격테스트", "MBTI", "연애테스트"],
+    keywords: ["심리테스트", "이상형 월드컵", "밸런스게임", "초성퀴즈", "넌센스퀴즈", "무료테스트", "심심풀이", "성격테스트", "MBTI", "연애테스트", "웹실험", "선택형 스토리", "빙고", "측정기"],
     description: DEFAULT_DESCRIPTION,
     metadataBase: new URL(SITE_URL),
     openGraph: {

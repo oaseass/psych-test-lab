@@ -1,8 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { NonsenseSet, NonsenseQuestion } from "@/data/games/nonsenseData";
 import NextContentRecommend from "@/components/common/NextContentRecommend";
 import PointRewardBanner from "@/components/user/PointRewardBanner";
+import { getCurrentUser } from "@/lib/user/authService";
+import { submitRankingScore } from "@/lib/ranking/rankingService";
 
 type Props = {
   data: NonsenseSet;
@@ -12,9 +14,20 @@ export default function NonsenseGame({ data }: Props) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [done, setDone] = useState(false);
+  const hasSubmittedRef = useRef(false);
+  const total = data.questions.length;
+
+  useEffect(() => {
+    if (done && !hasSubmittedRef.current) {
+      hasSubmittedRef.current = true;
+      const user = getCurrentUser();
+      if (user?.role === "member") {
+        submitRankingScore({ userId: user.id, contentId: data.slug, rankingType: "score", score: total });
+      }
+    }
+  }, [done, data.slug, total]);
 
   const q: NonsenseQuestion = data.questions[currentIdx];
-  const total = data.questions.length;
 
   function handleReveal() {
     setRevealed(true);

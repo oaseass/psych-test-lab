@@ -34,7 +34,12 @@ export default function AdSlot({ slotKey, className }: AdSlotProps) {
     );
   }
 
-  // 개발 환경 또는 AdSense 미설정 시 플레이스홀더
+  // 개발 환경에서만 플레이스홀더 표시 (프로덕션에서는 완전 숨김)
+  if (process.env.NODE_ENV !== "development") {
+    return null;
+  }
+
+  // 개발 환경 플레이스홀더
   return (
     <div
       className={cn(

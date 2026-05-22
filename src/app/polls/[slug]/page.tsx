@@ -122,7 +122,7 @@ function PollContent({ poll }: { poll: PollData }) {
 
           {votedOption && (
             <p className="text-center text-xs text-gray-400 mt-4">
-              총 {totalVotes.toLocaleString()}명 참여
+              결과를 보고 있어요
             </p>
           )}
 

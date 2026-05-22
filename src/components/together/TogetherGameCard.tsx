@@ -20,11 +20,6 @@ export default function TogetherGameCard({ game, variant = "card" }: Props) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
               <h3 className="font-bold text-gray-900">{game.title}</h3>
-              {game.isBotSupported && (
-                <span className="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-semibold">
-                  AI 봇 지원
-                </span>
-              )}
             </div>
             <p className="text-sm text-gray-600 truncate">{game.subtitle}</p>
             <div className="flex items-center gap-3 mt-1 text-xs text-gray-400">
@@ -50,9 +45,7 @@ export default function TogetherGameCard({ game, variant = "card" }: Props) {
         <div className="flex items-center gap-2 flex-wrap text-xs text-gray-500">
           <span>👥 {game.recommendedPlayers}</span>
           <span>⏱ {game.estimatedMinutes}분</span>
-          {game.isBotSupported && (
-            <span className="px-1.5 py-0.5 rounded bg-purple-100 text-purple-700 font-semibold">AI봇 ✓</span>
-          )}
+          <span className="px-1.5 py-0.5 rounded bg-violet-50 text-violet-600 font-semibold">링크 공유</span>
         </div>
         <div
           className="absolute bottom-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold group-hover:scale-110 transition-transform"

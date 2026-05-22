@@ -40,20 +40,11 @@ export default function Header() {
           <Link href="/tests" className="text-gray-600 hover:text-brand-purple transition-colors">
             심리테스트
           </Link>
-          <Link href="/daily" className="text-gray-600 hover:text-brand-purple transition-colors font-semibold">
-            오늘의 놀이
-          </Link>
           <Link href="/games" className="text-gray-600 hover:text-brand-purple transition-colors">
-            두뇌게임
+            퀴즈/퍼즐
           </Link>
           <Link href="/games/worldcup" className="text-gray-600 hover:text-brand-purple transition-colors">
             월드컵
-          </Link>
-          <Link href="/games/balance" className="text-gray-600 hover:text-brand-purple transition-colors">
-            밸런스
-          </Link>
-          <Link href="/games/initial-quiz" className="text-gray-600 hover:text-brand-purple transition-colors">
-            초성퀴즈
           </Link>
           <Link href="/together" className="relative text-violet-600 font-semibold hover:text-violet-700 transition-colors">
             같이놀기
@@ -61,11 +52,20 @@ export default function Header() {
               회원
             </span>
           </Link>
-          <Link href="/polls" className="text-gray-600 hover:text-brand-purple transition-colors">
-            투표
+          <Link href="/experiments" className="text-gray-600 hover:text-brand-purple transition-colors">
+            웹실험
           </Link>
-          <Link href="/generator" className="text-gray-600 hover:text-brand-purple transition-colors">
-            생성기
+          <Link href="/lucky" className="relative text-amber-600 font-semibold hover:text-amber-700 transition-colors">
+            🍀 럭키존
+            <span className="absolute -top-1.5 -right-5 text-[9px] bg-amber-500 text-white px-1 py-0.5 rounded-full leading-none">
+              회원
+            </span>
+          </Link>
+          <Link href="/categories" className="text-gray-600 hover:text-brand-purple transition-colors">
+            전체보기
+          </Link>
+          <Link href="/surprise" className="text-brand-purple font-semibold hover:text-purple-700 transition-colors">
+            🎲 랜덤
           </Link>
         </nav>
 
@@ -176,18 +176,21 @@ export default function Header() {
 
           {[
             { href: "/tests", label: "🧠 심리테스트" },
-            { href: "/daily", label: "🎯 오늘의 놀이" },
-            { href: "/games", label: "🎮 두뇌게임" },
+            { href: "/games", label: "🎮 퀴즈/퍼즐" },
             { href: "/games/worldcup", label: "🏆 이상형 월드컵" },
             { href: "/games/balance", label: "⚖️ 밸런스 게임" },
             { href: "/games/initial-quiz", label: "🔤 초성 퀴즈" },
-            { href: "/games/nonsense", label: "🤣 넌센스 퀴즈" },
-            { href: "/games/observation", label: "👁️ 관찰력 테스트" },
-            { href: "/games/memory", label: "🧠 기억력 테스트" },
-            { href: "/games/reaction", label: "⚡ 반응속도" },
+            { href: "/games/spot-difference", label: "🔍 틀린그림찾기" },
             { href: "/together", label: "👥 같이놀기", badge: "회원전용" },
+            { href: "/lucky", label: "🍀 럭키존", badge: "회원전용" },
+            { href: "/experiments", label: "⚗️ 웹실험" },
+            { href: "/story", label: "📖 선택형 스토리" },
+            { href: "/bingo", label: "🎯 빙고" },
+            { href: "/gauge", label: "📊 가짜 측정기" },
             { href: "/polls", label: "🗳️ 투표" },
             { href: "/generator", label: "✨ 생성기" },
+            { href: "/surprise", label: "🎲 랜덤 놀이" },
+            { href: "/categories", label: "📂 전체 카테고리" },
           ].map((item) => (
             <Link
               key={item.href}

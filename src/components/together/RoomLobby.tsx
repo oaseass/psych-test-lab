@@ -78,9 +78,9 @@ export default function RoomLobby({ room, myParticipantId, onRoomUpdate }: Props
         {/* AI 봇 관리 (방장만) */}
         {isHost && (
           <div className="bg-white rounded-2xl shadow-sm p-4">
-            <h3 className="font-semibold text-gray-800 mb-3">🤖 AI 친구 관리</h3>
+            <h3 className="font-semibold text-gray-800 mb-3">🤖 AI 연습 참가자</h3>
             <p className="text-xs text-gray-400 mb-3">
-              혼자 와도 AI 친구가 함께 놀아드려요. AI는 절대 진짜 사람처럼 속이지 않아요.
+              인원이 부족할 때 AI를 추가해 게임을 진행할 수 있습니다. AI는 항상 AI로 표시됩니다.
             </p>
             <div className="flex gap-2">
               <button

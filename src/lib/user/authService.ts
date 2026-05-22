@@ -9,6 +9,7 @@
 import type { UserProfile, UserRole } from "@/lib/user/types";
 import { GUEST_RANK, MEMBER_RANKS } from "@/data/ranks";
 import { syncUserRank } from "@/lib/user/rankService";
+import { syncProfile } from "@/lib/supabase/dbService";
 
 const KEY_CURRENT_USER = "sslab_current_user";
 const KEY_USERS_DB = "sslab_users_db";
@@ -73,6 +74,8 @@ export function saveCurrentUser(user: UserProfile): void {
     const db = getUsersDb();
     db[user.id] = user;
     saveUsersDb(db);
+    // Supabase 비동기 동기화
+    syncProfile(user).catch(() => {});
   }
 }
 

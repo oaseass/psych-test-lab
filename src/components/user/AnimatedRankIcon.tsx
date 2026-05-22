@@ -1,5 +1,6 @@
 "use client";
 import type { Rank } from "@/lib/user/types";
+import RankInsigniaSvg from "./RankInsigniaSvg";
 
 type Props = {
   rank: Rank;
@@ -7,25 +8,39 @@ type Props = {
   animated?: boolean;
 };
 
+const SIZE_MAP: Record<string, number> = {
+  "text-sm": 16,
+  "text-base": 18,
+  "text-lg": 20,
+  "text-xl": 22,
+  "text-2xl": 28,
+  "text-3xl": 36,
+  "text-4xl": 44,
+  "text-5xl": 52,
+  "text-6xl": 64,
+};
+
 export default function AnimatedRankIcon({ rank, sizeClass = "text-2xl", animated = true }: Props) {
   const animType = animated ? rank.animationType : "none";
+  const iconSize = SIZE_MAP[sizeClass] ?? 28;
+  const icon = <RankInsigniaSvg tier={rank.tier} count={rank.iconCount} size={iconSize} />;
 
   if (animType === "none") {
-    return <span className={`${sizeClass} select-none`}>{rank.icon}</span>;
+    return <span className="select-none inline-flex items-center">{icon}</span>;
   }
 
   if (animType === "soft-pulse") {
     return (
-      <span className={`${sizeClass} select-none rank-soft-pulse inline-block`}>
-        {rank.icon}
+      <span className="select-none rank-soft-pulse inline-flex items-center">
+        {icon}
       </span>
     );
   }
 
   if (animType === "shine") {
     return (
-      <span className="relative inline-block select-none overflow-hidden" style={{ verticalAlign: "middle" }}>
-        <span className={`${sizeClass} rank-shine-icon inline-block`}>{rank.icon}</span>
+      <span className="relative inline-flex items-center select-none overflow-hidden" style={{ verticalAlign: "middle" }}>
+        <span className="rank-shine-icon inline-flex">{icon}</span>
         {/* Sweep overlay */}
         <span
           className="absolute inset-0 pointer-events-none"
@@ -50,10 +65,10 @@ export default function AnimatedRankIcon({ rank, sizeClass = "text-2xl", animate
   if (animType === "float") {
     return (
       <span
-        className={`${sizeClass} select-none inline-block rank-float`}
+        className="select-none inline-flex items-center rank-float"
         style={{ filter: `drop-shadow(0 4px 8px ${rank.glowColor})` }}
       >
-        {rank.icon}
+        {icon}
       </span>
     );
   }
@@ -82,7 +97,7 @@ export default function AnimatedRankIcon({ rank, sizeClass = "text-2xl", animate
           style={{ width: "4px", height: "4px", background: "#a78bfa", borderRadius: "50%", bottom: "-1px", left: "-2px" }}
           aria-hidden="true"
         />
-        <span className={`${sizeClass} relative`}>{rank.icon}</span>
+        <span className="relative inline-flex">{icon}</span>
       </span>
     );
   }
@@ -130,10 +145,11 @@ export default function AnimatedRankIcon({ rank, sizeClass = "text-2xl", animate
           }}
           aria-hidden="true"
         />
-        <span className={`${sizeClass} relative rank-legend-glow`}>{rank.icon}</span>
+        <span className="relative inline-flex rank-legend-glow">{icon}</span>
       </span>
     );
   }
 
-  return <span className={`${sizeClass} select-none`}>{rank.icon}</span>;
+  return <span className="select-none inline-flex items-center">{icon}</span>;
 }
+

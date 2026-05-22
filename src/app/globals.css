@@ -2,12 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Design Tokens ─── */
+:root {
+  --color-bg: #FAF7F2;
+  --color-surface: #FFFFFF;
+  --color-text: #171717;
+  --color-muted: #737373;
+  --color-border: #E7E0D8;
+  --color-purple: #7C3AED;
+  --color-pink: #EC4899;
+  --radius-card: 20px;
+  --radius-button: 14px;
+  --shadow-card: 0 2px 12px 0 rgba(0,0,0,0.06);
+  --shadow-hover: 0 6px 24px 0 rgba(0,0,0,0.10);
+}
+
 @layer base {
   html {
     -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-brand-bg text-brand-text antialiased;
+    font-feature-settings: "kern" 1;
+  }
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  /* ─── Card Base ─── */
+  .card {
+    @apply bg-white rounded-3xl border border-brand-border shadow-card transition-all duration-200;
+  }
+  .card-hover {
+    @apply hover:shadow-card-hover hover:-translate-y-0.5 active:scale-[0.98];
+  }
+
+  /* ─── Section Title ─── */
+  .section-title {
+    @apply text-[17px] font-extrabold text-brand-text tracking-tight;
+  }
+
+  /* ─── Pill Badge ─── */
+  .pill {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold;
+  }
+  .pill-hot {
+    @apply pill bg-red-50 text-red-500;
+  }
+  .pill-new {
+    @apply pill bg-violet-50 text-violet-600;
+  }
+  .pill-member {
+    @apply pill bg-amber-50 text-amber-600;
+  }
+  .pill-free {
+    @apply pill bg-green-50 text-green-600;
+  }
+
+  /* ─── CTA Button ─── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-5 py-3 rounded-2xl font-bold text-sm text-white bg-brand-purple hover:bg-purple-700 active:scale-[0.97] transition-all shadow-md;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-5 py-3 rounded-2xl font-bold text-sm text-brand-purple bg-white border-2 border-brand-purple/20 hover:border-brand-purple/50 active:scale-[0.97] transition-all;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-xl font-semibold text-sm text-brand-muted bg-transparent hover:bg-gray-50 active:scale-[0.97] transition-all;
   }
 }
 

@@ -2,14 +2,16 @@
 import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { login } from "@/lib/user/authService";
+import { login, saveCurrentUser } from "@/lib/user/authService";
+import { isSupabaseConfigured, supabaseLogin } from "@/lib/supabase/authSupabase";
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") ?? "/my";
 
-  const [nickname, setNickname] = useState("");
+  // Supabase 모드: 이메일, localStorage 모드: 닉네임
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,14 +20,28 @@ function LoginForm() {
     e.preventDefault();
     setError("");
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 200));
-    const result = login(nickname, password);
-    setLoading(false);
-    if (!result.success) {
-      setError(result.error);
-      return;
+
+    if (isSupabaseConfigured) {
+      // ── Supabase 기반 로그인 ──
+      const result = await supabaseLogin(identifier, password);
+      setLoading(false);
+      if (!result.success) {
+        setError(result.error);
+        return;
+      }
+      saveCurrentUser(result.user);
+      router.replace(redirect);
+    } else {
+      // ── localStorage fallback ──
+      await new Promise((r) => setTimeout(r, 200));
+      const result = login(identifier, password);
+      setLoading(false);
+      if (!result.success) {
+        setError(result.error);
+        return;
+      }
+      router.replace(redirect);
     }
-    router.replace(redirect);
   }
 
   return (
@@ -40,13 +56,16 @@ function LoginForm() {
         <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6">
           <form onSubmit={handleSubmit} className="space-y-3">
             <div>
-              <label className="text-xs text-gray-500 font-semibold mb-1 block">닉네임</label>
+              <label className="text-xs text-gray-500 font-semibold mb-1 block">
+                {isSupabaseConfigured ? "이메일" : "닉네임"}
+              </label>
               <input
-                type="text"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-                placeholder="가입할 때 쓴 닉네임"
+                type={isSupabaseConfigured ? "email" : "text"}
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+                placeholder={isSupabaseConfigured ? "example@email.com" : "가입할 때 쓴 닉네임"}
                 required
+                autoComplete={isSupabaseConfigured ? "email" : "username"}
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-purple transition-colors"
               />
             </div>
@@ -58,6 +77,7 @@ function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="비밀번호"
                 required
+                autoComplete="current-password"
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-purple transition-colors"
               />
             </div>
@@ -80,7 +100,10 @@ function LoginForm() {
           <div className="mt-4 pt-4 border-t border-gray-50 text-center">
             <p className="text-xs text-gray-400">
               계정이 없어요?{" "}
-              <Link href={`/auth/signup?redirect=${encodeURIComponent(redirect)}`} className="text-brand-purple font-semibold hover:underline">
+              <Link
+                href={`/auth/signup?redirect=${encodeURIComponent(redirect)}`}
+                className="text-brand-purple font-semibold hover:underline"
+              >
                 회원가입 (축하 500P)
               </Link>
             </p>

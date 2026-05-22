@@ -31,7 +31,7 @@ export default function MyPage() {
     return (
       <div className="max-w-xl mx-auto px-4 py-8">
         <div className="text-center mb-6">
-          <div className="text-5xl mb-2">ㅡ</div>
+          <div className="text-5xl mb-2">🕵️</div>
           <h1 className="text-xl font-extrabold text-gray-800">{user?.nickname ?? "손님"}</h1>
           <p className="text-sm text-gray-400 mt-1">훈련병 · 게스트</p>
         </div>
@@ -78,7 +78,7 @@ export default function MyPage() {
       {/* 출석 현황 */}
       <div className="bg-white rounded-2xl border border-gray-100 p-4">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="font-bold text-gray-800">출석체크</h3>
+          <h3 className="font-bold text-gray-800">📅 출석체크</h3>
           {canCheckIn ? (
             <Link
               href="/check-in"
@@ -104,10 +104,12 @@ export default function MyPage() {
       {/* 활동 요약 */}
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-white rounded-2xl border border-gray-100 p-4 text-center">
+          <div className="text-xl mb-1">🎮</div>
           <div className="text-2xl font-extrabold text-brand-purple">{user.playedCount}</div>
           <div className="text-xs text-gray-500 mt-0.5">완료한 테스트/게임</div>
         </div>
         <div className="bg-white rounded-2xl border border-gray-100 p-4 text-center">
+          <div className="text-xl mb-1">👥</div>
           <div className="text-2xl font-extrabold text-violet-600">{user.togetherPlayedCount}</div>
           <div className="text-xs text-gray-500 mt-0.5">같이놀기 참여</div>
         </div>
@@ -115,9 +117,12 @@ export default function MyPage() {
 
       {/* 최근 포인트 로그 */}
       <div className="bg-white rounded-2xl border border-gray-100 p-4">
-        <h3 className="font-bold text-gray-800 mb-3">최근 획득 포인트</h3>
+        <h3 className="font-bold text-gray-800 mb-3">💰 최근 획득 포인트</h3>
         {logs.length === 0 ? (
-          <p className="text-sm text-gray-400 text-center py-4">아직 포인트 기록이 없어요.</p>
+          <div className="text-center py-4">
+            <div className="text-3xl mb-1">📭</div>
+            <p className="text-sm text-gray-400">아직 포인트 기록이 없어요.</p>
+          </div>
         ) : (
           <div className="space-y-2">
             {logs.map((log) => (

@@ -55,8 +55,8 @@ function WorldcupCard({ data }: { data: (typeof worldcupList)[0] }) {
             )}
           </div>
           <p className="text-xs text-gray-500 mt-0.5">{data.description}</p>
-          {data.playCount && (
-            <p className="text-xs text-gray-400 mt-1">👥 {data.playCount.toLocaleString()}명 참여</p>
+          {data.isFeatured && (
+            <span className="inline-block mt-1 text-[10px] bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full font-bold">많이 하는 중</span>
           )}
         </div>
         <span className="text-gray-300">›</span>

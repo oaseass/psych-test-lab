@@ -1,7 +1,9 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import NextContentRecommend from "@/components/common/NextContentRecommend";
 import PointRewardBanner from "@/components/user/PointRewardBanner";
+import { getCurrentUser } from "@/lib/user/authService";
+import { submitRankingScore } from "@/lib/ranking/rankingService";
 
 // 기억력 테스트: 시퀀스 기억하기
 const EMOJIS = ["🔴", "🟡", "🟢", "🔵", "🟣", "🟠"];
@@ -21,6 +23,18 @@ export default function MemoryGame() {
   const [correct, setCorrect] = useState(true);
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const hasSubmittedRef = useRef(false);
+
+  useEffect(() => {
+    if (gameState === "result" && !hasSubmittedRef.current) {
+      hasSubmittedRef.current = true;
+      const user = getCurrentUser();
+      if (user?.role === "member") {
+        submitRankingScore({ userId: user.id, contentId: "memory", rankingType: "score", score });
+      }
+    }
+    if (gameState !== "result") hasSubmittedRef.current = false;
+  }, [gameState, score]);
 
   const startGame = useCallback(() => {
     const seq = generateSequence(level + 2);

@@ -1,6 +1,7 @@
 "use client";
 import { getRankProgress } from "@/lib/user/rankService";
 import type { UserProfile } from "@/lib/user/types";
+import RankInsigniaSvg from "./RankInsigniaSvg";
 
 type Props = {
   user: UserProfile;
@@ -14,7 +15,7 @@ export default function RankProgress({ user, className = "" }: Props) {
     <div className={`bg-white rounded-2xl border border-gray-100 p-4 ${className}`}>
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
-          <span className="text-xl">{currentRank.icon}</span>
+          <RankInsigniaSvg tier={currentRank.tier} count={currentRank.iconCount} size={22} />
           <span className="font-bold text-gray-800">{currentRank.name}</span>
         </div>
         <span className="text-xs text-gray-500">{user.points.toLocaleString()}P</span>
@@ -28,7 +29,7 @@ export default function RankProgress({ user, className = "" }: Props) {
             />
           </div>
           <p className="text-xs text-gray-400">
-            다음 계급 <span className="font-semibold text-gray-600">{nextRank.icon} {nextRank.name}</span>까지{" "}
+            다음 계급 <span className="font-semibold text-gray-600 inline-flex items-center gap-1"><RankInsigniaSvg tier={nextRank.tier} count={nextRank.iconCount} size={16} /> {nextRank.name}</span>까지{" "}
             <span className="font-bold text-brand-purple">{pointsToNext.toLocaleString()}P</span> 남음
           </p>
         </>

@@ -1,5 +1,5 @@
 // ============================
-// 심리테스트 연구소 타입 정의
+// 심심풀이 연구소 타입 정의
 // ============================
 
 export type TestFormat =
@@ -69,6 +69,11 @@ export type TestMeta = {
   visualStyle?: VisualStyle;
   minQuestionCount?: number;
   maxQuestionCount?: number;
+  // 플레이 가능 여부 (전수검수 기준)
+  isPlayable?: boolean;
+  qualityTier?: "polished" | "normal" | "prototype" | "hidden";
+  auditStatus?: "pass" | "fail" | "needsReview";
+  auditReason?: string;
 };
 
 export type TestQuestion = {

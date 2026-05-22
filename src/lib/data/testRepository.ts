@@ -3,6 +3,7 @@ import { categories, getCategoryBySlug } from "@/data/categories";
 import { curatedTests, getCuratedTest, curatedTestSlugs } from "@/data/curatedTests";
 import { generatedTestMeta } from "@/data/generated/testMeta.generated";
 import { generatePlayableTest } from "@/lib/test-engine/generatePlayableTest";
+import { POLISHED_SLUGS } from "@/data/playableSlugs";
 
 export { getRecommendations } from "@/lib/test-engine/recommendations";
 
@@ -61,14 +62,49 @@ export function searchTests(query: string): TestMeta[] {
 }
 
 // 플레이 가능한 테스트 반환 (큐레이션 우선, 없으면 생성)
+// 항상 6문항으로 정규화 (빠른 테스트 구조)
 export function getPlayableTest(slug: string): PlayableTest | null {
   const curated = getCuratedTest(slug);
-  if (curated) return curated;
+  const raw: PlayableTest | null = curated ?? (() => {
+    const meta = getTestMeta(slug);
+    if (!meta) return null;
+    return generatePlayableTest(meta);
+  })();
 
-  const meta = getTestMeta(slug);
-  if (!meta) return null;
+  if (!raw) return null;
 
-  return generatePlayableTest(meta);
+  if (raw.questions.length > 6) {
+    return {
+      ...raw,
+      questions: raw.questions.slice(0, 6),
+      meta: { ...raw.meta, questionCount: 6, estimatedMinutes: 1 },
+    };
+  }
+  return {
+    ...raw,
+    meta: { ...raw.meta, questionCount: Math.min(raw.questions.length, 6), estimatedMinutes: 1 },
+  };
+}
+
+// polished 테스트만 반환 (목록 노출용)
+export function getPlayableTests(): TestMeta[] {
+  return allTestMeta.filter((m) => POLISHED_SLUGS.has(m.slug));
+}
+
+// 활성 카테고리 반환 (playable 테스트가 있는 카테고리)
+export function getActiveCategories(): TestCategory[] {
+  const activeSlugs = new Set(getPlayableTests().map((m) => m.categorySlug));
+  return categories.filter((c) => activeSlugs.has(c.slug));
+}
+
+// 활성 카테고리 슬러그 (generateStaticParams / sitemap용)
+export function getActiveCategorySlugs(): string[] {
+  return getActiveCategories().map((c) => c.slug);
+}
+
+// 공개 테스트 슬러그 (sitemap용)
+export function getPublicTestSlugs(): string[] {
+  return getPlayableTests().map((m) => m.slug);
 }
 
 export function getAllCategories(): TestCategory[] {
