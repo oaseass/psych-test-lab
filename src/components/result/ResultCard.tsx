@@ -1,5 +1,6 @@
 import type { TestResult, TestMeta } from "@/types";
 import { cn } from "@/lib/utils/cn";
+import { getTestIllustration } from "@/lib/visuals/resultIllustrations";
 
 interface ResultCardProps {
   result: TestResult;
@@ -21,14 +22,27 @@ export default function ResultCard({ result, meta, className }: ResultCardProps)
   const shareCount = mockShareCount(result.id);
   const hasMatchingTypes = result.matchingTypes && result.matchingTypes.length > 0;
   const hasOppositeTypes = result.oppositeTypes && result.oppositeTypes.length > 0;
+  const visual = getTestIllustration(meta.slug, meta.categorySlug);
 
   return (
     <div className={cn("bg-white rounded-3xl border border-gray-100 shadow-lg overflow-hidden", className)}>
       {/* Header */}
-      <div className="relative bg-gradient-to-br from-purple-600 via-violet-600 to-pink-500 px-6 pt-8 pb-12 text-white text-center overflow-hidden">
+      <div className={cn(
+        "relative bg-gradient-to-br px-6 pt-8 pb-12 text-white text-center overflow-hidden",
+        visual.gradient
+      )}>
+        {/* 배경 장식 원 */}
         <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full" />
         <div className="absolute -bottom-4 -left-6 w-24 h-24 bg-white/10 rounded-full" />
         <div className="absolute top-4 left-4 w-12 h-12 bg-white/5 rounded-full" />
+
+        {/* 대표 이모지 */}
+        <div className="relative mb-3 flex justify-center">
+          <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center shadow-inner border border-white/30">
+            <span className="text-4xl">{visual.emoji}</span>
+          </div>
+        </div>
+
         <p className="relative text-xs font-semibold opacity-70 tracking-widest uppercase mb-2">{meta.title}</p>
         <h1 className="relative text-2xl sm:text-3xl font-extrabold leading-snug drop-shadow-sm">{result.title}</h1>
         {result.subtitle && (

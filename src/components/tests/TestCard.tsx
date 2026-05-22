@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { TestMeta } from "@/types";
 import { cn } from "@/lib/utils/cn";
 import { formatMinutes } from "@/lib/utils/format";
+import { getTestIllustration } from "@/lib/visuals/resultIllustrations";
 
 interface TestCardProps {
   test: TestMeta;
@@ -10,6 +11,8 @@ interface TestCardProps {
 }
 
 export default function TestCard({ test, className, compact }: TestCardProps) {
+  const visual = getTestIllustration(test.slug, test.categorySlug);
+
   return (
     <Link
       href={`/test/${test.slug}`}
@@ -18,6 +21,29 @@ export default function TestCard({ test, className, compact }: TestCardProps) {
         className
       )}
     >
+      {/* 썸네일 영역 */}
+      {!compact && (
+        <div className={cn(
+          "relative h-24 bg-gradient-to-br overflow-hidden flex items-center justify-center",
+          visual.gradient
+        )}>
+          {/* 배경 장식 */}
+          <div className="absolute -top-4 -right-4 w-16 h-16 bg-white/10 rounded-full" />
+          <div className="absolute -bottom-3 -left-3 w-12 h-12 bg-white/10 rounded-full" />
+          {/* 장식 이모지들 */}
+          {visual.decorEmojis[0] && (
+            <span className="absolute top-2 left-3 text-lg opacity-50">{visual.decorEmojis[0]}</span>
+          )}
+          {visual.decorEmojis[1] && (
+            <span className="absolute bottom-2 right-4 text-base opacity-40">{visual.decorEmojis[1]}</span>
+          )}
+          {/* 대표 이모지 */}
+          <div className="relative w-12 h-12 rounded-full bg-white/25 border border-white/40 flex items-center justify-center shadow-sm">
+            <span className="text-2xl">{visual.emoji}</span>
+          </div>
+        </div>
+      )}
+
       <div className={cn("p-4", compact && "p-3")}>
         {/* 배지 영역 */}
         <div className="flex items-center gap-1.5 mb-2">

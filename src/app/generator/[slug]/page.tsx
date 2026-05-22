@@ -5,6 +5,7 @@ import { getGeneratorBySlug, generateResult } from "@/data/generatorData";
 import type { GeneratorData } from "@/data/generatorData";
 import Link from "next/link";
 import { use } from "react";
+import { getPastLifeJobVisual } from "@/lib/visuals/resultIllustrations";
 
 export default function GeneratorDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -28,6 +29,10 @@ function GeneratorClient({ data }: { data: GeneratorData }) {
   function handleReset() {
     setResult(null);
   }
+
+  // 전생 직업 생성기 여부 & 직업 비주얼
+  const isPastLife = data.slug === "past-life";
+  const jobVisual = isPastLife && result ? getPastLifeJobVisual(result) : null;
 
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
@@ -107,14 +112,51 @@ function GeneratorClient({ data }: { data: GeneratorData }) {
 
           {/* 결과 표시 */}
           {result && (
-            <div className="flex flex-col items-center gap-5 py-4">
-              <div className="text-4xl">{data.emoji}</div>
-              <div
-                className="w-full rounded-2xl p-5 text-white text-center"
-                style={{ background: data.color }}
-              >
-                <p className="text-base font-bold leading-relaxed">{result}</p>
-              </div>
+            <div className="flex flex-col items-center gap-5 py-2">
+              {/* 전생 직업 생성기: 직업별 일러스트 */}
+              {isPastLife && jobVisual ? (
+                <div className="w-full">
+                  {/* 일러스트 헤더 */}
+                  <div
+                    className={`relative w-full rounded-2xl overflow-hidden mb-4 bg-gradient-to-br ${jobVisual.gradient}`}
+                    style={{ minHeight: 160 }}
+                  >
+                    {/* 배경 장식 */}
+                    <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full" />
+                    <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-white/10 rounded-full" />
+                    {/* 장식 이모지 */}
+                    <span className="absolute top-3 left-4 text-2xl opacity-40">{jobVisual.secondaryEmojis[0]}</span>
+                    <span className="absolute top-3 right-4 text-2xl opacity-40">{jobVisual.secondaryEmojis[1]}</span>
+                    <span className="absolute bottom-3 right-6 text-xl opacity-30">{jobVisual.secondaryEmojis[2]}</span>
+                    {/* 메인 콘텐츠 */}
+                    <div className="relative flex flex-col items-center justify-center py-8 px-4 text-white text-center">
+                      <div className="w-20 h-20 rounded-full bg-white/25 border-2 border-white/40 flex items-center justify-center mb-3 shadow-lg">
+                        <span className="text-4xl">{jobVisual.emoji}</span>
+                      </div>
+                      <div className="text-xs font-bold opacity-70 tracking-widest uppercase mb-1">전생 직업</div>
+                      <div className="text-2xl font-extrabold drop-shadow-sm">{jobVisual.label}</div>
+                    </div>
+                  </div>
+                  {/* 결과 문구 카드 */}
+                  <div
+                    className="w-full rounded-2xl p-5 text-white text-center"
+                    style={{ background: data.color }}
+                  >
+                    <p className="text-base font-bold leading-relaxed">{result}</p>
+                  </div>
+                </div>
+              ) : (
+                /* 일반 생성기: 기존 레이아웃 */
+                <>
+                  <div className="text-4xl">{data.emoji}</div>
+                  <div
+                    className="w-full rounded-2xl p-5 text-white text-center"
+                    style={{ background: data.color }}
+                  >
+                    <p className="text-base font-bold leading-relaxed">{result}</p>
+                  </div>
+                </>
+              )}
               <div className="flex gap-3">
                 <button
                   onClick={handleReset}
