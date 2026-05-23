@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import type { InitialQuizData, InitialQuizQuestion } from "@/data/games/initialQuizData";
+import { getChosung } from "@/lib/korean/chosung";
 import NextContentRecommend from "@/components/common/NextContentRecommend";
 import PointRewardBanner from "@/components/user/PointRewardBanner";
 import { getCurrentUser } from "@/lib/user/authService";
@@ -211,7 +212,14 @@ export default function InitialQuizGame({ data }: Props) {
   }
 
   // ─── 게임 화면 ───────────────────────────────────────
-  const progPct = (currentIdx / total) * 100;
+  const progPct        = (currentIdx / total) * 100;
+  const displayInitials = getChosung(currentQ.answer);
+  const charsCount      = displayInitials.replace(/\s/g, "").length;
+  const chosungTextSize =
+    charsCount <= 3  ? "text-7xl" :
+    charsCount <= 5  ? "text-5xl" :
+    charsCount <= 7  ? "text-4xl" :
+    charsCount <= 10 ? "text-3xl" : "text-2xl";
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -245,14 +253,14 @@ export default function InitialQuizGame({ data }: Props) {
         style={{ background: `linear-gradient(135deg, ${data.bgColor}, white)` }}
       >
         <div
-          className="text-7xl font-black tracking-widest leading-none"
+          className={`${chosungTextSize} font-black tracking-widest leading-snug`}
           style={{
             background: `linear-gradient(135deg, ${data.color}, #EC4899)`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
         >
-          {currentQ.initials}
+          {displayInitials}
         </div>
         {/* 장식 원 */}
         <div
@@ -354,7 +362,11 @@ export default function InitialQuizGame({ data }: Props) {
           <div className="space-y-0.5 text-xs opacity-75">
             <p>내 입력: <span className="font-semibold opacity-100">{lastInput}</span></p>
             <p>정답: <span className="font-semibold opacity-100">{currentQ.answer}</span></p>
-            <p>초성: <span className="font-semibold opacity-100">{currentQ.initials}</span></p>
+            <p>초성: <span className="font-semibold opacity-100">{displayInitials}</span></p>
+            <p className="opacity-60">
+              {`"${currentQ.answer}"는 `}
+              {displayInitials.split(" ").map((w) => w.split("").join("+")).join(" / ")}
+            </p>
           </div>
         </div>
       )}

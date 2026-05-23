@@ -10,7 +10,8 @@
     "import:tests": "tsx scripts/import-tests.ts",
     "audit:routes": "tsx scripts/audit-routes.ts",
     "audit:tests": "tsx scripts/audit-tests.ts",
-    "audit:site": "node scripts/audit-site.mjs"
+    "audit:site": "node scripts/audit-site.mjs",
+    "audit:initial-quiz": "npx tsx scripts/audit-initial-quiz.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.0",
