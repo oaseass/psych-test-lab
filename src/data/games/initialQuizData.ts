@@ -7,7 +7,8 @@ export type InitialQuizQuestion = {
   initials: string;      // "ㄱㅊ" 형태
   answer: string;        // "김치"
   hint?: string;
-  options: string[];     // 객관식 4지선다 (정답 포함)
+  options: string[];     // 힌트 3단계 4지선다 (정답 포함)
+  aliases?: string[];    // 허용 오타/유의어
   category: string;
 };
 
@@ -41,7 +42,7 @@ export const initialQuizList: InitialQuizData[] = [
     playCount: 32000,
     tags: ["음식", "한식", "인기"],
     questions: [
-      { id: "q1", initials: "ㄷㅂㄱ", answer: "떡볶이", hint: "매콤달콤 국민 간식", options: ["떡볶이", "만두국", "된장국", "다시마"], category: "음식" },
+      { id: "q1", initials: "ㄷㅂㅇ", answer: "떡볶이", hint: "매콤달콤 국민 간식", options: ["떡볶이", "만두국", "된장국", "다시마"], category: "음식" },
       { id: "q2", initials: "ㅅㄱㅅ", answer: "삼겹살", hint: "구워서 쌈 싸먹는 고기", options: ["삼겹살", "소고기", "순대국", "새우살"], category: "음식" },
       { id: "q3", initials: "ㅂㄱㄱ", answer: "불고기", hint: "달콤 간장에 재운 소고기", options: ["불고기", "비빔국", "보쌈국", "배고기"], category: "음식" },
       { id: "q4", initials: "ㄱㅊㅉㄱ", answer: "김치찌개", hint: "얼큰한 국민 찌개", options: ["김치찌개", "기초지개", "강처자개", "곰치찌개"], category: "음식" },
@@ -50,7 +51,7 @@ export const initialQuizList: InitialQuizData[] = [
       { id: "q7", initials: "ㅅㄷㅂㅉㄱ", answer: "순두부찌개", hint: "부드럽고 얼큰한 찌개", options: ["순두부찌개", "시도비지개", "숙도밥지개", "수도부찌개"], category: "음식" },
       { id: "q8", initials: "ㄱㅂㅉ", answer: "갈비찜", hint: "명절에 자주 등장하는 요리", options: ["갈비찜", "기비짐", "겨비찜", "갈보짬"], category: "음식" },
       { id: "q9", initials: "ㅅㄱㅌ", answer: "삼계탕", hint: "닭 안에 인삼+찹쌀", options: ["삼계탕", "숯고탕", "설겨탕", "시구탕"], category: "음식" },
-      { id: "q10", initials: "ㅎㄷㄱ", answer: "호떡", hint: "겨울 길거리 간식, 흑설탕 시럽", options: ["호떡", "흑도기", "화덕국", "한도기"], category: "음식" },
+      { id: "q10", initials: "ㅎㄷ", answer: "호떡", hint: "겨울 길거리 간식, 흑설탕 시럽", options: ["호떡", "흑도기", "화덕국", "한도기"], category: "음식" },
     ],
   },
   {
