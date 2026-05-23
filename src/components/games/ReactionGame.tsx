@@ -2,6 +2,8 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import NextContentRecommend from "@/components/common/NextContentRecommend";
 import PointRewardBanner from "@/components/user/PointRewardBanner";
+import BenchmarkRankCard from "@/components/results/BenchmarkRankCard";
+import { getReactionTimeRank, REACTION_TIERS } from "@/lib/benchmarks/reactionTimeBenchmark";
 import { getCurrentUser } from "@/lib/user/authService";
 import { submitRankingScore } from "@/lib/ranking/rankingService";
 
@@ -88,24 +90,86 @@ export default function ReactionGame() {
   }
 
   if (isDone && avgTime !== null) {
+    const rank = getReactionTimeRank(avgTime);
+    const B_MEDIAN = 273;
+    const B_AVG = 250;
+    const B_PRO = 150;
+    const B_ELITE = 120;
+
+    const tierTable = REACTION_TIERS.map((t) => ({
+      tier: t.tier,
+      range: t.maxMs === Infinity ? `${t.minMs}ms~` : `${t.minMs}~${t.maxMs}ms`,
+      label: t.label,
+      color: t.color,
+      bgColor: t.bgColor,
+      isCurrentTier: t.tier === rank.tier,
+    }));
+
+    const comparisons = [
+      {
+        label: `Human Benchmark 중앙값 (${B_MEDIAN}ms)보다`,
+        delta: rank.deltaFromHumanBenchmarkMedian,
+        unit: "ms",
+        lowerIsBetter: true,
+      },
+      {
+        label: `일반 평균 (${B_AVG}ms)보다`,
+        delta: rank.deltaFromGeneralAverage,
+        unit: "ms",
+        lowerIsBetter: true,
+      },
+      {
+        label: `프로게이머권 기준 (${B_PRO}ms)까지`,
+        delta: rank.deltaFromProGamerReference,
+        unit: "ms",
+        lowerIsBetter: true,
+      },
+      {
+        label: `SSS 인간 한계권 (${B_ELITE}ms)까지`,
+        delta: rank.deltaFromEliteReference,
+        unit: "ms",
+        lowerIsBetter: true,
+      },
+    ];
+
     return (
-      <div className="flex flex-col items-center gap-6 py-10">
-        <div className="text-5xl">⚡</div>
-        <div className="text-xl font-bold text-gray-800">{getGrade(avgTime)}</div>
-        <div className="text-4xl font-black text-purple-600">{avgTime}ms</div>
-        <p className="text-sm text-gray-500">평균 반응속도</p>
-        <div className="flex flex-col gap-1 w-full max-w-xs">
-          {times.map((t, i) => (
-            <div key={i} className="flex justify-between text-sm text-gray-600 px-2">
-              <span>{i + 1}회차</span>
-              <span className="font-semibold">{t}ms</span>
-            </div>
-          ))}
+      <div className="flex flex-col gap-6 py-4">
+        <BenchmarkRankCard
+          value={avgTime}
+          unit="ms"
+          tier={rank.tier}
+          tierColor={rank.tierInfo.color}
+          tierBgColor={rank.tierInfo.bgColor}
+          label={rank.label}
+          score={rank.score}
+          scoreLabel={rank.scoreLabel}
+          roastLine={rank.roastLine}
+          comparisons={comparisons}
+          tierTable={tierTable}
+          caution={rank.caution}
+          shareText={rank.shareText}
+        />
+
+        {/* 회차별 기록 */}
+        <div className="bg-white rounded-2xl border border-gray-100 px-4 py-3">
+          <p className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">회차별 기록</p>
+          <div className="flex flex-col gap-1">
+            {times.map((t, i) => (
+              <div key={i} className="flex justify-between text-sm text-gray-600 px-1">
+                <span className="text-gray-400">{i + 1}회차</span>
+                <span className="font-semibold">{t}ms</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <button onClick={handleRetry} className="px-6 py-3 rounded-full bg-purple-600 text-white font-bold">
+
+        <button
+          onClick={handleRetry}
+          className="w-full py-3 rounded-xl bg-purple-600 text-white font-bold text-sm"
+        >
           다시 측정
         </button>
-        <PointRewardBanner contentId="reaction" reason="reaction_complete" className="w-full max-w-sm" />
+        <PointRewardBanner contentId="reaction" reason="reaction_complete" className="w-full" />
         <NextContentRecommend currentSlug="reaction" title="다음에 이거 해보요 👇" />
       </div>
     );

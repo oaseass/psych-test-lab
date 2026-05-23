@@ -69,22 +69,54 @@ function GameContent({ user }: { user: UserProfile }) {
 
   useEffect(() => () => { if (intervalRef.current) clearInterval(intervalRef.current); }, []);
 
-  if (phase === "result" && playResult?.success && playResult.result) {
+  if (phase === "result" && playResult?.success && playResult.result && finalNum !== null && choice !== null) {
+    const isOdd = finalNum % 2 !== 0;
+    const isWin = playResult.result.isWin;
+    const choiceLabel = choice === "odd" ? "홀수" : "짝수";
+    const parityLabel = isOdd ? "홀수" : "짝수";
+    const reason = isOdd
+      ? `${finalNum}은(는) 2로 나누어 떨어지지 않아서 홀수예요.`
+      : `${finalNum}은(는) 2로 나누어 떨어져서 짝수예요.`;
     return (
-      <LuckyResultCard
-        isWin={playResult.result.isWin}
-        stakePoints={playResult.result.stakePoints}
-        rewardPoints={playResult.result.rewardPoints}
-        netPoints={playResult.result.netPoints}
-        newPoints={playResult.newPoints ?? currentUser.points}
-        rankUp={playResult.rankUp}
-        newRankName={playResult.newRankName}
-        prevRankName={playResult.prevRankName}
-        detail={playResult.result.detail}
-        onRetry={reset}
-        nextGameHref="/lucky/ox"
-        nextGameLabel="OX 퀴즈 도전 →"
-      />
+      <div className="space-y-4">
+        {/* 숫자 결과 카드 */}
+        <div className={`rounded-2xl p-5 text-center border-2 ${
+          isOdd ? "bg-orange-50 border-orange-200" : "bg-blue-50 border-blue-200"
+        }`}>
+          <div className={`text-7xl font-black mb-1 ${isOdd ? "text-orange-600" : "text-blue-600"}`}>
+            {finalNum}
+          </div>
+          <div className={`text-lg font-black mb-2 ${isOdd ? "text-orange-500" : "text-blue-500"}`}>
+            {parityLabel}
+          </div>
+          <p className="text-xs text-gray-500">{reason}</p>
+        </div>
+        {/* 내 선택 vs 판정 */}
+        <div className={`flex items-center justify-between rounded-xl px-4 py-3 border ${
+          isWin ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
+        }`}>
+          <div className="text-sm text-gray-500">
+            내 선택: <span className="font-black text-gray-800">{choiceLabel}</span>
+          </div>
+          <div className={`text-sm font-black ${isWin ? "text-green-700" : "text-red-600"}`}>
+            {isWin ? "🎉 정답! 2배" : "😢 틀렸어요"}
+          </div>
+        </div>
+        <LuckyResultCard
+          isWin={playResult.result.isWin}
+          stakePoints={playResult.result.stakePoints}
+          rewardPoints={playResult.result.rewardPoints}
+          netPoints={playResult.result.netPoints}
+          newPoints={playResult.newPoints ?? currentUser.points}
+          rankUp={playResult.rankUp}
+          newRankName={playResult.newRankName}
+          prevRankName={playResult.prevRankName}
+          detail={playResult.result.detail}
+          onRetry={reset}
+          nextGameHref="/lucky/ox"
+          nextGameLabel="OX 퀴즈 도전 →"
+        />
+      </div>
     );
   }
 

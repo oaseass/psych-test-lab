@@ -129,10 +129,20 @@ function GeneratorClient({ data }: { data: GeneratorData }) {
                     <span className="absolute top-3 right-4 text-2xl opacity-40">{jobVisual.secondaryEmojis[1]}</span>
                     <span className="absolute bottom-3 right-6 text-xl opacity-30">{jobVisual.secondaryEmojis[2]}</span>
                     {/* 메인 콘텐츠 */}
-                    <div className="relative flex flex-col items-center justify-center py-8 px-4 text-white text-center">
-                      <div className="w-20 h-20 rounded-full bg-white/25 border-2 border-white/40 flex items-center justify-center mb-3 shadow-lg">
-                        <span className="text-4xl">{jobVisual.emoji}</span>
-                      </div>
+                    <div className="relative flex flex-col items-center justify-center py-6 px-4 text-white text-center">
+                      {jobVisual.illustrationUrl ? (
+                        <img
+                          src={jobVisual.illustrationUrl}
+                          alt={jobVisual.label}
+                          width={144}
+                          height={144}
+                          className="w-36 h-36 object-contain drop-shadow-xl mb-2"
+                        />
+                      ) : (
+                        <div className="w-20 h-20 rounded-full bg-white/25 border-2 border-white/40 flex items-center justify-center mb-3 shadow-lg">
+                          <span className="text-4xl">{jobVisual.emoji}</span>
+                        </div>
+                      )}
                       <div className="text-xs font-bold opacity-70 tracking-widest uppercase mb-1">전생 직업</div>
                       <div className="text-2xl font-extrabold drop-shadow-sm">{jobVisual.label}</div>
                     </div>

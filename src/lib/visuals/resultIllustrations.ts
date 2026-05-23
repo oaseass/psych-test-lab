@@ -13,6 +13,8 @@ export type TestIllustration = {
   bgColor: string;
   /** 카드 썸네일용 장식 이모지 목록 */
   decorEmojis: string[];
+  /** Noto Color Emoji SVG URL (Apache 2.0 무료 사용) */
+  illustrationUrl?: string;
 };
 
 export type ResultIllustration = {
@@ -24,6 +26,46 @@ export type ResultIllustration = {
   accentColor: string;
   /** 결과 배경 연한 색상 */
   bgColor: string;
+};
+
+// ──────────────────────────────
+// Noto Color Emoji SVG CDN (Apache 2.0 license)
+// https://github.com/googlefonts/noto-emoji
+// ──────────────────────────────
+const N = "https://cdn.jsdelivr.net/gh/googlefonts/noto-emoji@main/svg/";
+
+const CATEGORY_ILLUSTRATION_URLS: Record<string, string> = {
+  yeonae:            N + "emoji_u1f495.svg", // 💕
+  sseom:             N + "emoji_u1f498.svg", // 💘
+  ibyeol:            N + "emoji_u1f494.svg", // 💔
+  gyeolhon:          N + "emoji_u1f48d.svg", // 💍
+  "ingangwan-gye":   N + "emoji_u1f91d.svg", // 🤝
+  chingu:            N + "emoji_u1f46b.svg", // 👫
+  jikjang:           N + "emoji_u1f4bc.svg", // 💼
+  "don-sobi":        N + "emoji_u1f4b0.svg", // 💰
+  "seonggong-saup":  N + "emoji_u1f680.svg", // 🚀
+  seonggyek:         N + "emoji_u1f9e0.svg", // 🧠
+  jajungam:          N + "emoji_u1f331.svg", // 🌱
+  seuteuleseu:       N + "emoji_u1f624.svg", // 😤
+  muheuishik:        N + "emoji_u1f52e.svg", // 🔮
+  gajok:             N + "emoji_u1f3e0.svg", // 🏠
+  "sosyal-imiji":    N + "emoji_u1fa9e.svg", // 🪞
+  chihyang:          N + "emoji_u2728.svg",  // ✨
+};
+
+const SLUG_ILLUSTRATION_URLS: Partial<Record<string, string>> = {
+  "yeonae-gojang-paeteon":      "/images/tests/cards/yeonae-gojang.svg",
+  "kkeullim-yuhyeong":          "/images/tests/cards/kkeullim.svg",
+  "jeon-aein-mot-nitneum":      "/images/tests/cards/jeon-aein.svg",
+  "jipcheok-button":            "/images/tests/cards/jipcheok.svg",
+  "hoepisseonghyang-testeut":   "/images/tests/cards/hoepissong.svg",
+  "jiltu-bangshik-testeut":     "/images/tests/cards/jiltu.svg",
+  "sohnjeol-dang-ha-neun-iyu":  "/images/tests/cards/sohnjeol.svg",
+  "don-mot-moneun-iyu":         "/images/tests/cards/don-mot.svg",
+  "tongjang-sae-neun-paeteon":  "/images/tests/cards/tongjang.svg",
+  "nae-seonggyek-wiheom-bubun": "/images/tests/cards/wiheom.svg",
+  "naega-muneojinan-sungan":    "/images/tests/cards/muneojineum.svg",
+  "insheng-kkoineum-paeteon":   "/images/tests/cards/kkoineum.svg",
 };
 
 // ──────────────────────────────
@@ -244,6 +286,8 @@ export type PastLifeJobVisual = {
   gradient: string;
   accentColor: string;
   bgColor: string;
+  /** 전생 직업 SVG 일러스트 URL */
+  illustrationUrl?: string;
 };
 
 export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
@@ -254,6 +298,7 @@ export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
     gradient: "linear-gradient(135deg, #92400E 0%, #D97706 50%, #F59E0B 100%)",
     accentColor: "#92400E",
     bgColor: "#FFFBEB",
+    illustrationUrl: "/images/tests/past-life/hakja.svg",
   },
   "궁중 화가": {
     emoji: "🎨",
@@ -262,6 +307,7 @@ export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
     gradient: "linear-gradient(135deg, #1D4ED8 0%, #6366F1 50%, #8B5CF6 100%)",
     accentColor: "#1D4ED8",
     bgColor: "#EFF6FF",
+    illustrationUrl: "/images/tests/past-life/hwaga.svg",
   },
   상인: {
     emoji: "⚖️",
@@ -270,6 +316,7 @@ export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
     gradient: "linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #FB923C 100%)",
     accentColor: "#D97706",
     bgColor: "#FFFBEB",
+    illustrationUrl: "/images/tests/past-life/sangin.svg",
   },
   검객: {
     emoji: "⚔️",
@@ -278,6 +325,7 @@ export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
     gradient: "linear-gradient(135deg, #374151 0%, #4B5563 50%, #6B7280 100%)",
     accentColor: "#374151",
     bgColor: "#F9FAFB",
+    illustrationUrl: "/images/tests/past-life/geomgaek.svg",
   },
   점술사: {
     emoji: "🔮",
@@ -286,6 +334,7 @@ export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
     gradient: "linear-gradient(135deg, #4338CA 0%, #6366F1 50%, #8B5CF6 100%)",
     accentColor: "#4338CA",
     bgColor: "#EEF2FF",
+    illustrationUrl: "/images/tests/past-life/jeomsulsa.svg",
   },
   의원: {
     emoji: "⚕️",
@@ -294,6 +343,7 @@ export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
     gradient: "linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%)",
     accentColor: "#059669",
     bgColor: "#ECFDF5",
+    illustrationUrl: "/images/tests/past-life/euiwon.svg",
   },
   시인: {
     emoji: "🪶",
@@ -302,6 +352,7 @@ export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
     gradient: "linear-gradient(135deg, #F43F5E 0%, #EC4899 50%, #E879F9 100%)",
     accentColor: "#F43F5E",
     bgColor: "#FFF1F2",
+    illustrationUrl: "/images/tests/past-life/siin.svg",
   },
   귀족: {
     emoji: "👑",
@@ -310,6 +361,7 @@ export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
     gradient: "linear-gradient(135deg, #B45309 0%, #D97706 50%, #FB923C 100%)",
     accentColor: "#B45309",
     bgColor: "#FFFBEB",
+    illustrationUrl: "/images/tests/past-life/gwijok.svg",
   },
   농부: {
     emoji: "🌾",
@@ -318,6 +370,7 @@ export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
     gradient: "linear-gradient(135deg, #15803D 0%, #22C55E 50%, #84CC16 100%)",
     accentColor: "#15803D",
     bgColor: "#F0FDF4",
+    illustrationUrl: "/images/tests/past-life/nongbu.svg",
   },
   장군: {
     emoji: "🏹",
@@ -326,6 +379,7 @@ export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
     gradient: "linear-gradient(135deg, #B91C1C 0%, #DC2626 50%, #F97316 100%)",
     accentColor: "#B91C1C",
     bgColor: "#FEF2F2",
+    illustrationUrl: "/images/tests/past-life/janggun.svg",
   },
   무희: {
     emoji: "🎭",
@@ -334,6 +388,7 @@ export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
     gradient: "linear-gradient(135deg, #C026D3 0%, #EC4899 50%, #F472B6 100%)",
     accentColor: "#C026D3",
     bgColor: "#FDF4FF",
+    illustrationUrl: "/images/tests/past-life/muhui.svg",
   },
   도공: {
     emoji: "🏺",
@@ -342,6 +397,7 @@ export const PAST_LIFE_JOB_VISUALS: Record<string, PastLifeJobVisual> = {
     gradient: "linear-gradient(135deg, #EA580C 0%, #F97316 50%, #FBBF24 100%)",
     accentColor: "#EA580C",
     bgColor: "#FFF7ED",
+    illustrationUrl: "/images/tests/past-life/doeong.svg",
   },
 };
 
@@ -359,7 +415,7 @@ export function getPastLifeJobVisual(resultText: string): PastLifeJobVisual | nu
 
 /** 테스트 슬러그로 카드 썸네일 비주얼 반환 */
 export function getTestIllustration(slug: string, categorySlug: string): TestIllustration {
-  return (
+  const base =
     TEST_OVERRIDES[slug] ??
     CATEGORY_VISUALS[categorySlug] ?? {
       emoji: "🧠",
@@ -367,8 +423,10 @@ export function getTestIllustration(slug: string, categorySlug: string): TestIll
       accentColor: "#7C3AED",
       bgColor: "#F5F3FF",
       decorEmojis: ["✨", "⚡", "💫"],
-    }
-  );
+    };
+  const illustrationUrl =
+    SLUG_ILLUSTRATION_URLS[slug] ?? CATEGORY_ILLUSTRATION_URLS[categorySlug];
+  return { ...base, illustrationUrl };
 }
 
 /** 결과 카드 헤더 비주얼 반환 (카테고리 기반) */

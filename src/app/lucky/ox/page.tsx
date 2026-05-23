@@ -83,15 +83,42 @@ function GameContent({ user }: { user: UserProfile }) {
   }
 
   if (phase === "revealed" && playResult?.success && playResult.result) {
+    const isWin = playResult.result.isWin;
     return (
       <div className="space-y-4">
-        {/* 정답 공개 */}
-        <div className={`rounded-2xl p-5 text-center border-2 ${playResult.result.isWin ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"}`}>
-          <div className="text-3xl mb-2">{currentQ.answer === "O" ? "⭕" : "❌"}</div>
-          <div className="font-bold text-gray-900 mb-1 text-sm">"{currentQ.question}"</div>
-          <div className="text-xs text-gray-500 mb-3">정답: {currentQ.answer} — {currentQ.explanation}</div>
-          <div className={`text-xl font-black ${playResult.result.isWin ? "text-green-600" : "text-red-500"}`}>
-            {playResult.result.isWin ? "🎉 정답!" : "😢 오답"}
+        {/* 문제 + 정답 공개 카드 */}
+        <div className={`rounded-2xl p-5 border-2 ${isWin ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"}`}>
+          <p className="text-sm font-bold text-gray-700 mb-4 text-center leading-relaxed">
+            "{currentQ.question}"
+          </p>
+          {/* 내 선택 vs 정답 */}
+          <div className="flex items-center justify-center gap-6 mb-4">
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[10px] font-bold text-gray-400 tracking-widest">내 선택</span>
+              <span className={`text-5xl ${chosen === "O" ? "text-green-500" : "text-red-500"}`}>
+                {chosen === "O" ? "⭕" : "❌"}
+              </span>
+              <span className={`text-lg font-black ${chosen === "O" ? "text-green-600" : "text-red-600"}`}>
+                {chosen}
+              </span>
+            </div>
+            <div className="text-gray-200 text-2xl font-black">→</div>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[10px] font-bold text-gray-400 tracking-widest">정답</span>
+              <span className={`text-5xl ${currentQ.answer === "O" ? "text-green-500" : "text-red-500"}`}>
+                {currentQ.answer === "O" ? "⭕" : "❌"}
+              </span>
+              <span className={`text-lg font-black ${currentQ.answer === "O" ? "text-green-600" : "text-red-600"}`}>
+                {currentQ.answer}
+              </span>
+            </div>
+          </div>
+          {/* 해설 */}
+          <div className="bg-white rounded-xl px-4 py-2.5 mb-3 text-xs text-gray-500 text-center">
+            {currentQ.explanation}
+          </div>
+          <div className={`text-center text-xl font-black ${isWin ? "text-green-600" : "text-red-500"}`}>
+            {isWin ? "🎉 정답!" : "😢 오답"}
           </div>
         </div>
         <LuckyResultCard

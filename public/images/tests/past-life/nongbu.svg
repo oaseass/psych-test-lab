@@ -1,0 +1,43 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.05)"/>
+  <!-- sun -->
+  <circle cx="155" cy="42" r="20" fill="rgba(255,220,60,0.52)"/>
+  <!-- sun rays -->
+  <line x1="155" y1="16" x2="155" y2="12" stroke="rgba(255,220,60,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="155" y1="68" x2="155" y2="72" stroke="rgba(255,220,60,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="129" y1="42" x2="125" y2="42" stroke="rgba(255,220,60,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="181" y1="42" x2="185" y2="42" stroke="rgba(255,220,60,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="136" y1="23" x2="133" y2="20" stroke="rgba(255,220,60,0.45)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="174" y1="61" x2="177" y2="64" stroke="rgba(255,220,60,0.45)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="174" y1="23" x2="177" y2="20" stroke="rgba(255,220,60,0.45)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="136" y1="61" x2="133" y2="64" stroke="rgba(255,220,60,0.45)" stroke-width="2" stroke-linecap="round"/>
+  <!-- ground line -->
+  <path d="M22 162 Q100 148 178 162" stroke="rgba(255,255,255,0.35)" stroke-width="2" fill="none"/>
+  <!-- rice stalk 1 -->
+  <line x1="62" y1="162" x2="58" y2="94" stroke="rgba(255,255,255,0.62)" stroke-width="3" stroke-linecap="round"/>
+  <!-- grains stalk 1 -->
+  <path d="M55 94 Q52 88 54 80 Q58 76 62 80 Q65 88 62 94 Z" fill="rgba(255,255,255,0.62)"/>
+  <circle cx="56" cy="96" r="4" fill="rgba(255,255,255,0.55)"/>
+  <circle cx="62" cy="99" r="4" fill="rgba(255,255,255,0.55)"/>
+  <!-- rice stalk 2 -->
+  <line x1="82" y1="162" x2="80" y2="90" stroke="rgba(255,255,255,0.58)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M77 90 Q74 84 76 76 Q80 72 84 76 Q87 84 84 90 Z" fill="rgba(255,255,255,0.58)"/>
+  <circle cx="78" cy="92" r="4" fill="rgba(255,255,255,0.52)"/>
+  <circle cx="84" cy="95" r="4" fill="rgba(255,255,255,0.52)"/>
+  <!-- rice stalk 3 -->
+  <line x1="100" y1="162" x2="98" y2="86" stroke="rgba(255,255,255,0.6)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M95 86 Q92 80 94 72 Q98 68 102 72 Q105 80 102 86 Z" fill="rgba(255,255,255,0.62)"/>
+  <circle cx="96" cy="88" r="4" fill="rgba(255,255,255,0.55)"/>
+  <circle cx="102" cy="91" r="4" fill="rgba(255,255,255,0.55)"/>
+  <!-- rice stalk 4 -->
+  <line x1="118" y1="162" x2="120" y2="90" stroke="rgba(255,255,255,0.58)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M117 90 Q114 84 116 76 Q120 72 124 76 Q127 84 124 90 Z" fill="rgba(255,255,255,0.58)"/>
+  <circle cx="118" cy="92" r="4" fill="rgba(255,255,255,0.52)"/>
+  <!-- rice stalk 5 -->
+  <line x1="138" y1="162" x2="142" y2="94" stroke="rgba(255,255,255,0.55)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M139 94 Q136 88 138 80 Q142 76 146 80 Q149 88 146 94 Z" fill="rgba(255,255,255,0.55)"/>
+  <!-- sickle tool -->
+  <path d="M22 138 Q18 120 28 110 Q40 100 48 110 Q52 118 44 128" stroke="rgba(255,255,255,0.65)" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <line x1="44" y1="128" x2="28" y2="158" stroke="rgba(255,255,255,0.6)" stroke-width="4" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,46 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.06)"/>
+  <!-- wheel shadow -->
+  <ellipse cx="100" cy="178" rx="52" ry="13" fill="rgba(0,0,0,0.18)"/>
+  <!-- wheel disc layers -->
+  <ellipse cx="100" cy="172" rx="50" ry="12" fill="rgba(255,255,255,0.18)"/>
+  <ellipse cx="100" cy="170" rx="40" ry="10" fill="rgba(255,255,255,0.26)"/>
+  <ellipse cx="100" cy="168" rx="28" ry="7"  fill="rgba(255,255,255,0.35)"/>
+  <circle  cx="100" cy="166" r="5"            fill="rgba(255,255,255,0.5)"/>
+  <!-- spokes -->
+  <line x1="100" y1="166" x2="128" y2="166" stroke="rgba(255,255,255,0.38)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="100" y1="166" x2="72"  y2="166" stroke="rgba(255,255,255,0.38)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="100" y1="166" x2="86"  y2="154" stroke="rgba(255,255,255,0.38)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="100" y1="166" x2="114" y2="154" stroke="rgba(255,255,255,0.38)" stroke-width="2" stroke-linecap="round"/>
+  <!-- vase body -->
+  <path d="M78 168 C70 145 66 118 74 96 C81 76 100 65 100 65 C100 65 119 76 126 96 C134 118 130 145 122 168 Z"
+        fill="rgba(255,255,255,0.62)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+  <!-- vase neck -->
+  <path d="M89 65 Q100 53 111 65 Q107 48 100 44 Q93 48 89 65 Z" fill="rgba(255,255,255,0.5)"/>
+  <!-- vase rim -->
+  <ellipse cx="100" cy="44" rx="13" ry="4" fill="rgba(255,255,255,0.72)"/>
+  <!-- vase belly highlight -->
+  <path d="M84 110 Q92 104 100 104 Q108 104 116 110" stroke="rgba(255,255,255,0.55)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- decorative bands -->
+  <path d="M79 135 Q100 127 121 135" stroke="rgba(255,255,255,0.42)" stroke-width="1.8" fill="none"/>
+  <path d="M78 150 Q100 141 122 150" stroke="rgba(255,255,255,0.32)" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
+  <!-- dot pattern -->
+  <circle cx="93" cy="118" r="2.5" fill="rgba(255,255,255,0.32)"/>
+  <circle cx="100" cy="116" r="2.5" fill="rgba(255,255,255,0.32)"/>
+  <circle cx="107" cy="118" r="2.5" fill="rgba(255,255,255,0.32)"/>
+  <!-- hands -->
+  <path d="M60 128 Q67 135 74 128" stroke="rgba(255,255,255,0.68)" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M140 128 Q133 135 126 128" stroke="rgba(255,255,255,0.68)" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <!-- fire left -->
+  <circle cx="38" cy="162" r="9"  fill="rgba(255,165,0,0.48)"/>
+  <circle cx="30" cy="150" r="6"  fill="rgba(255,100,0,0.42)"/>
+  <circle cx="40" cy="145" r="3.5" fill="rgba(255,210,0,0.38)"/>
+  <!-- fire right -->
+  <circle cx="162" cy="162" r="8"  fill="rgba(255,165,0,0.44)"/>
+  <circle cx="170" cy="150" r="5"  fill="rgba(255,100,0,0.38)"/>
+  <!-- sparkles -->
+  <circle cx="28"  cy="85"  r="2.5" fill="rgba(255,255,255,0.45)"/>
+  <circle cx="168" cy="78"  r="2"   fill="rgba(255,255,255,0.4)"/>
+  <circle cx="160" cy="108" r="1.8" fill="rgba(255,255,255,0.35)"/>
+</svg>

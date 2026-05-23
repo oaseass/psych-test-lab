@@ -1,0 +1,37 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.05)"/>
+  <!-- crescent moon -->
+  <path d="M38 30 Q62 44 62 68 Q62 92 38 106 Q56 88 56 68 Q56 48 38 30 Z" fill="rgba(255,255,255,0.52)"/>
+  <!-- stars -->
+  <circle cx="80"  cy="26"  r="2.5" fill="rgba(255,255,255,0.55)"/>
+  <circle cx="96"  cy="18"  r="2"   fill="rgba(255,255,255,0.48)"/>
+  <circle cx="112" cy="28"  r="1.8" fill="rgba(255,255,255,0.42)"/>
+  <circle cx="158" cy="38"  r="2.2" fill="rgba(255,255,255,0.5)"/>
+  <circle cx="170" cy="24"  r="1.5" fill="rgba(255,255,255,0.4)"/>
+  <!-- scroll / parchment paper -->
+  <rect x="72" y="52" width="106" height="120" rx="6" fill="rgba(255,255,255,0.5)" stroke="rgba(255,255,255,0.38)" stroke-width="1.5"/>
+  <!-- scroll top roll -->
+  <ellipse cx="125" cy="52" rx="53" ry="8" fill="rgba(255,255,255,0.6)"/>
+  <!-- scroll bottom roll -->
+  <ellipse cx="125" cy="172" rx="53" ry="8" fill="rgba(255,255,255,0.6)"/>
+  <!-- writing lines on paper -->
+  <line x1="84" y1="76"  x2="166" y2="76"  stroke="rgba(255,255,255,0.45)" stroke-width="1.8"/>
+  <line x1="84" y1="89"  x2="166" y2="89"  stroke="rgba(255,255,255,0.45)" stroke-width="1.8"/>
+  <line x1="84" y1="102" x2="166" y2="102" stroke="rgba(255,255,255,0.45)" stroke-width="1.8"/>
+  <line x1="84" y1="115" x2="155" y2="115" stroke="rgba(255,255,255,0.4)" stroke-width="1.8"/>
+  <line x1="84" y1="128" x2="166" y2="128" stroke="rgba(255,255,255,0.45)" stroke-width="1.8"/>
+  <line x1="84" y1="141" x2="148" y2="141" stroke="rgba(255,255,255,0.38)" stroke-width="1.8"/>
+  <line x1="84" y1="154" x2="166" y2="154" stroke="rgba(255,255,255,0.4)" stroke-width="1.8"/>
+  <!-- quill feather (large) -->
+  <path d="M58 168 C52 156 50 132 56 108 C62 84 76 68 88 60 C82 80 70 108 68 140 C66 158 64 168 58 168 Z"
+        fill="rgba(255,255,255,0.62)" stroke="rgba(255,255,255,0.38)" stroke-width="1"/>
+  <!-- quill right barbs -->
+  <path d="M58 168 C66 156 78 132 88 112 C84 120 74 142 68 164 Z" fill="rgba(255,255,255,0.42)"/>
+  <!-- quill center shaft -->
+  <line x1="58" y1="168" x2="88" y2="60" stroke="rgba(255,255,255,0.55)" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- ink drip from quill tip -->
+  <path d="M86 62 Q84 70 86 74 Q89 70 86 62 Z" fill="rgba(255,255,255,0.58)"/>
+  <!-- small ink dot -->
+  <circle cx="85" cy="76" r="2" fill="rgba(255,255,255,0.4)"/>
+</svg>

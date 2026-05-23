@@ -1,0 +1,41 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.05)"/>
+  <!-- flag pole -->
+  <line x1="148" y1="22" x2="148" y2="178" stroke="rgba(255,255,255,0.62)" stroke-width="4" stroke-linecap="round"/>
+  <!-- flag body -->
+  <path d="M148 28 L185 44 L148 60 Z" fill="rgba(255,255,255,0.56)"/>
+  <!-- flag stripe -->
+  <line x1="157" y1="36" x2="178" y2="45" stroke="rgba(255,255,255,0.3)" stroke-width="1.8"/>
+  <line x1="157" y1="52" x2="178" y2="45" stroke="rgba(255,255,255,0.3)" stroke-width="1.8"/>
+  <!-- helmet dome -->
+  <path d="M52 128 C47 100 57 68 80 54 Q100 46 120 54 C143 68 153 100 148 128 Z"
+        fill="rgba(255,255,255,0.6)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+  <!-- helmet crest fin -->
+  <path d="M70 72 C75 52 100 40 100 40 C100 40 125 52 130 72"
+        fill="rgba(255,255,255,0.4)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+  <!-- crest top plume -->
+  <path d="M95 40 C89 26 93 15 100 14 C107 15 111 26 105 40"
+        fill="rgba(255,255,255,0.52)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <!-- visor bar -->
+  <path d="M58 118 Q100 126 142 118" stroke="rgba(255,255,255,0.55)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- cheek guards -->
+  <path d="M58 118 L55 138 Q66 148 76 138 L76 125 Z" fill="rgba(255,255,255,0.32)"/>
+  <path d="M142 118 L145 138 Q134 148 124 138 L124 125 Z" fill="rgba(255,255,255,0.32)"/>
+  <!-- neck guard band -->
+  <path d="M60 140 Q100 150 140 140" stroke="rgba(255,255,255,0.38)" stroke-width="2" fill="none"/>
+  <!-- helmet rivets -->
+  <circle cx="80"  cy="88"  r="3" fill="rgba(255,255,255,0.45)"/>
+  <circle cx="100" cy="82"  r="3" fill="rgba(255,255,255,0.45)"/>
+  <circle cx="120" cy="88"  r="3" fill="rgba(255,255,255,0.45)"/>
+  <!-- sword left side -->
+  <rect x="26" y="94" width="7" height="46" rx="3" fill="rgba(255,255,255,0.55)" transform="rotate(-22,29,117)"/>
+  <!-- sword crossguard -->
+  <rect x="15" y="108" width="30" height="6" rx="3" fill="rgba(255,255,255,0.52)" transform="rotate(-22,30,111)"/>
+  <!-- sword blade -->
+  <path d="M20 94 L30 52 L40 94" fill="rgba(255,255,255,0.42)" transform="rotate(-22,30,73)"/>
+  <!-- small stars -->
+  <circle cx="172" cy="84"  r="3" fill="rgba(255,255,255,0.5)"/>
+  <circle cx="164" cy="96"  r="2" fill="rgba(255,255,255,0.42)"/>
+  <circle cx="178" cy="97"  r="1.5" fill="rgba(255,255,255,0.35)"/>
+</svg>

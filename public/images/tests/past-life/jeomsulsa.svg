@@ -1,0 +1,41 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.05)"/>
+  <!-- stars background -->
+  <circle cx="30"  cy="28"  r="2.5" fill="rgba(255,255,255,0.55)"/>
+  <circle cx="48"  cy="18"  r="1.8" fill="rgba(255,255,255,0.45)"/>
+  <circle cx="155" cy="22"  r="2"   fill="rgba(255,255,255,0.5)"/>
+  <circle cx="172" cy="35"  r="1.5" fill="rgba(255,255,255,0.4)"/>
+  <circle cx="20"  cy="58"  r="1.8" fill="rgba(255,255,255,0.42)"/>
+  <circle cx="178" cy="62"  r="2"   fill="rgba(255,255,255,0.45)"/>
+  <!-- crescent moon -->
+  <path d="M148 24 Q165 36 165 52 Q165 68 148 80 Q162 65 162 52 Q162 39 148 24 Z" fill="rgba(255,255,255,0.52)"/>
+  <!-- crystal ball glow aura -->
+  <circle cx="100" cy="108" r="56" fill="rgba(255,255,255,0.08)"/>
+  <circle cx="100" cy="108" r="48" fill="rgba(255,255,255,0.1)"/>
+  <!-- crystal ball outer -->
+  <circle cx="100" cy="108" r="44" fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+  <!-- crystal ball inner glow -->
+  <circle cx="100" cy="108" r="36" fill="rgba(255,255,255,0.18)"/>
+  <!-- inner swirl/glow reflection -->
+  <path d="M80 90 Q95 82 112 90 Q120 100 112 112 Q100 122 88 112 Q78 102 80 90 Z" fill="rgba(255,255,255,0.22)"/>
+  <!-- highlight reflection -->
+  <ellipse cx="86" cy="92" rx="10" ry="6" fill="rgba(255,255,255,0.35)" transform="rotate(-30,86,92)"/>
+  <!-- stars inside ball -->
+  <circle cx="104" cy="104" r="3"   fill="rgba(255,255,255,0.5)"/>
+  <circle cx="94"  cy="114" r="2"   fill="rgba(255,255,255,0.42)"/>
+  <circle cx="108" cy="118" r="2.5" fill="rgba(255,255,255,0.45)"/>
+  <!-- pedestal base -->
+  <path d="M68 152 Q100 164 132 152 L136 160 Q100 174 64 160 Z" fill="rgba(255,255,255,0.42)"/>
+  <!-- pedestal stem -->
+  <path d="M88 152 Q88 148 100 148 Q112 148 112 152" stroke="rgba(255,255,255,0.55)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- pedestal cup connecting ball -->
+  <path d="M80 152 Q88 148 100 148 Q112 148 120 152" fill="rgba(255,255,255,0.38)"/>
+  <!-- star sparkles around ball -->
+  <circle cx="52"  cy="80"  r="3"   fill="rgba(255,255,255,0.48)"/>
+  <circle cx="148" cy="76"  r="3.5" fill="rgba(255,255,255,0.52)"/>
+  <circle cx="46"  cy="128" r="2"   fill="rgba(255,255,255,0.4)"/>
+  <circle cx="154" cy="136" r="2.5" fill="rgba(255,255,255,0.44)"/>
+  <!-- 4-point star sparkle top left -->
+  <path d="M32 46 L34 38 L36 46 L44 48 L36 50 L34 58 L32 50 L24 48 Z" fill="rgba(255,255,255,0.45)"/>
+</svg>

@@ -1,0 +1,31 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.05)"/>
+  <!-- door frame -->
+  <rect x="52" y="42" width="84" height="130" rx="6" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.55)" stroke-width="3"/>
+  <!-- door panel (open, angled) -->
+  <path d="M52 42 L52 172 L108 154 L108 60 Z" fill="rgba(255,255,255,0.42)" stroke="rgba(255,255,255,0.45)" stroke-width="2"/>
+  <!-- door panel inner rectangle -->
+  <rect x="58" y="56" width="44" height="50" rx="3" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+  <rect x="58" y="116" width="44" height="40" rx="3" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+  <!-- doorknob -->
+  <circle cx="104" cy="112" r="6" fill="rgba(255,220,80,0.65)"/>
+  <!-- shadow from open door -->
+  <path d="M108 60 L136 172 L108 172" fill="rgba(0,0,0,0.12)"/>
+  <!-- footprints running away (right side) -->
+  <!-- footprint 1 -->
+  <ellipse cx="148" cy="158" rx="8" ry="5" fill="rgba(255,255,255,0.5)" transform="rotate(30,148,158)"/>
+  <ellipse cx="158" cy="165" rx="8" ry="5" fill="rgba(255,255,255,0.5)" transform="rotate(-30,158,165)"/>
+  <!-- footprint 2 (smaller, farther) -->
+  <ellipse cx="155" cy="138" rx="6" ry="3.8" fill="rgba(255,255,255,0.42)" transform="rotate(25,155,138)"/>
+  <ellipse cx="165" cy="144" rx="6" ry="3.8" fill="rgba(255,255,255,0.42)" transform="rotate(-25,165,144)"/>
+  <!-- footprint 3 (even smaller) -->
+  <ellipse cx="160" cy="118" rx="5" ry="3" fill="rgba(255,255,255,0.35)" transform="rotate(20,160,118)"/>
+  <ellipse cx="170" cy="124" rx="5" ry="3" fill="rgba(255,255,255,0.35)" transform="rotate(-20,170,124)"/>
+  <!-- big arrow pointing right -->
+  <path d="M126 90 L160 90 L150 78 M160 90 L150 102" stroke="rgba(255,255,255,0.6)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- motion lines -->
+  <line x1="120" y1="84" x2="110" y2="84" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="122" y1="90" x2="110" y2="90" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="120" y1="96" x2="110" y2="96" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+</svg>

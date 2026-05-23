@@ -12,6 +12,7 @@ export type UserProfile = {
   createdAt: string;
   lastLoginAt?: string;
   lastCheckInAt?: string;
+  checkInDates?: string[];        // ["YYYY-MM-DD", ...]
   checkInStreak: number;
   totalCheckInDays: number;
   playedCount: number;

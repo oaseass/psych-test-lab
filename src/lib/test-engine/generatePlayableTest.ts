@@ -1,5 +1,8 @@
 import type { PlayableTest, TestMeta, TestQuestion, TestResult } from "@/types";
 import { createSeededRandomFromSlug, seededPickN } from "./seed";
+import { QA_BANKS } from "./banks/qa";
+import { RESULT_BANKS } from "./banks/results";
+import type { QAOption, ResultTemplate } from "./banks/types";
 
 // 카테고리별 질문 템플릿 뱅크
 const QUESTION_TEMPLATES_BY_CATEGORY: Record<string, string[]> = {
@@ -134,9 +137,63 @@ function makeSimpleResult(id: string, title: string, categorySlug: string, rng: 
   };
 }
 
+// QAPair (object 형식 선택지) → TestQuestion 변환
+function qaToTestQuestion(pair: { text: string; options: QAOption[] }, index: number): TestQuestion {
+  return {
+    id: `q${index + 1}`,
+    text: pair.text,
+    options: pair.options.map((opt, oi) => {
+      const optText = typeof opt === "string" ? opt : opt.text;
+      const resultKey = typeof opt === "string" ? `r${oi + 1}` : opt.resultKey;
+      return {
+        id: `opt-${String.fromCharCode(97 + oi)}`,
+        text: optText,
+        scores: { [resultKey]: 3 },
+      };
+    }),
+  };
+}
+
+// ResultTemplate → TestResult 변환
+function resultTemplateToTestResult(rt: ResultTemplate): TestResult {
+  return {
+    id: rt.key ?? rt.title,
+    title: rt.title,
+    subtitle: rt.subtitle,
+    summary: rt.summary,
+    keywords: rt.keywords,
+    strengths: rt.strengths,
+    weaknesses: rt.weaknesses,
+    relationship: rt.relationship,
+    money: rt.money,
+    work: rt.work,
+    social: rt.social,
+    caution: rt.caution,
+    matchingTypes: rt.matchingTypes,
+    oppositeTypes: rt.oppositeTypes,
+    shareText: rt.shareText,
+  };
+}
+
 export function generatePlayableTest(meta: TestMeta): PlayableTest {
   const rng = createSeededRandomFromSlug(meta.slug);
 
+  // slug 전용 QA 뱅크가 있으면 우선 사용
+  const slugQABank = QA_BANKS[meta.slug];
+  const slugResultBank = RESULT_BANKS[meta.slug];
+
+  if (slugQABank && slugResultBank) {
+    // object 형식 선택지인지 확인 (신버전 뱅크)
+    const firstOpt = slugQABank[0]?.options[0];
+    if (firstOpt && typeof firstOpt === "object" && "resultKey" in firstOpt) {
+      const picked = seededPickN(slugQABank, 6, rng);
+      const questions: TestQuestion[] = picked.map((pair, i) => qaToTestQuestion(pair, i));
+      const results: TestResult[] = slugResultBank.map(resultTemplateToTestResult);
+      return { meta, questions, results };
+    }
+  }
+
+  // 폴백: 카테고리 템플릿 기반 생성 (구버전)
   const categoryTemplates = QUESTION_TEMPLATES_BY_CATEGORY[meta.categorySlug] ||
     QUESTION_TEMPLATES_BY_CATEGORY.default;
 

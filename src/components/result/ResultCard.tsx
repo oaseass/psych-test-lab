@@ -36,11 +36,23 @@ export default function ResultCard({ result, meta, className }: ResultCardProps)
         <div className="absolute -bottom-4 -left-6 w-24 h-24 bg-white/10 rounded-full" />
         <div className="absolute top-4 left-4 w-12 h-12 bg-white/5 rounded-full" />
 
-        {/* 대표 이모지 */}
+        {/* 대표 이모지 / Noto SVG 일러스트 */}
         <div className="relative mb-3 flex justify-center">
-          <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center shadow-inner border border-white/30">
-            <span className="text-4xl">{visual.emoji}</span>
-          </div>
+          {visual.illustrationUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={visual.illustrationUrl}
+              alt=""
+              width={88}
+              height={88}
+              className="w-20 h-20 object-contain drop-shadow-lg"
+              aria-hidden="true"
+            />
+          ) : (
+            <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center shadow-inner border border-white/30">
+              <span className="text-4xl">{visual.emoji}</span>
+            </div>
+          )}
         </div>
 
         <p className="relative text-xs font-semibold opacity-70 tracking-widest uppercase mb-2">{meta.title}</p>

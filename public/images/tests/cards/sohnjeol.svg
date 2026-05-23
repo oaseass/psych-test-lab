@@ -1,0 +1,36 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.05)"/>
+  <!-- scissors blade left (top blade) -->
+  <path d="M48 28 Q44 40 68 68 L82 68 Q62 42 60 28 Z" fill="rgba(255,255,255,0.58)" stroke="rgba(255,255,255,0.42)" stroke-width="1.5"/>
+  <!-- scissors blade right (bottom blade) -->
+  <path d="M152 28 Q156 40 132 68 L118 68 Q138 42 140 28 Z" fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.42)" stroke-width="1.5"/>
+  <!-- scissors pivot -->
+  <circle cx="100" cy="72" r="10" fill="rgba(255,255,255,0.65)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+  <circle cx="100" cy="72" r="4" fill="rgba(255,255,255,0.38)"/>
+  <!-- scissors handle left -->
+  <path d="M82 68 Q70 90 62 110 Q54 130 64 144 Q74 152 84 144 Q92 130 88 110 L82 68 Z" fill="rgba(255,255,255,0.5)" stroke="rgba(255,255,255,0.38)" stroke-width="1.5"/>
+  <!-- handle hole left -->
+  <ellipse cx="76" cy="128" rx="10" ry="12" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+  <!-- scissors handle right -->
+  <path d="M118 68 Q130 90 138 110 Q146 130 136 144 Q126 152 116 144 Q108 130 112 110 L118 68 Z" fill="rgba(255,255,255,0.48)" stroke="rgba(255,255,255,0.38)" stroke-width="1.5"/>
+  <!-- handle hole right -->
+  <ellipse cx="124" cy="128" rx="10" ry="12" fill="rgba(0,0,0,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+  <!-- thread being cut -->
+  <!-- left circle (person 1) -->
+  <circle cx="26" cy="148" r="18" fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.52)" stroke-width="2.5"/>
+  <!-- person silhouette left -->
+  <circle cx="26" cy="142" r="6" fill="rgba(255,255,255,0.5)"/>
+  <path d="M18 156 Q18 148 26 148 Q34 148 34 156 L34 162 L18 162 Z" fill="rgba(255,255,255,0.45)"/>
+  <!-- right circle (person 2) -->
+  <circle cx="174" cy="148" r="18" fill="rgba(255,255,255,0.32)" stroke="rgba(255,255,255,0.48)" stroke-width="2.5"/>
+  <circle cx="174" cy="142" r="6" fill="rgba(255,255,255,0.48)"/>
+  <path d="M166 156 Q166 148 174 148 Q182 148 182 156 L182 162 L166 162 Z" fill="rgba(255,255,255,0.42)"/>
+  <!-- thread cut (dashed, broken) -->
+  <line x1="44" y1="148" x2="88" y2="148" stroke="rgba(255,255,255,0.55)" stroke-width="2.5" stroke-dasharray="5,4"/>
+  <line x1="112" y1="148" x2="156" y2="148" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" stroke-dasharray="5,4"/>
+  <!-- cut sparks near blades -->
+  <circle cx="94"  cy="140" r="3"   fill="rgba(255,220,0,0.6)"/>
+  <circle cx="102" cy="136" r="2.5" fill="rgba(255,220,0,0.55)"/>
+  <circle cx="108" cy="142" r="2"   fill="rgba(255,220,0,0.5)"/>
+</svg>

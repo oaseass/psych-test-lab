@@ -1,0 +1,35 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.05)"/>
+  <!-- main surface/floor -->
+  <rect x="20" y="90" width="160" height="80" rx="8" fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.45)" stroke-width="2"/>
+  <!-- main crack radiating from center -->
+  <path d="M100 90 L88 110 L104 122 L86 150 L100 170"
+        stroke="rgba(255,255,255,0.72)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- secondary cracks left -->
+  <path d="M88 110 L60 100 L42 112"   stroke="rgba(255,255,255,0.55)" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M60 100 L36 94"            stroke="rgba(255,255,255,0.42)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M50 118 L28 130"           stroke="rgba(255,255,255,0.38)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <!-- secondary cracks right -->
+  <path d="M104 122 L136 106 L162 114" stroke="rgba(255,255,255,0.52)" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M136 106 L164 96"           stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M148 120 L174 130"          stroke="rgba(255,255,255,0.36)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <!-- upper structure cracking (wall above) -->
+  <rect x="36" y="28" width="128" height="66" rx="6" fill="rgba(255,255,255,0.28)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+  <!-- upper crack continuing up -->
+  <path d="M100 90 L96 72 L104 56 L98 36" stroke="rgba(255,255,255,0.65)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M96 72 L72 64"  stroke="rgba(255,255,255,0.42)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M104 56 L128 48" stroke="rgba(255,255,255,0.38)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- broken piece top-left falling -->
+  <path d="M36 28 L56 28 L52 42 L36 46 Z" fill="rgba(255,255,255,0.38)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <!-- broken piece top-right falling -->
+  <path d="M152 30 L164 30 L164 44 L148 42 Z" fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
+  <!-- broken chip bottom-left -->
+  <path d="M26 150 L38 144 L42 158 L30 162 Z" fill="rgba(255,255,255,0.32)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+  <!-- broken chip bottom-right -->
+  <path d="M162 148 L174 152 L170 166 L158 162 Z" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+  <!-- impact dust/dots -->
+  <circle cx="100" cy="88"  r="4"   fill="rgba(255,255,255,0.45)"/>
+  <circle cx="110" cy="82"  r="2.5" fill="rgba(255,255,255,0.38)"/>
+  <circle cx="90"  cy="80"  r="2"   fill="rgba(255,255,255,0.35)"/>
+</svg>

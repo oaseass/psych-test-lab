@@ -1,0 +1,26 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- cracked heart left half -->
+  <path d="M100 168 Q56 140 38 108 Q24 80 40 60 Q56 40 78 50 Q90 56 100 68"
+        fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  <!-- cracked heart right half (slightly offset/separated) -->
+  <path d="M100 168 Q144 140 162 108 Q176 80 160 60 Q144 40 122 50 Q110 56 100 68"
+        fill="rgba(255,255,255,0.5)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  <!-- gap / crack at center -->
+  <path d="M100 68 L96 90 L106 100 L96 120 L104 140 L100 168" stroke="rgba(255,255,255,0.7)" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  <!-- lightning crack lines -->
+  <path d="M72 80 L60 96 L76 96 L62 118" stroke="rgba(255,255,255,0.45)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M124 78 L134 92 L122 96 L132 114" stroke="rgba(255,255,255,0.4)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- small broken pieces -->
+  <path d="M56 148 L48 140 L60 136 L56 148 Z" fill="rgba(255,255,255,0.4)"/>
+  <path d="M144 150 L154 142 L142 138 L144 150 Z" fill="rgba(255,255,255,0.38)"/>
+  <!-- warning triangles -->
+  <path d="M28 44 L38 26 L48 44 Z" stroke="rgba(255,220,0,0.6)" stroke-width="2" fill="rgba(255,220,0,0.2)"/>
+  <line x1="38" y1="32" x2="38" y2="38" stroke="rgba(255,220,0,0.65)" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="38" cy="41" r="1.2" fill="rgba(255,220,0,0.65)"/>
+  <path d="M158 38 L168 20 L178 38 Z" stroke="rgba(255,220,0,0.55)" stroke-width="2" fill="rgba(255,220,0,0.18)"/>
+  <line x1="168" y1="26" x2="168" y2="32" stroke="rgba(255,220,0,0.6)" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="168" cy="35" r="1.2" fill="rgba(255,220,0,0.6)"/>
+  <!-- small hearts floating -->
+  <path d="M24 90 Q24 84 30 84 Q36 84 36 90 Q36 96 30 100 Q24 96 24 90 Z" fill="rgba(255,255,255,0.3)"/>
+  <path d="M164 86 Q164 80 170 80 Q176 80 176 86 Q176 92 170 96 Q164 92 164 86 Z" fill="rgba(255,255,255,0.28)"/>
+</svg>

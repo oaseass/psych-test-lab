@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LayoutContainer from "@/components/layout/LayoutContainer";
 
 type Country = {
@@ -31,13 +31,27 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 export default function WorldTripPage() {
-  const [questions] = useState(() => shuffle(COUNTRIES).slice(0, 8));
+  const [questions, setQuestions] = useState<Country[]>([]);
+  const [ready, setReady] = useState(false);
   const [idx, setIdx] = useState(0);
   const [hintsUsed, setHintsUsed] = useState(0);
   const [input, setInput] = useState("");
   const [result, setResult] = useState<"correct" | "wrong" | null>(null);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    setQuestions(shuffle(COUNTRIES).slice(0, 8));
+    setReady(true);
+  }, []);
+
+  if (!ready) {
+    return (
+      <LayoutContainer>
+        <div className="py-8 text-center text-gray-400 animate-pulse">로딩 중...</div>
+      </LayoutContainer>
+    );
+  }
 
   const current = questions[idx];
 

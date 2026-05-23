@@ -1,0 +1,45 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.05)"/>
+  <!-- open book left page -->
+  <path d="M30 58 Q30 52 38 52 L98 54 L98 148 Q38 148 30 142 Z" fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <!-- open book right page -->
+  <path d="M102 54 L160 52 Q168 52 168 58 L168 142 Q160 148 102 148 Z" fill="rgba(255,255,255,0.5)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <!-- book spine -->
+  <line x1="100" y1="52" x2="100" y2="148" stroke="rgba(255,255,255,0.6)" stroke-width="3"/>
+  <!-- book shadow/shadow curve at base -->
+  <path d="M30 148 Q100 158 168 148" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" fill="none"/>
+  <!-- left page lines (text) -->
+  <line x1="42" y1="72"  x2="90" y2="72"  stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  <line x1="42" y1="83"  x2="90" y2="83"  stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  <line x1="42" y1="94"  x2="90" y2="94"  stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  <line x1="42" y1="105" x2="90" y2="105" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  <line x1="42" y1="116" x2="75" y2="116" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+  <line x1="42" y1="127" x2="90" y2="127" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  <line x1="42" y1="138" x2="80" y2="138" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+  <!-- right page lines (text) -->
+  <line x1="110" y1="72"  x2="158" y2="72"  stroke="rgba(255,255,255,0.38)" stroke-width="1.5"/>
+  <line x1="110" y1="83"  x2="158" y2="83"  stroke="rgba(255,255,255,0.38)" stroke-width="1.5"/>
+  <line x1="110" y1="94"  x2="158" y2="94"  stroke="rgba(255,255,255,0.38)" stroke-width="1.5"/>
+  <line x1="110" y1="105" x2="148" y2="105" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+  <line x1="110" y1="116" x2="158" y2="116" stroke="rgba(255,255,255,0.38)" stroke-width="1.5"/>
+  <!-- quill feather -->
+  <path d="M162 18 C168 22 172 40 162 58 C154 68 148 70 144 66 C148 54 156 36 162 18 Z" fill="rgba(255,255,255,0.6)"/>
+  <!-- quill barbs -->
+  <line x1="155" y1="32" x2="166" y2="26" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+  <line x1="152" y1="42" x2="166" y2="35" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+  <line x1="150" y1="52" x2="163" y2="46" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+  <!-- quill shaft -->
+  <line x1="162" y1="20" x2="144" y2="68" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- ink drop -->
+  <path d="M141 68 Q138 74 141 78 Q145 74 141 68 Z" fill="rgba(255,255,255,0.55)"/>
+  <!-- scroll left -->
+  <rect x="16" y="62" width="14" height="76" rx="7" fill="rgba(255,255,255,0.4)"/>
+  <ellipse cx="23" cy="62"  rx="7" ry="4" fill="rgba(255,255,255,0.55)"/>
+  <ellipse cx="23" cy="138" rx="7" ry="4" fill="rgba(255,255,255,0.55)"/>
+  <!-- stars -->
+  <circle cx="78"  cy="38"  r="3" fill="rgba(255,255,255,0.55)"/>
+  <circle cx="90"  cy="30"  r="2" fill="rgba(255,255,255,0.45)"/>
+  <circle cx="110" cy="28"  r="2.5" fill="rgba(255,255,255,0.5)"/>
+  <circle cx="130" cy="35"  r="1.8" fill="rgba(255,255,255,0.4)"/>
+</svg>

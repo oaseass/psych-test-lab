@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LayoutContainer from "@/components/layout/LayoutContainer";
 
 type RankingItem = {
@@ -60,13 +60,29 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
+type ShuffledRanking = RankingItem & { shuffled: RankingItem["items"] };
+
 export default function RankingGuessPage() {
-  const [questions] = useState(() => RANKINGS.map((r) => ({ ...r, shuffled: shuffle(r.items) })));
+  const [questions, setQuestions] = useState<ShuffledRanking[]>([]);
+  const [ready, setReady] = useState(false);
   const [idx, setIdx] = useState(0);
   const [order, setOrder] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    setQuestions(RANKINGS.map((r) => ({ ...r, shuffled: shuffle(r.items) })));
+    setReady(true);
+  }, []);
+
+  if (!ready) {
+    return (
+      <LayoutContainer>
+        <div className="py-8 text-center text-gray-400 animate-pulse">로딩 중...</div>
+      </LayoutContainer>
+    );
+  }
 
   const current = questions[idx];
 

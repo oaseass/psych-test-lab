@@ -1,0 +1,43 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.06)"/>
+  <!-- crown base band -->
+  <path d="M38 118 Q38 132 100 136 Q162 132 162 118 L162 108 Q100 104 38 108 Z"
+        fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.42)" stroke-width="1.5"/>
+  <!-- crown point left outer -->
+  <path d="M38 108 L48 68 L64 100 Z" fill="rgba(255,255,255,0.58)"/>
+  <!-- crown point left inner -->
+  <path d="M64 100 L72 58 L84 95 Z" fill="rgba(255,255,255,0.55)"/>
+  <!-- crown point center (tallest) -->
+  <path d="M84 95 L100 44 L116 95 Z" fill="rgba(255,255,255,0.62)"/>
+  <!-- crown point right inner -->
+  <path d="M116 95 L128 58 L136 100 Z" fill="rgba(255,255,255,0.55)"/>
+  <!-- crown point right outer -->
+  <path d="M136 100 L152 68 L162 108 Z" fill="rgba(255,255,255,0.58)"/>
+  <!-- gems on crown band -->
+  <!-- center diamond -->
+  <path d="M97 110 L100 104 L103 110 L100 116 Z" fill="rgba(255,220,100,0.7)"/>
+  <!-- left gem -->
+  <circle cx="72" cy="112" r="5" fill="rgba(180,140,255,0.65)"/>
+  <!-- right gem -->
+  <circle cx="128" cy="112" r="5" fill="rgba(180,140,255,0.65)"/>
+  <!-- far left gem -->
+  <circle cx="50" cy="114" r="4" fill="rgba(255,160,160,0.6)"/>
+  <!-- far right gem -->
+  <circle cx="150" cy="114" r="4" fill="rgba(255,160,160,0.6)"/>
+  <!-- gem top tip stars -->
+  <circle cx="100" cy="44" r="4" fill="rgba(255,220,100,0.65)"/>
+  <!-- large diamond gem below crown -->
+  <path d="M84 156 L100 140 L116 156 L100 176 Z" fill="rgba(255,255,255,0.65)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+  <!-- diamond facets -->
+  <line x1="100" y1="140" x2="84"  y2="156" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+  <line x1="100" y1="140" x2="116" y2="156" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+  <line x1="84"  y1="156" x2="100" y2="176" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+  <line x1="116" y1="156" x2="100" y2="176" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+  <line x1="84"  y1="156" x2="116" y2="156" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+  <!-- sparkles -->
+  <circle cx="28"  cy="68"  r="3"   fill="rgba(255,255,255,0.5)"/>
+  <circle cx="172" cy="72"  r="2.5" fill="rgba(255,255,255,0.48)"/>
+  <circle cx="22"  cy="130" r="2"   fill="rgba(255,255,255,0.4)"/>
+  <circle cx="178" cy="140" r="2"   fill="rgba(255,255,255,0.4)"/>
+</svg>

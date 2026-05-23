@@ -24,22 +24,39 @@ export default function TestCard({ test, className, compact }: TestCardProps) {
       {/* 썸네일 영역 */}
       {!compact && (
         <div
-          className="relative h-24 overflow-hidden flex items-center justify-center"
-          style={{ background: visual.gradient }}
+          className="relative overflow-hidden flex items-center justify-center"
+          style={{
+            background: visual.gradient,
+            height: visual.illustrationUrl?.startsWith("/") ? 128 : 96,
+          }}
         >
           {/* 배경 장식 */}
           <div className="absolute -top-4 -right-4 w-16 h-16 bg-white/10 rounded-full" />
           <div className="absolute -bottom-3 -left-3 w-12 h-12 bg-white/10 rounded-full" />
-          {/* 장식 이모지들 */}
-          {visual.decorEmojis[0] && (
+          {/* 장식 이모지들 - 로컬 SVG가 아닐 때만 */}
+          {!visual.illustrationUrl?.startsWith("/") && visual.decorEmojis[0] && (
             <span className="absolute top-2 left-3 text-lg opacity-50">{visual.decorEmojis[0]}</span>
           )}
-          {visual.decorEmojis[1] && (
+          {!visual.illustrationUrl?.startsWith("/") && visual.decorEmojis[1] && (
             <span className="absolute bottom-2 right-4 text-base opacity-40">{visual.decorEmojis[1]}</span>
           )}
-          {/* 대표 이모지 */}
-          <div className="relative w-12 h-12 rounded-full bg-white/25 border border-white/40 flex items-center justify-center shadow-sm">
-            <span className="text-2xl">{visual.emoji}</span>
+          {/* 대표 이모지 / SVG 일러스트 */}
+          <div className="relative flex items-center justify-center drop-shadow-lg">
+            {visual.illustrationUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={visual.illustrationUrl}
+                alt=""
+                width={visual.illustrationUrl.startsWith("/") ? 112 : 64}
+                height={visual.illustrationUrl.startsWith("/") ? 112 : 64}
+                className={visual.illustrationUrl.startsWith("/") ? "w-28 h-28 object-contain" : "w-16 h-16 object-contain"}
+                aria-hidden="true"
+              />
+            ) : (
+              <div className="w-12 h-12 rounded-full bg-white/25 border border-white/40 flex items-center justify-center shadow-sm">
+                <span className="text-2xl">{visual.emoji}</span>
+              </div>
+            )}
           </div>
         </div>
       )}

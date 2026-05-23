@@ -1,0 +1,29 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.05)"/>
+  <!-- tangled string - complex overlapping paths -->
+  <!-- main spiral/knot in center -->
+  <path d="M100 60 Q130 60 138 80 Q146 100 130 112 Q114 124 100 112 Q86 100 94 84 Q102 68 118 72 Q134 76 130 92 Q126 108 112 108 Q98 108 96 96 Q94 84 106 82 Q118 80 118 92 Q118 100 110 100 Q102 100 102 94"
+        stroke="rgba(255,255,255,0.6)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- string tails going out -->
+  <path d="M100 60 Q80 48 60 52 Q40 56 30 42" stroke="rgba(255,255,255,0.55)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M130 112 Q148 128 156 148 Q164 168 178 170" stroke="rgba(255,255,255,0.5)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M94 84 Q74 72 56 78 Q38 84 28 72" stroke="rgba(255,255,255,0.45)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M102 94 Q90 108 82 128 Q74 148 60 160" stroke="rgba(255,255,255,0.45)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- extra tangled loops -->
+  <path d="M118 72 Q148 60 158 44 Q168 28 152 26" stroke="rgba(255,255,255,0.42)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M138 80 Q162 86 172 72 Q182 58 172 44" stroke="rgba(255,255,255,0.38)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- confused arrows at tails -->
+  <!-- arrow 1 (top-left, wrong way) -->
+  <path d="M36 48 L26 42 L32 56" stroke="rgba(255,220,0,0.58)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- arrow 2 (bottom-right) -->
+  <path d="M172 164 L182 170 L176 156" stroke="rgba(255,220,0,0.55)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- arrow 3 (bottom-left, wrong way) -->
+  <path d="M66 156 L56 164 L62 148" stroke="rgba(255,220,0,0.52)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- arrow 4 (top-right) -->
+  <path d="M156 28 L164 22 L158 36" stroke="rgba(255,220,0,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- small dots at knot intersections -->
+  <circle cx="100" cy="96" r="4" fill="rgba(255,255,255,0.55)"/>
+  <circle cx="112" cy="86" r="3" fill="rgba(255,255,255,0.48)"/>
+  <circle cx="106" cy="108" r="3" fill="rgba(255,255,255,0.45)"/>
+</svg>

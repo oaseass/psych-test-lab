@@ -44,14 +44,13 @@ export default function LuckyResultCard({
   }, [rankUp, prevRankName, newRankName]);
 
   return (
-    <div className={`rounded-2xl p-6 text-center border-2 ${isWin ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"}`}>
-      <div className="text-5xl mb-3">{isWin ? "🎉" : "😢"}</div>
-      <div className={`text-2xl font-black mb-1 ${isWin ? "text-green-700" : "text-red-600"}`}>
-        {isWin ? "성공!" : "아쉽게 실패!"}
+    <div className="rounded-2xl border bg-white overflow-hidden">
+      {/* 포인트 정산 헤더 */}
+      <div className="bg-gray-50 border-b px-5 py-3">
+        <p className="text-xs font-bold text-gray-500 tracking-wide">포인트 정산</p>
       </div>
-      <p className="text-sm text-gray-600 mb-4">{detail}</p>
-
-      <div className="bg-white rounded-xl p-4 mb-4 text-left space-y-2">
+      {/* 정산 내역 */}
+      <div className="px-5 py-4 space-y-2">
         <div className="flex justify-between text-sm">
           <span className="text-gray-500">사용 포인트</span>
           <span className="font-bold text-red-500">-{stakePoints}P</span>
@@ -68,25 +67,28 @@ export default function LuckyResultCard({
             {netPoints >= 0 ? `+${netPoints}P` : `${netPoints}P`}
           </span>
         </div>
-        <div className="flex justify-between text-sm">
-          <span className="text-gray-500">현재 보유</span>
-          <span className="font-bold text-violet-600">{newPoints.toLocaleString()}P</span>
-        </div>
+      </div>
+      {/* 현재 보유 포인트 강조 */}
+      <div className={`mx-4 mb-4 rounded-xl px-4 py-3 flex items-center justify-between ${
+        isWin ? "bg-violet-50 border border-violet-100" : "bg-gray-50 border border-gray-100"
+      }`}>
+        <span className="text-sm text-gray-500">현재 보유</span>
+        <span className="text-lg font-black text-violet-600">{newPoints.toLocaleString()}P</span>
       </div>
 
       {rankUp && newRankName && (
-        <div className="bg-violet-100 rounded-xl p-3 mb-4 text-center text-sm font-bold text-violet-700">
+        <div className="mx-4 mb-4 bg-violet-100 rounded-xl p-3 text-center text-sm font-bold text-violet-700">
           🎖️ {prevRankName} → {newRankName} 진급!
         </div>
       )}
 
       {!isWin && (
-        <p className="text-xs text-gray-400 mb-4">
+        <p className="text-xs text-gray-400 px-5 pb-3 text-center">
           테스트·퀴즈를 완료하거나 출석체크로 포인트를 모아보세요.
         </p>
       )}
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 px-4 pb-4">
         <button
           onClick={onRetry}
           className="flex-1 py-3 rounded-xl font-bold text-white bg-violet-600 hover:bg-violet-700 transition-colors"

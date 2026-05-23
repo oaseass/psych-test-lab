@@ -1,0 +1,38 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.05)"/>
+  <!-- moon upper right -->
+  <path d="M162 22 Q178 32 178 50 Q178 68 162 78 Q175 62 175 50 Q175 38 162 22 Z" fill="rgba(255,255,255,0.48)"/>
+  <!-- sword 1 (left-to-right diagonal) -->
+  <!-- blade -->
+  <path d="M40 168 L128 40 L136 48 Z" fill="rgba(255,255,255,0.58)"/>
+  <!-- edge highlight -->
+  <line x1="40" y1="168" x2="132" y2="44" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+  <!-- guard 1 -->
+  <path d="M115 62 Q120 56 127 60 Q123 70 115 74 Q112 66 115 62 Z" fill="rgba(255,255,255,0.62)"/>
+  <!-- handle 1 -->
+  <rect x="36" y="162" width="10" height="22" rx="5" fill="rgba(255,255,255,0.55)" transform="rotate(-52,41,173)"/>
+  <!-- sword 2 (right-to-left diagonal) -->
+  <path d="M160 168 L72 40 L64 48 Z" fill="rgba(255,255,255,0.55)"/>
+  <line x1="160" y1="168" x2="68" y2="44" stroke="rgba(255,255,255,0.65)" stroke-width="1.5"/>
+  <!-- guard 2 -->
+  <path d="M85 62 Q80 56 73 60 Q77 70 85 74 Q88 66 85 62 Z" fill="rgba(255,255,255,0.58)"/>
+  <!-- handle 2 -->
+  <rect x="154" y="162" width="10" height="22" rx="5" fill="rgba(255,255,255,0.52)" transform="rotate(52,159,173)"/>
+  <!-- cherry blossom petals -->
+  <!-- petal set 1 -->
+  <ellipse cx="58"  cy="72"  rx="7" ry="4" fill="rgba(255,180,200,0.62)" transform="rotate(-30,58,72)"/>
+  <ellipse cx="68"  cy="66"  rx="7" ry="4" fill="rgba(255,180,200,0.58)" transform="rotate(20,68,66)"/>
+  <ellipse cx="78"  cy="75"  rx="6" ry="3.5" fill="rgba(255,160,190,0.52)" transform="rotate(60,78,75)"/>
+  <!-- petal set 2 -->
+  <ellipse cx="130" cy="142" rx="7" ry="4" fill="rgba(255,180,200,0.55)" transform="rotate(-45,130,142)"/>
+  <ellipse cx="142" cy="136" rx="6" ry="3.5" fill="rgba(255,180,200,0.5)" transform="rotate(15,142,136)"/>
+  <ellipse cx="148" cy="148" rx="6" ry="4" fill="rgba(255,160,190,0.48)" transform="rotate(75,148,148)"/>
+  <!-- petal set 3 (near center) -->
+  <ellipse cx="92"  cy="108" rx="6" ry="3.5" fill="rgba(255,180,200,0.5)" transform="rotate(-20,92,108)"/>
+  <ellipse cx="110" cy="102" rx="5" ry="3" fill="rgba(255,180,200,0.45)" transform="rotate(40,110,102)"/>
+  <!-- sparkle dots -->
+  <circle cx="32"  cy="52"  r="2.5" fill="rgba(255,255,255,0.5)"/>
+  <circle cx="170" cy="100" r="2"   fill="rgba(255,255,255,0.42)"/>
+  <circle cx="52"  cy="140" r="1.8" fill="rgba(255,255,255,0.38)"/>
+</svg>

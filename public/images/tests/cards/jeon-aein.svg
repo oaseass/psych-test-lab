@@ -1,0 +1,31 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.05)"/>
+  <!-- ghost body -->
+  <path d="M60 70 Q60 38 100 38 Q140 38 140 70 L140 148 Q130 140 120 148 Q110 140 100 148 Q90 140 80 148 Q70 140 60 148 Z"
+        fill="rgba(255,255,255,0.5)" stroke="rgba(255,255,255,0.38)" stroke-width="1.5"/>
+  <!-- ghost eyes -->
+  <circle cx="86" cy="86"  r="8" fill="rgba(0,0,0,0.2)"/>
+  <circle cx="114" cy="86" r="8" fill="rgba(0,0,0,0.2)"/>
+  <circle cx="88"  cy="84" r="3" fill="rgba(255,255,255,0.7)"/>
+  <circle cx="116" cy="84" r="3" fill="rgba(255,255,255,0.7)"/>
+  <!-- ghost waving arm -->
+  <path d="M140 90 Q158 78 160 66 Q156 60 150 66 Q148 78 140 88" fill="rgba(255,255,255,0.42)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <!-- phone -->
+  <rect x="116" y="118" width="36" height="58" rx="6" fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.42)" stroke-width="1.5"/>
+  <!-- phone screen -->
+  <rect x="120" y="124" width="28" height="38" rx="3" fill="rgba(255,255,255,0.3)"/>
+  <!-- phone home button -->
+  <circle cx="134" cy="168" r="3" fill="rgba(255,255,255,0.45)"/>
+  <!-- notification bubble -->
+  <circle cx="152" cy="114" r="13" fill="rgba(255,80,80,0.6)"/>
+  <text x="147" y="119" font-size="12" fill="rgba(255,255,255,0.9)" font-family="sans-serif" font-weight="bold">!</text>
+  <!-- heart on phone screen -->
+  <path d="M127 137 Q127 132 132 132 Q134 132 134 135 Q134 132 137 132 Q142 132 142 137 Q142 143 134 148 Q127 143 127 137 Z" fill="rgba(255,120,120,0.55)"/>
+  <!-- dotted connection line -->
+  <line x1="116" y1="110" x2="78" y2="100" stroke="rgba(255,255,255,0.35)" stroke-width="1.8" stroke-dasharray="5,4"/>
+  <!-- sparkles around ghost -->
+  <circle cx="38"  cy="64"  r="3"   fill="rgba(255,255,255,0.5)"/>
+  <circle cx="28"  cy="82"  r="2"   fill="rgba(255,255,255,0.42)"/>
+  <circle cx="32"  cy="46"  r="1.8" fill="rgba(255,255,255,0.38)"/>
+</svg>

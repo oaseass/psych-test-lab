@@ -1,0 +1,38 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- glow bg -->
+  <circle cx="100" cy="100" r="85" fill="rgba(255,255,255,0.05)"/>
+  <!-- easel left leg -->
+  <line x1="48" y1="46" x2="70" y2="168" stroke="rgba(255,255,255,0.55)" stroke-width="4" stroke-linecap="round"/>
+  <!-- easel right leg -->
+  <line x1="152" y1="46" x2="130" y2="168" stroke="rgba(255,255,255,0.55)" stroke-width="4" stroke-linecap="round"/>
+  <!-- easel back leg -->
+  <line x1="100" y1="50" x2="100" y2="168" stroke="rgba(255,255,255,0.38)" stroke-width="3" stroke-linecap="round"/>
+  <!-- easel crossbar -->
+  <line x1="56" y1="110" x2="144" y2="110" stroke="rgba(255,255,255,0.5)" stroke-width="3" stroke-linecap="round"/>
+  <!-- canvas frame -->
+  <rect x="54" y="46" width="92" height="72" rx="4" fill="rgba(255,255,255,0.5)" stroke="rgba(255,255,255,0.45)" stroke-width="2"/>
+  <!-- canvas painting content -->
+  <path d="M64 80 Q74 65 84 72 Q94 79 100 65 Q112 50 126 70 Q132 78 134 88 L64 88 Z" fill="rgba(255,255,255,0.55)"/>
+  <!-- mountain in painting -->
+  <circle cx="75" cy="70"  r="8"  fill="rgba(255,255,255,0.35)"/>
+  <!-- cloud in painting -->
+  <ellipse cx="118" cy="60" rx="10" ry="6" fill="rgba(255,255,255,0.3)"/>
+  <!-- paint brush -->
+  <rect x="148" y="46" width="8" height="52" rx="4" fill="rgba(255,255,255,0.58)" transform="rotate(18,152,72)"/>
+  <path d="M156 80 Q162 84 162 92 Q156 95 150 92 Q150 84 156 80 Z" fill="rgba(255,255,255,0.65)" transform="rotate(18,156,87)"/>
+  <!-- palette -->
+  <path d="M20 118 Q14 108 20 96 Q32 86 46 92 Q54 86 60 92 Q62 104 56 116 Q46 126 32 124 Q20 120 20 118 Z" fill="rgba(255,255,255,0.45)"/>
+  <circle cx="28" cy="100" r="5" fill="rgba(255,120,120,0.5)"/>
+  <circle cx="38" cy="96"  r="5" fill="rgba(120,200,120,0.5)"/>
+  <circle cx="50" cy="99"  r="5" fill="rgba(120,160,255,0.5)"/>
+  <circle cx="48" cy="111" r="5" fill="rgba(255,220,0,0.5)"/>
+  <circle cx="34" cy="114" r="5" fill="rgba(220,100,220,0.5)"/>
+  <!-- palette thumb hole -->
+  <ellipse cx="26" cy="112" rx="4" ry="5" fill="rgba(0,0,0,0.15)"/>
+  <!-- paint drip on brush -->
+  <path d="M159 94 Q161 100 159 104 Q157 100 159 94 Z" fill="rgba(255,255,255,0.5)" transform="rotate(18,159,99)"/>
+  <!-- sparkles -->
+  <circle cx="170" cy="40"  r="3" fill="rgba(255,255,255,0.5)"/>
+  <circle cx="180" cy="55"  r="2" fill="rgba(255,255,255,0.42)"/>
+  <circle cx="22"  cy="70"  r="2.5" fill="rgba(255,255,255,0.4)"/>
+</svg>

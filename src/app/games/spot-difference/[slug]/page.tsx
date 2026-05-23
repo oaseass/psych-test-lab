@@ -35,6 +35,23 @@ export default async function SpotDifferencePlayPage({ params }: PageProps) {
         <div className="bg-white rounded-3xl p-4 shadow-sm border border-gray-100">
           <SpotDifferenceGame scene={scene} />
         </div>
+
+        {/* Attribution panel */}
+        <div className="mt-4 bg-white rounded-2xl border border-gray-100 p-4 text-xs text-gray-500 leading-relaxed">
+          <p className="font-semibold text-gray-700 mb-1">📜 이미지 출처 및 라이선스</p>
+          <p>{scene.source.attribution}</p>
+          <p className="text-gray-400 mt-1">
+            {scene.source.license} ·{" "}
+            <a
+              href={scene.source.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-gray-600 transition-colors"
+            >
+              원본 페이지 보기
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );

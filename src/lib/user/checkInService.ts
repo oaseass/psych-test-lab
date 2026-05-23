@@ -68,12 +68,14 @@ export function checkIn(userId: string): CheckInResult {
   }
 
   const totalGained = POINT_AMOUNTS.daily_check_in + bonusPoints;
+  const existingDates = user.checkInDates ?? [];
   const updated: UserProfile = {
     ...user,
     points: user.points + totalGained,
     checkInStreak: newStreak,
     totalCheckInDays: newTotal,
     lastCheckInAt: today,
+    checkInDates: existingDates.includes(today) ? existingDates : [...existingDates, today],
   };
 
   // 계급 동기화
