@@ -58,7 +58,7 @@ export type SpotSceneData = {
   sceneType: string;
 };
 
-function wikiThumb(path: string, filename: string, width = 900): string {
+function wikiThumb(path: string, filename: string, width = 800): string {
   const encoded = encodeURIComponent(filename);
   return `https://upload.wikimedia.org/wikipedia/commons/thumb/${path}/${encoded}/${width}px-${encoded}`;
 }
@@ -134,7 +134,7 @@ export const spotSceneList: SpotSceneData[] = [
       isCommercialSafe: true,
       attribution: "Johannes Vermeer, Public domain, via Wikimedia Commons",
     },
-    originalImage: wikiThumb("d/d7", "Meisje_met_de_parel.jpg", 700),
+    originalImage: wikiThumb("d/d7", "Meisje_met_de_parel.jpg", 800),
     differences: [
       { id: "earring",   x: 61, y: 64, radius: 5, label: "귀걸이" },
       { id: "headscarf", x: 43, y: 27, radius: 8, label: "머리 스카프 색" },
@@ -178,7 +178,7 @@ export const spotSceneList: SpotSceneData[] = [
     originalImage: wikiThumb(
       "a/aa",
       "Claude_Monet_-_Water_Lilies_-_1906,_Ryerson.jpg",
-      900
+      800
     ),
     differences: [
       { id: "lily-color",    x: 28, y: 57, radius: 7, label: "꽃 색깔" },
@@ -220,7 +220,7 @@ export const spotSceneList: SpotSceneData[] = [
       isCommercialSafe: true,
       attribution: "Benh LIEU SONG, CC BY-SA 3.0, via Wikimedia Commons",
     },
-    originalImage: wikiThumb("a/a8", "Tour_Eiffel_Wikimedia_Commons.jpg", 700),
+    originalImage: wikiThumb("a/a8", "Tour_Eiffel_Wikimedia_Commons.jpg", 800),
     differences: [
       { id: "cloud-added",  x: 22, y: 18, radius: 8, label: "구름" },
       { id: "tower-top",    x: 51, y:  8, radius: 5, label: "꼭대기 조명" },
@@ -261,7 +261,7 @@ export const spotSceneList: SpotSceneData[] = [
       isCommercialSafe: true,
       attribution: "© Photographer, CC BY-SA 4.0, via Wikimedia Commons",
     },
-    originalImage: wikiThumb("d/de", "Colosseo_2020.jpg", 900),
+    originalImage: wikiThumb("d/de", "Colosseo_2020.jpg", 800),
     differences: [
       { id: "arch-dark",   x: 38, y: 56, radius: 7, label: "아치 명암" },
       { id: "cloud-shape", x: 72, y: 22, radius: 9, label: "구름 모양" },
@@ -305,7 +305,7 @@ export const spotSceneList: SpotSceneData[] = [
     originalImage: wikiThumb(
       "b/bd",
       "Taj_Mahal,_Agra,_India_edit3.jpg",
-      900
+      800
     ),
     differences: [
       { id: "reflection",   x: 51, y: 80, radius: 7, label: "수면 반영" },
