@@ -27,6 +27,9 @@ function OverlaySvg({ overlay, hidden }: { overlay: ImageOverlay; hidden: boolea
   const cy = overlay.y;
   const hw = overlay.w / 2;
   const hh = overlay.h / 2;
+  const gradId = `rg-${overlay.id}`;
+  const filterId = `bl-${overlay.id}`;
+  const hasBlur = (overlay.blur ?? 0) > 0;
   return (
     <svg
       viewBox="0 0 100 100"
@@ -34,14 +37,26 @@ function OverlaySvg({ overlay, hidden }: { overlay: ImageOverlay; hidden: boolea
       className="absolute inset-0 w-full h-full pointer-events-none"
       style={style}
     >
+      <defs>
+        <radialGradient id={gradId} cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stopColor={overlay.fill} stopOpacity={overlay.opacity} />
+          <stop offset="60%"  stopColor={overlay.fill} stopOpacity={overlay.opacity * 0.3} />
+          <stop offset="100%" stopColor={overlay.fill} stopOpacity="0" />
+        </radialGradient>
+        {hasBlur && (
+          <filter id={filterId} x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation={overlay.blur} />
+          </filter>
+        )}
+      </defs>
       {overlay.shape === "rect" ? (
         <rect
           x={cx - hw}
           y={cy - hh}
           width={overlay.w}
           height={overlay.h}
-          fill={overlay.fill}
-          opacity={overlay.opacity}
+          fill={`url(#${gradId})`}
+          filter={hasBlur ? `url(#${filterId})` : undefined}
         />
       ) : (
         <ellipse
@@ -49,8 +64,8 @@ function OverlaySvg({ overlay, hidden }: { overlay: ImageOverlay; hidden: boolea
           cy={cy}
           rx={hw}
           ry={hh}
-          fill={overlay.fill}
-          opacity={overlay.opacity}
+          fill={`url(#${gradId})`}
+          filter={hasBlur ? `url(#${filterId})` : undefined}
         />
       )}
     </svg>
@@ -67,6 +82,8 @@ export default function SpotDifferenceGame({ scene }: Props) {
   const [hintId, setHintId] = useState<string | null>(null);
   const [wrongMarkers, setWrongMarkers] = useState<ClickMarker[]>([]);
   const [correctMarkers, setCorrectMarkers] = useState<Map<string, { x: number; y: number }>>(new Map());
+  const [wrongClickCount, setWrongClickCount] = useState(0);
+  const [hintLabel, setHintLabel] = useState<string | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const imgRef = useRef<HTMLDivElement>(null);
   const hasSubmittedRef = useRef(false);
@@ -135,6 +152,7 @@ export default function SpotDifferenceGame({ scene }: Props) {
       setFound((prev) => new Set(prev).add(hit!));
       setCorrectMarkers((prev) => new Map(prev).set(hit!, { x: pctX, y: pctY }));
     } else {
+      setWrongClickCount((prev) => prev + 1);
       const marker = { x: pctX, y: pctY, correct: false };
       setWrongMarkers((prev) => [...prev, marker]);
       setTimeout(() => setWrongMarkers((prev) => prev.filter((m) => m !== marker)), 1000);
@@ -147,13 +165,16 @@ export default function SpotDifferenceGame({ scene }: Props) {
     if (unfound.length === 0) return;
     const pick = unfound[Math.floor(Math.random() * unfound.length)];
     setHintId(pick.id);
+    setHintLabel(pick.label);
     setHintUsed(true);
-    setTimeout(() => setHintId(null), 3000);
+    setTimeout(() => { setHintId(null); setHintLabel(null); }, 3500);
   }
 
   const timerPct = (timeLeft / scene.timeLimit) * 100;
   const usedRatio = 1 - timeLeft / scene.timeLimit;
   const rank = computeRank(usedRatio);
+  const totalClicks = foundCount + wrongClickCount;
+  const accuracy = totalClicks === 0 ? 100 : Math.round((foundCount / totalClicks) * 100);
 
   // ── Image panel (shared) ────────────────────────────────────
   const imageBase = (
@@ -237,10 +258,21 @@ export default function SpotDifferenceGame({ scene }: Props) {
           <>
             <div className="text-6xl mb-2">🎉</div>
             <h2 className="text-2xl font-bold mb-1">모든 차이를 찾았어요!</h2>
-            <div className={`text-5xl font-black mb-1 ${rank.color}`}>Rank {rank.label}</div>
-            <p className="text-gray-500 text-sm mb-6">
-              {scene.timeLimit - timeLeft}초 / {scene.timeLimit}초 사용 · {totalDiffs}개 완료
-            </p>
+            <div className={`text-5xl font-black mb-2 ${rank.color}`}>Rank {rank.label}</div>
+            <div className="flex justify-center gap-6 text-sm text-gray-500 mb-6">
+              <div className="text-center">
+                <div className="font-bold text-gray-800 text-lg">{scene.timeLimit - timeLeft}초</div>
+                <div>클리어 시간</div>
+              </div>
+              <div className="text-center">
+                <div className="font-bold text-gray-800 text-lg">{accuracy}%</div>
+                <div>정확도</div>
+              </div>
+              <div className="text-center">
+                <div className="font-bold text-gray-800 text-lg">{hintUsed ? "1회" : "없음"}</div>
+                <div>힌트 사용</div>
+              </div>
+            </div>
           </>
         ) : (
           <>
@@ -253,10 +285,12 @@ export default function SpotDifferenceGame({ scene }: Props) {
         )}
 
         {/* Attribution */}
-        <div className="text-xs text-gray-400 bg-gray-50 rounded-lg p-3 mb-6 text-left leading-relaxed">
-          <strong>이미지 출처</strong><br />
+        <div className="text-xs text-gray-600 bg-gray-50 rounded-lg p-3 mb-6 text-left leading-relaxed border border-gray-200">
+          <strong className="text-gray-700">이미지 출처 및 라이선스</strong><br />
           {scene.source.attribution}<br />
-          <span className="text-gray-300">{scene.source.license} · {scene.source.provider}</span>
+          <a href={scene.source.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">
+            {scene.source.licenseName} · {scene.source.provider}
+          </a>
         </div>
 
         <div className="flex flex-col gap-3">
@@ -271,8 +305,10 @@ export default function SpotDifferenceGame({ scene }: Props) {
               setFailed(false);
               setHintUsed(false);
               setHintId(null);
+              setHintLabel(null);
               setWrongMarkers([]);
               setCorrectMarkers(new Map());
+              setWrongClickCount(0);
               hasSubmittedRef.current = false;
             }}
           >
@@ -321,20 +357,28 @@ export default function SpotDifferenceGame({ scene }: Props) {
         />
       </div>
 
-      {/* Difference checklist */}
-      <div className="flex flex-wrap gap-1.5 px-2 mb-4">
-        {scene.differences.map((d) => (
-          <span
-            key={d.id}
-            className={`text-xs px-2 py-0.5 rounded-full border transition-all ${
-              found.has(d.id)
-                ? "bg-green-100 border-green-300 text-green-700 line-through"
-                : "bg-gray-50 border-gray-200 text-gray-500"
-            }`}
-          >
-            {d.label}
-          </span>
-        ))}
+      {/* Difference checklist — labels hidden until found (no spoilers) */}
+      <div className="flex items-center gap-2 px-2 mb-4 flex-wrap">
+        <span className="text-xs text-gray-400 shrink-0">숨은 차이 {totalDiffs}개</span>
+        <div className="flex flex-wrap gap-1.5">
+          {scene.differences.map((d, i) =>
+            found.has(d.id) ? (
+              <span
+                key={d.id}
+                className="text-xs px-2 py-0.5 rounded-full border bg-green-100 border-green-300 text-green-700"
+              >
+                ✓ {d.label}
+              </span>
+            ) : (
+              <span
+                key={d.id}
+                className="inline-flex items-center justify-center text-xs w-6 h-6 rounded-full bg-gray-100 border border-gray-200 text-gray-400 font-bold"
+              >
+                {i + 1}
+              </span>
+            )
+          )}
+        </div>
       </div>
 
       {/* Image panels */}
@@ -358,12 +402,20 @@ export default function SpotDifferenceGame({ scene }: Props) {
         >
           {hintUsed ? "힌트 사용됨" : "💡 힌트 (1회)"}
         </button>
+        {hintLabel && (
+          <p className="text-xs text-yellow-600 mt-1.5 font-medium animate-pulse">
+            힌트: &ldquo;{hintLabel}&rdquo; 근처를 확인해보세요
+          </p>
+        )}
       </div>
 
       {/* Attribution footnote */}
-      <p className="text-center text-xs text-gray-300 mt-6 px-4">
-        {scene.source.attribution} · {scene.source.license}
-      </p>
+      <div className="mt-6 mx-2 px-4 py-3 bg-gray-50 rounded-lg border border-gray-100 text-xs text-gray-500 text-center leading-relaxed">
+        📷 {scene.source.attribution} ·{" "}
+        <a href={scene.source.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-700">
+          {scene.source.licenseName}
+        </a>
+      </div>
     </div>
   );
 }

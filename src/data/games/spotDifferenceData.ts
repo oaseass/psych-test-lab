@@ -25,6 +25,7 @@ export type ImageOverlay = {
   fill: string;
   opacity: number;
   blend: "color" | "normal" | "multiply" | "screen" | "hue";
+  blur?: number; // optional gaussian blur stdDeviation (SVG viewBox units)
 };
 
 export type SourceInfo = {
@@ -95,11 +96,11 @@ export const spotSceneList: SpotSceneData[] = [
       { id: "floor-item",   x: 52, y: 82, radius: 6, label: "바닥 오브젝트" },
     ],
     overlays: [
-      { id: "picture-wall", shape: "rect",    x: 63, y: 24, w:  9, h: 11, fill: "#7A8FA5", opacity: 0.88, blend: "normal" },
+      { id: "picture-wall", shape: "rect",    x: 63, y: 24, w:  9, h: 11, fill: "#7A8FA5", opacity: 0.65, blend: "color" },
       { id: "chair-color",  shape: "ellipse", x: 37, y: 68, w: 12, h: 18, fill: "#CC2200", opacity: 0.52, blend: "color" },
       { id: "pillow-color", shape: "ellipse", x: 80, y: 44, w: 10, h:  6, fill: "#DAA520", opacity: 0.62, blend: "color" },
       { id: "window-pane",  shape: "rect",    x: 82, y: 20, w:  9, h: 10, fill: "#001040", opacity: 0.50, blend: "multiply" },
-      { id: "floor-item",   shape: "ellipse", x: 52, y: 82, w:  6, h:  4, fill: "#2C1A0A", opacity: 0.78, blend: "normal" },
+      { id: "floor-item",   shape: "ellipse", x: 52, y: 82, w:  6, h:  4, fill: "#2C1A0A", opacity: 0.60, blend: "multiply" },
     ],
   },
 
@@ -137,10 +138,10 @@ export const spotSceneList: SpotSceneData[] = [
     ],
     overlays: [
       { id: "earring",   shape: "ellipse", x: 61, y: 64, w:  4, h:  5, fill: "#DAA520", opacity: 0.72, blend: "color" },
-      { id: "headscarf", shape: "ellipse", x: 43, y: 27, w: 18, h: 22, fill: "#6600AA", opacity: 0.42, blend: "color" },
+      { id: "headscarf", shape: "ellipse", x: 43, y: 27, w: 18, h: 22, fill: "#6600AA", opacity: 0.38, blend: "hue" },
       { id: "collar",    shape: "ellipse", x: 52, y: 77, w: 16, h:  9, fill: "#8B4513", opacity: 0.38, blend: "color" },
       { id: "bg-spot",   shape: "ellipse", x: 18, y: 38, w:  9, h: 10, fill: "#FFFFFF", opacity: 0.35, blend: "screen" },
-      { id: "shoulder",  shape: "ellipse", x: 36, y: 79, w: 15, h: 14, fill: "#1A6B3C", opacity: 0.38, blend: "color" },
+      { id: "shoulder",  shape: "ellipse", x: 36, y: 79, w: 15, h: 14, fill: "#1A6B3C", opacity: 0.35, blend: "hue" },
     ],
   },
 
@@ -177,11 +178,11 @@ export const spotSceneList: SpotSceneData[] = [
       { id: "stem-left",     x: 14, y: 74, radius: 7, label: "식물 줄기" },
     ],
     overlays: [
-      { id: "lily-color",    shape: "ellipse", x: 28, y: 57, w: 11, h:  9, fill: "#FF6600", opacity: 0.60, blend: "color" },
-      { id: "water-reflect", shape: "ellipse", x: 66, y: 36, w: 15, h: 11, fill: "#003366", opacity: 0.42, blend: "multiply" },
-      { id: "lily-removed",  shape: "ellipse", x: 50, y: 63, w: 10, h:  8, fill: "#2A8A9A", opacity: 0.78, blend: "normal" },
+      { id: "lily-color",    shape: "ellipse", x: 28, y: 57, w: 11, h:  9, fill: "#FF6600", opacity: 0.55, blend: "color" },
+      { id: "water-reflect", shape: "ellipse", x: 66, y: 36, w: 15, h: 11, fill: "#003366", opacity: 0.40, blend: "multiply" },
+      { id: "lily-removed",  shape: "ellipse", x: 50, y: 63, w: 10, h:  8, fill: "#2A8A9A", opacity: 0.55, blend: "color" },
       { id: "upper-sky",     shape: "ellipse", x: 80, y: 22, w: 15, h: 13, fill: "#FFB366", opacity: 0.32, blend: "screen" },
-      { id: "stem-left",     shape: "rect",    x: 14, y: 74, w:  3, h: 16, fill: "#1A5C2A", opacity: 0.72, blend: "normal" },
+      { id: "stem-left",     shape: "rect",    x: 14, y: 74, w:  3, h: 16, fill: "#1A5C2A", opacity: 0.55, blend: "multiply" },
     ],
   },
 
@@ -218,11 +219,11 @@ export const spotSceneList: SpotSceneData[] = [
       { id: "sky-tint",     x: 84, y: 30, radius: 9, label: "하늘 색조" },
     ],
     overlays: [
-      { id: "cloud-added",  shape: "ellipse", x: 22, y: 18, w: 20, h: 11, fill: "#FFFFFF", opacity: 0.50, blend: "screen" },
-      { id: "tower-top",    shape: "ellipse", x: 51, y:  8, w:  4, h:  4, fill: "#FF4400", opacity: 0.80, blend: "normal" },
-      { id: "tree-left",    shape: "ellipse", x: 18, y: 74, w: 13, h: 18, fill: "#87CEEB", opacity: 0.75, blend: "normal" },
-      { id: "building-bg",  shape: "rect",    x: 82, y: 66, w: 11, h: 13, fill: "#FF8C00", opacity: 0.42, blend: "color" },
-      { id: "sky-tint",     shape: "ellipse", x: 84, y: 30, w: 18, h: 18, fill: "#001080", opacity: 0.30, blend: "multiply" },
+      { id: "cloud-added",  shape: "ellipse", x: 22, y: 18, w: 22, h: 13, fill: "#FFFFFF", opacity: 0.55, blend: "screen" },
+      { id: "tower-top",    shape: "ellipse", x: 51, y:  8, w:  5, h:  5, fill: "#FF8800", opacity: 0.60, blend: "screen" },
+      { id: "tree-left",    shape: "ellipse", x: 18, y: 74, w: 14, h: 20, fill: "#B8D8F0", opacity: 0.50, blend: "screen", blur: 1.5 },
+      { id: "building-bg",  shape: "rect",    x: 82, y: 66, w: 11, h: 13, fill: "#FF8C00", opacity: 0.38, blend: "color" },
+      { id: "sky-tint",     shape: "ellipse", x: 84, y: 30, w: 20, h: 20, fill: "#001080", opacity: 0.28, blend: "multiply" },
     ],
   },
 
@@ -259,11 +260,11 @@ export const spotSceneList: SpotSceneData[] = [
       { id: "fence-red",   x: 82, y: 80, radius: 7, label: "하단 펜스 색" },
     ],
     overlays: [
-      { id: "arch-dark",   shape: "ellipse", x: 38, y: 56, w:  9, h: 11, fill: "#000020", opacity: 0.62, blend: "multiply" },
-      { id: "cloud-shape", shape: "ellipse", x: 72, y: 22, w: 20, h: 13, fill: "#FFFFFF", opacity: 0.48, blend: "screen" },
-      { id: "tree-base",   shape: "ellipse", x: 16, y: 72, w:  9, h: 15, fill: "#228B22", opacity: 0.72, blend: "normal" },
-      { id: "stone-tone",  shape: "rect",    x: 58, y: 44, w: 13, h: 11, fill: "#8B6914", opacity: 0.42, blend: "color" },
-      { id: "fence-red",   shape: "rect",    x: 82, y: 80, w: 11, h:  5, fill: "#CC0000", opacity: 0.68, blend: "normal" },
+      { id: "arch-dark",   shape: "ellipse", x: 38, y: 56, w:  9, h: 11, fill: "#000020", opacity: 0.55, blend: "multiply" },
+      { id: "cloud-shape", shape: "ellipse", x: 72, y: 22, w: 22, h: 14, fill: "#FFFFFF", opacity: 0.50, blend: "screen" },
+      { id: "tree-base",   shape: "ellipse", x: 16, y: 72, w: 10, h: 16, fill: "#AACC22", opacity: 0.60, blend: "hue" },
+      { id: "stone-tone",  shape: "rect",    x: 58, y: 44, w: 14, h: 12, fill: "#8B6914", opacity: 0.40, blend: "color" },
+      { id: "fence-red",   shape: "rect",    x: 82, y: 80, w: 11, h:  5, fill: "#CC2200", opacity: 0.55, blend: "color" },
     ],
   },
 
@@ -300,11 +301,11 @@ export const spotSceneList: SpotSceneData[] = [
       { id: "pool-color",   x: 51, y: 72, radius: 8, label: "반영 연못 색" },
     ],
     overlays: [
-      { id: "reflection",   shape: "ellipse", x: 51, y: 80, w: 11, h:  7, fill: "#003366", opacity: 0.52, blend: "multiply" },
-      { id: "minaret-top",  shape: "ellipse", x: 28, y: 15, w:  4, h:  6, fill: "#FFD700", opacity: 0.62, blend: "color" },
-      { id: "cypress-left", shape: "ellipse", x: 15, y: 63, w:  5, h: 16, fill: "#8B4513", opacity: 0.48, blend: "color" },
-      { id: "cloud-dome",   shape: "ellipse", x: 65, y: 18, w: 18, h: 11, fill: "#FFFFFF", opacity: 0.42, blend: "screen" },
-      { id: "pool-color",   shape: "rect",    x: 51, y: 72, w: 16, h:  7, fill: "#00A8CC", opacity: 0.50, blend: "color" },
+      { id: "reflection",   shape: "ellipse", x: 51, y: 80, w: 12, h:  8, fill: "#003366", opacity: 0.48, blend: "multiply" },
+      { id: "minaret-top",  shape: "ellipse", x: 28, y: 15, w:  4, h:  6, fill: "#FFD700", opacity: 0.60, blend: "color" },
+      { id: "cypress-left", shape: "ellipse", x: 15, y: 63, w:  5, h: 16, fill: "#8B4513", opacity: 0.45, blend: "hue" },
+      { id: "cloud-dome",   shape: "ellipse", x: 65, y: 18, w: 20, h: 12, fill: "#FFFFFF", opacity: 0.40, blend: "screen" },
+      { id: "pool-color",   shape: "rect",    x: 51, y: 72, w: 16, h:  7, fill: "#00A8CC", opacity: 0.45, blend: "color" },
     ],
   },
 ];
