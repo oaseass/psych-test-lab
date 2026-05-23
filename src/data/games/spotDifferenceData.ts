@@ -58,10 +58,7 @@ export type SpotSceneData = {
   sceneType: string;
 };
 
-function wikiThumb(path: string, filename: string, width = 800): string {
-  const encoded = encodeURIComponent(filename);
-  return `https://upload.wikimedia.org/wikipedia/commons/thumb/${path}/${encoded}/${width}px-${encoded}`;
-}
+// Images are served locally from /public/images/spot-difference/
 
 export const spotSceneList: SpotSceneData[] = [
 
@@ -89,11 +86,7 @@ export const spotSceneList: SpotSceneData[] = [
       isCommercialSafe: true,
       attribution: "Vincent van Gogh, Public domain, via Wikimedia Commons",
     },
-    originalImage: wikiThumb(
-      "7/76",
-      "Vincent_van_Gogh_-_De_slaapkamer_-_Google_Art_Project.jpg",
-      900
-    ),
+    originalImage: "/images/spot-difference/vangogh.jpg",
     differences: [
       { id: "picture-wall", x: 63, y: 24, radius: 6, label: "벽에 걸린 그림" },
       { id: "chair-color",  x: 37, y: 68, radius: 7, label: "의자 색깔" },
@@ -134,7 +127,7 @@ export const spotSceneList: SpotSceneData[] = [
       isCommercialSafe: true,
       attribution: "Johannes Vermeer, Public domain, via Wikimedia Commons",
     },
-    originalImage: wikiThumb("d/d7", "Meisje_met_de_parel.jpg", 800),
+    originalImage: "/images/spot-difference/meisje.jpg",
     differences: [
       { id: "earring",   x: 61, y: 64, radius: 5, label: "귀걸이" },
       { id: "headscarf", x: 43, y: 27, radius: 8, label: "머리 스카프 색" },
@@ -175,11 +168,7 @@ export const spotSceneList: SpotSceneData[] = [
       isCommercialSafe: true,
       attribution: "Claude Monet, Public domain, via Wikimedia Commons",
     },
-    originalImage: wikiThumb(
-      "a/aa",
-      "Claude_Monet_-_Water_Lilies_-_1906,_Ryerson.jpg",
-      800
-    ),
+    originalImage: "/images/spot-difference/monet.jpg",
     differences: [
       { id: "lily-color",    x: 28, y: 57, radius: 7, label: "꽃 색깔" },
       { id: "water-reflect", x: 66, y: 36, radius: 8, label: "수면 반영" },
@@ -220,7 +209,7 @@ export const spotSceneList: SpotSceneData[] = [
       isCommercialSafe: true,
       attribution: "Benh LIEU SONG, CC BY-SA 3.0, via Wikimedia Commons",
     },
-    originalImage: wikiThumb("a/a8", "Tour_Eiffel_Wikimedia_Commons.jpg", 800),
+    originalImage: "/images/spot-difference/eiffel.jpg",
     differences: [
       { id: "cloud-added",  x: 22, y: 18, radius: 8, label: "구름" },
       { id: "tower-top",    x: 51, y:  8, radius: 5, label: "꼭대기 조명" },
@@ -261,7 +250,7 @@ export const spotSceneList: SpotSceneData[] = [
       isCommercialSafe: true,
       attribution: "© Photographer, CC BY-SA 4.0, via Wikimedia Commons",
     },
-    originalImage: wikiThumb("d/de", "Colosseo_2020.jpg", 800),
+    originalImage: "/images/spot-difference/colosseum.jpg",
     differences: [
       { id: "arch-dark",   x: 38, y: 56, radius: 7, label: "아치 명암" },
       { id: "cloud-shape", x: 72, y: 22, radius: 9, label: "구름 모양" },
@@ -302,11 +291,7 @@ export const spotSceneList: SpotSceneData[] = [
       isCommercialSafe: true,
       attribution: "Yann Forget / Wikimedia Commons, CC BY-SA 3.0",
     },
-    originalImage: wikiThumb(
-      "b/bd",
-      "Taj_Mahal,_Agra,_India_edit3.jpg",
-      800
-    ),
+    originalImage: "/images/spot-difference/tajmahal.jpg",
     differences: [
       { id: "reflection",   x: 51, y: 80, radius: 7, label: "수면 반영" },
       { id: "minaret-top",  x: 28, y: 15, radius: 6, label: "미나렛 첨탑" },
