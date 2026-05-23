@@ -206,7 +206,8 @@ function GameContent({ user }: { user: UserProfile }) {
         }, 500);
         return;
       }
-      setDrawnPoints(prev => [...prev, waypoints[idx]]);
+      const pt = waypoints[idx];
+      setDrawnPoints(prev => [...prev, pt]);
       idx++;
     }, 260);
     return () => clearInterval(timer);
